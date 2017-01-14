@@ -1,0 +1,100 @@
+html, body {
+  height: 100%;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height:14pt;
+  font-size:10pt;
+  background:#111111 url('/bg.jpg') repeat-y center center;
+  color:#bec7d2;
+  margin: 20px auto auto 10px;
+  padding: 0;
+}
+
+#wrapper {
+padding-top:25px;
+padding-bottom:25px;
+padding-left:50px;
+padding-right:50px; 
+}
+
+#dk64img {
+	text-align: center;
+}
+
+
+/* -=-=-=*/
+/* Bingo */
+/* -=-=-=*/
+
+#bingo {
+  border:2px #aaa solid;
+}
+
+#bingo tr td { 
+  cursor:pointer;
+  width:93px;
+  height:73px;
+  text-align:center;
+  border:1px #666 solid;
+  background: #000;    
+}
+#bingo tr td { background:#000; }
+#bingo tr td:hover { background:#001122; }
+#bingo tr td.greensquare { background:#005511; }
+#bingo tr td.greensquare:hover { background:#007722; }
+#bingo tr td.redsquare { background:#550011; }
+#bingo tr td.redsquare:hover { background:#770022; }
+
+#results {
+  float:right;
+  padding-top:50px;
+  padding-right:50px;
+  width:550px;
+  margin: 0px auto;
+}
+
+#about_bingo {
+  float: left;
+  width: 410px;
+}
+
+ol li {
+  padding-bottom:10px;
+}
+
+#bingo td {
+  width:93px;
+  height:73px;
+  text-align:center;
+  border:1px #666 solid;
+  background: #000;
+}
+
+/* version 4 */
+
+#oot-bingo-v4 {
+  border:2px #aaa solid;
+}
+
+#oot-bingo-v4 tr td:hover {
+  background:#001122;
+  cursor:pointer;
+}
+
+#oot-bingo-v4 td {
+  width:93px;
+  height:93px;
+  text-align:center;
+  vertical-align:bottom;
+  border:1px #666 solid;
+  background: #222;
+  padding:0px;
+}
+
+#oot-bingo-v4 p {
+  background:#000;
+  width:100%;
+  font-size: 10px;
+  margin:0px;
+  padding:0px;
+  line-height:11px;
+}

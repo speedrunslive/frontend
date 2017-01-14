@@ -1,0 +1,17 @@
+	<script id="raceTemplate" type="text/x-jquery-tmpl">
+		<table class="raceResults testrace" id="raceid${id}">
+		<col class="raceFeedPlacing" /><col class="raceFeedName" /><col class="raceFeedStatus" /><col class="raceFeedComment" />
+		<tr><th colspan="7"><a href="/races/game/#!/${game.abbrev}/1">${game.name}</a></th><th><a href="/races/result/#!/${id}">#${id}</a></th></tr>
+		<tr><td colspan="4"><div class="raceGoal"></div></td><td class="datetime" colspan="4">${date}</td></tr>
+		</table>
+	</script>
+	
+	<script id="trTemplate" type="text/x-jquery-tmpl">
+		<tr>
+			<td>{{html placetext}}</td>
+			<td><a href="/profiles/#!/${player}/1">${player}</a></td>
+			<td>{{html timetext}}</td>
+			{{html commenttext}}
+			{{html ratingtext}}
+		</tr>
+	</script>
