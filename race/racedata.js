@@ -1,3 +1,5 @@
+var CLIENT_ID = "77j5cesl781f4gpduf1278i38j8icr1";
+
 function getTrueskill ( skill ) {
 	if ( skill == 0 ) { skill = "unranked"; }
 	return skill;
@@ -30,7 +32,7 @@ function updateEntrants ( id ) {
 function getStreams ( names ) {
 	return $.ajax({
 		type : "GET",
-		url : "https://api.twitch.tv/kraken/streams?channel=" + names + "&callback=?",
+		url : "https://api.twitch.tv/kraken/streams?channel=" + names + "&callback=?&client_id=" + CLIENT_ID,
 		processData : true,
 		data : {},
 		dataType : "jsonp",
@@ -42,7 +44,7 @@ function getStreams ( names ) {
 function addStream ( name ) {
 	return $.ajax({
 		type : "GET",
-		url : "https://api.twitch.tv/kraken/streams?channel=" + name + "&callback=?",
+		url : "https://api.twitch.tv/kraken/streams?channel=" + name + "&callback=?&client_id=" + CLIENT_ID,
 		processData : true,
 		data : {},
 		dataType : "jsonp",
@@ -142,7 +144,7 @@ function getStreamList( info, count ) {
 		var time = getTime( info[ z ].time, info[ z ].place );
 		var trueskill = getTrueskill( info[ z ].trueskill );
 		if (streamblock[info[z].twitch]) {
-			$( '#raceTable' ).append( '<tr><td>' + place + '</td><td class="entrant' + z + '"><img title="Add Stream" src="http://c15111086.r86.cf2.rackcdn.com/ttv_icon.png" alt="" class="addStream' + info[z].twitch + ' hiddenStream icons" data-name="' + info[z].twitch + '" data-srlname="' + z + '"/><a href="/profiles/#!/' + z + '/1">' + z + '</a> <span class="small grey">' + trueskill + '</span></td><td colspan="2">' + time + '</td></tr>' )
+			$( '#raceTable' ).append( '<tr><td>' + place + '</td><td class="entrant' + z + '"><img title="Add Stream" src="http://cdn.speedrunslive.com/images/ttv_icon.png" alt="" class="addStream' + info[z].twitch + ' hiddenStream icons" data-name="' + info[z].twitch + '" data-srlname="' + z + '"/><a href="/profiles/#!/' + z + '/1">' + z + '</a> <span class="small grey">' + trueskill + '</span></td><td colspan="2">' + time + '</td></tr>' )
 			$('.addStream' + info[z].twitch ).click(function() {
 				if ( !$( '.icons' ).hasClass( 'disabled2' ) ) {
 					var name = $(this).attr("data-name")
@@ -260,7 +262,7 @@ function getEntrants( info, count ) {
 };
 
 function addStreamIcon(srlname, twitch) {
-	$( '.entrant' + srlname ).prepend( '<img title="Add Stream" src="http://c15111086.r86.cf2.rackcdn.com/ttv_icon.png" alt="" class="addStream' + twitch + ' hiddenStream icons" data-name="' + twitch + '" data-srlname="' + srlname + '"/>' )
+	$( '.entrant' + srlname ).prepend( '<img title="Add Stream" src="http://cdn.speedrunslive.com/images/ttv_icon.png" alt="" class="addStream' + twitch + ' hiddenStream icons" data-name="' + twitch + '" data-srlname="' + srlname + '"/>' )
 	$('.addStream' + twitch ).click(function() {
 		if ( !$( '.icons' ).hasClass( 'disabled2' ) ) {
 			var name = $(this).attr("data-name")
@@ -385,7 +387,7 @@ $( document ).ready( function(){
 	var updateraces = function(){
 		disableButtons()
 		updateEntrants( raceid ); 
-		setTimeout( updateraces, 30000 ); 
+		setTimeout ( updateraces, 90000);
 	}
-	setTimeout( updateraces, 30000 ); 
+	setTimeout( updateraces, 90000 ); 
 });

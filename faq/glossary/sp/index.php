@@ -12,6 +12,7 @@
 
     <div id="faqHead">
         <script type="text/javascript" src="/scripts/backtotop.js"></script>
+        <script type="text/javascript" src="/faq/highlightactive.js"></script>
         <a href="/faq/rules/sp">Reglas de Carreras</a>
         <a href="/faq/sp/">Preguntas Frecuentes</a>
         <a href="/faq/commandlist/sp">Lista de Comandos RaceBot</a>
@@ -24,7 +25,7 @@
         </div>
     
     <div id="glossary">
-        <h1>Glosario Speedrunning&ensp;<a href="../"><a href=".."><img class="flag" src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/United_States_of_America.png" alt="En"/></a><a href="../sp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Spain.png" class="flag" alt="Sp"/></a></h1>
+        <h1>Glosario Speedrunning&ensp;<a href="../"><a href=".."><img class="flag" src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="En"/></a><a href="../sp/"><img src="http://cdn.speedrunslive.com/images/flags/Spain.png" class="flag" alt="Sp"/></a></h1>
         
         <table><colgroup><col class="term"><col class="description">
         </colgroup><tbody>

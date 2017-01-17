@@ -12,8 +12,10 @@
 
 	<!-- get seed random, the bingo script, and this game's item list -->
 	<script src="/scripts/seedrandom-min.js" type="text/javascript"></script>
-	<script src="generator_v7.1.js" type="text/javascript"></script> <!--custom generator for OoT-->
-	<script src="goallist_v8.1.js" type="text/javascript"></script>
+	<script src="generator_v9.2.js" type="text/javascript"></script> <!--custom generator for OoT-->
+	<script src="goallist_v9.2.js" type="text/javascript"></script>
+	<script src="querystring.js" type="text/javascript"></script>
+	<script src="bingosetup.js" type="text/javascript"></script>
 
 	<div id="bingoPage">
 		<div id="about_bingo">
@@ -22,7 +24,8 @@
 			<div id="newcards">
 				<?php echo ('<a class="newcard" href="?seed='.mt_rand(0, 999999).'">Normal card</a>'); ?>
 				<?php echo ('<a class="newcard" href="?seed='.mt_rand(0, 999999).'&mode=short">Short card</a>'); ?>
-				<?php echo ('<a class="newcard" href="?seed='.mt_rand(0, 999999).'&mode=long">Long card</a>'); ?>
+				<!--<?php echo ('<a class="newcard" href="?seed='.mt_rand(0, 999999).'&mode=long">Long card</a>'); ?>-->
+				<?php echo ('<a class="newcard" href="?seed='.mt_rand(0, 999999).'&mode=blackout">Blackout card</a>'); ?>
 			</div>
 			<div style="clear:both;"></div>
 			
@@ -35,13 +38,19 @@
 			<p>For OoT-Bingo, there are some specific rules in place:</p>
 			
 			<ul>
-			<li>Just to clarify, RBA is allowed.</li>
+			<li>Banned Tricks for Bingo: "Using Stick on B as Adult", "Get Item Manipulation (GIM)", and ""Hold R to obtain Early Eyeball Frog".</li>
+			<li>Item specific explainations:<br> "At least 1 skulltula from each dungeon": Only dungeons with blue warps are required. <br>
+				"X Songs": Scarecrow's Song does not count.<br>"Frog's HP": You only need to get one of the frog's HPs.<br>"5 Zora Area HPs": Ice Cavern and Jabu Jabu does not count.
+</li>
 			<li>If it says to have an item, you must actually keep it. For example, if it says to have "Blue Potion," you 
-			must not drink it, and you must still have it in your inventory at the time you finish getting all 5 objectives.</li>
+			must not drink it, and you must still have it in your inventory at the time you finish getting all 5 objectives.
+			</li>
 			<li>Sometimes there is a question of when to say you are finished. For dungeons, you are "finished" with the dungeon when you step into the blue warp after defeating the boss. For items, you are "finished" when you are holding the item above your head. For songs, when the text says "You have learned the..."</li>
+			<li>For collection goals such as "8 hearts", "5 songs", "3 unused keys", etc, you are allowed to exceed the required amount.
 			</ul>
 			 
-			<p class="note">This is version 8.1 of the Bingo script. Originally written &amp; designed by Cosmo. Magic square formula redesigned by Gombill. Generator improved by giuocob. Heavy data analysis by Gombill, giuocob, Runnerguy2489 with additional help from #zelda.</p>
+			<p class="note">GENERATOR: Originally written and designed by Narcissa. Improved by Giuocob. v9 redesign by Saltor.<br>
+			GOAL LIST: Original goal list by Narcissa. Rebalanced by the #zelda community with analysis by Gombill, Runnerguy2489, and Zamiel. v9 data collection and coordination by Gombill. Goal timing by Exodus, SnipinG117, Moose1137, Runnerguy2489, and the #zelda community.</p>
 		</div>
 
 		<div id="results">
@@ -100,7 +109,7 @@
 			// this produces a suck url if lang is the first option, but i lazy
 			?>
 
-			<a href="<?php echo $lang_url ?>"><img src="http://c15111086.r86.cf2.rackcdn.com/flagen.jpg" alt="English" /></a>&emsp;<a href="<?php echo $lang_url ?>&lang=jp"><img src="http://c15111086.r86.cf2.rackcdn.com/flagjp.jpg" alt="Japanese" /></a>
+			<a href="<?php echo $lang_url ?>"><img src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="English" /></a>&emsp;<a href="<?php echo $lang_url ?>&lang=jp"><img src="http://cdn.speedrunslive.com/images/flags/Japan.png" alt="Japanese" /></a>
 
 		</div>
 	</div>

@@ -4,7 +4,7 @@
 // SpeedRunsLive stylesheet
 //
 
-// grid system developed by me, all hand typed line by line with much love 
+// grid system developed by me, all hand typed line by line with much love
 // -Cosmo
 
 //
@@ -16,6 +16,7 @@
 @gold: #f7e279; .gold { color: @gold; text-shadow: 1px 1px 0px rgba(0,0,0,0.6), 0 0 1px @gold*(4/7); }
 @silver: #bec7d2; .silver { color: @silver; text-shadow: 1px 1px 0px rgba(0,0,0,0.6), 0 0 1px @silver*(4/7); }
 @bronze: #e09456; .bronze { color: @bronze; text-shadow: 1px 1px 0px rgba(0,0,0,0.6), 0 0 1px @bronze*(4/7); }
+.darkbronze { color: @bronze*.7; text-shadow: 1px 1px 0px rgba(0,0,0,0.6), 0 0 1px @bronze*.7*(4/7); }
 @red: #f05858; .red { color: @red; }
 @green: #52d64f; .green { color: @green; }
 @grey: #424242;
@@ -30,6 +31,7 @@
 @blue: #3c70df; .blue { color: @blue }
 @yellow: #b1b65b;
 @coolpurple: #8b70b7; // for leaderboards
+@coolgreen: #bae539; // hitbox color
 
 
 // I would like to unify things more (red = races, purple = LB, etc)
@@ -42,18 +44,18 @@
 //
 
 .sans {
-	font-family: 'Roboto', Helvetica, Arial, sans-serif;
-	font-weight: normal;
-	font-size:0.92rem;
-	line-height:1.22rem;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    font-size:0.92rem;
+    line-height:1.22rem;
 }
 
 .heading {
-	font-family: 'Roboto', Helvetica, Arial, sans-serif;
-	font-weight:bold;
-	font-size:1.06rem;
-	line-height:1.22rem;
-	text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    font-size:1.06rem;
+    line-height:1.15rem;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
 }
 
 .cuprum { font-family: 'Cuprum', sans-serif; letter-spacing:1px; }
@@ -71,20 +73,20 @@
 //
 
 html, body {
-	background: @darkgrey;
-	color: @silver;
-	.sans;
-	padding: 0;
-	margin: 0;
-	height: 100%;
-	text-shadow: 1px 1px 0px rgba(0,0,0,0.3); // a bit experimental here but i think it works good!
+    background: @darkgrey;
+    color: @silver;
+    .sans;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.3); // a bit experimental here but i think it works good!
 }
 
 html { .always_scrollbar }
 
 .always_scrollbar {
-	overflow: -moz-scrollbars-vertical; 
-	overflow-y: scroll; // useful when pages vary in height from ajax. prevents page from jumping horizontally.
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll; // useful when pages vary in height from ajax. prevents page from jumping horizontally.
 }
 
 @column: 125px; // column width. used everywhere. this seriously can be changed and the website will not break (exception: embedded players)
@@ -92,176 +94,522 @@ html { .always_scrollbar }
 @pagewidth: (@column * 8); // yep. 8 is actually a small number for a grid system but it works out well enough for now. maybe change someday to 12.
 
 // container is for normal pages that fit within the grid.
-.container { 
-	width: @pagewidth;
-	margin: 0 auto; // center the page
-	padding: (@gutter / 2) 0 6px @gutter;
-	overflow: auto;
+.container {
+    width: @pagewidth;
+    margin: 0 auto; // center the page
+    padding: (@gutter / 2) 0 6px @gutter;
+    overflow: visible;
 }
 
 // container2 is for streams/races where it should utilize more of the screen space. added via jquery to pages where relevant to avoid having multiple header files (which we used to do)
-.container2 { 
-	width:100%;
-	min-width: @pagewidth + @gutter;
-	margin: 0 auto;
-	overflow:hidden;
-	padding-bottom:@gutter;
+.container2 {
+    width:100%;
+    min-width: @pagewidth + @gutter;
+    margin: 0 auto;
+    overflow:hidden;
+    padding-bottom:@gutter;
 }
 
 // use this to specify how many columns wide a page section should be. this falls apart when dealing with border, but can fake it pretty easily with "@column * x - @gutter - 1px;"
 .width(@width) { width: @column * @width - @gutter; margin-right:@gutter; }
 
 header {
-	background: url("http://c15111086.r86.cf2.rackcdn.com/texture_bar2.jpg") top center; //makes the header look nice.
-	border-bottom: 1px @grey dotted; // surprisingly dotted 1px looks good enough to use instead of image based.
-	.boxshadow;
-	padding-top:@gutter / 2;
+    background: url("http://cdn.speedrunslive.com/images/texture_bar2.jpg") top center; //makes the header look nice.
+    border-bottom: 1px @grey dotted; // surprisingly dotted 1px looks good enough to use instead of image based.
+    .boxshadow;
+    padding-top:@gutter / 2;
 }
 .streamsborder { border-color: @blue*0.8; .boxglow(@blue*0.8); }
 .racesborder { border-color: @red*0.5; .boxglow(@red*0.5); }
 .leaderboardsborder { border-color: saturate(@coolpurple*0.6,10%); .boxglow(@coolpurple*0.6); }
+.faqborder { border-color: @green*0.5; .boxglow(@green*0.5); }
+.channelborder { border-color: @gold*0.5; .boxglow(@gold*0.5); }
+
+.twitchracespageembed { width: 100%; height: 100%; }
 
 @footerheight: 28px;
 footer {
-	background: url("http://c15111086.r86.cf2.rackcdn.com/texture_bar_footer2.jpg") top center;
-	border-top: 1px @grey dotted;
-	.boxshadow; // doesn't seem like this would do anything but it actually gives a very slight shadow ABOVE the footer.
-	color:@lightgrey;
-	font-size: @smaller;
-	line-height:@smaller;
-	text-align:center;
-	width: 100%;
-	.left { margin-left: @gutter /2; }
-	.right { margin-right: @gutter /2; }
-	
-	//stupid positioning fix
-	position: relative;	
-	margin-top: -(@footerheight) - 1; /* negative height minus border */
-	height: @footerheight; 
-	clear:both;
-	.container { padding: (@gutter / 2) 0; }
+    background: url("http://cdn.speedrunslive.com/images/texture_bar_footer2.jpg") top center;
+    border-top: 1px @grey dotted;
+    .boxshadow; // doesn't seem like this would do anything but it actually gives a very slight shadow ABOVE the footer.
+    color:@lightgrey;
+    font-size: @smaller;
+    line-height:@smaller;
+    text-align:center;
+    width: 100%;
+    .left { margin-left: @gutter /2; }
+    .right { margin-right: @gutter /2; }
+
+    //stupid positioning fix
+    position: relative;
+    margin-top: (@footerheight) - 1; /* negative height minus border */
+    height: @footerheight;
+    clear:both;
+    .container { padding: (@gutter / 2) 0; }
+    display: inline-block;
+    margin-bottom: -10px;
 }
-#wrap { min-height:100% }
-#main { 
-	//overflow:hidden; 
-	padding-bottom: @footerheight + @gutter;}
+#wrap {
+    min-height:~"calc(100% - 56px)";
+    //overflow: hidden; // i honestly have no clue why this works to fix footer margins (breaks showing whole footer on page when not enough content though)
+}
+#main {
+    //overflow:hidden;
+    //padding-bottom: @footerheight + @gutter;
+    }
 #logo {
-	background: url("http://c15111086.r86.cf2.rackcdn.com/srl_305.png") no-repeat;
-	display: block;
-	overflow: hidden;
-	width: 305px; // visually, 3 columns at current size. if column width etc changes i will need to change logo prob.
-	height:43px;
-	//margin-bottom:@gutter/2;
-	span { display:none; }
-	.left;
+    background: url("http://cdn.speedrunslive.com/images/srl_305.png") no-repeat;
+    display: block;
+    overflow: hidden;
+    width: 305px; // visually, 3 columns at current size. if column width etc changes i will need to change logo prob.
+    height:43px;
+    //margin-bottom:@gutter/2;
+    span { display:none; }
+    .left;
 }
 
 #headerright {
-	display:block;
-	overflow: hidden;
-	height:43px;
-	//margin-bottom:4px;
-	 width: @column * 5 - @gutter; padding-right:@gutter;
-	.right;
-	text-align:right;
-	font-size:@smaller;
-	color:@lightgrey;
-	
-	input { 
-		outline: none;
-		width:95px; 
-		margin-right:0; 
-		margin-left:5px; 
-		padding:2px 5px 2px;
-		.bold; 
-		border: 0; 
-		.rounded(3px);
-		.box_gradient(@silver / 2);
-		/*
-		&[type=password] {
-			letter-spacing:1px;
-		}
-		*/
-		&:focus { 
-			.boxglow(@blue*2);
-			.box_gradient(@blue / 2);
-		}
-	}
-	
-	.loginregister { .smallbutton; float:none; display:inline-block; margin-right:0; margin-left:4px; .rounded(3px); padding:1px 3px 2px; width:55px;}
-	#loginfail { display:none; line-height:6px; color:@red; font-size:@smaller; .bold; .italic; }
-	
-	#headerav {
-		.right;
-		width:40px;
-		height:40px;
-		background-size:40px 40px;
-		background-repeat: no-repeat;
-		border: 1px @black solid;
-		.boxshadow;
-		margin-left:15px;
-		.rounded(3px);
-	}
+
+    display:block;
+    overflow: visible;
+    height:43px;
+    //margin-bottom:4px;
+     width: @column * 5.5 - @gutter; padding-right:@gutter;
+    .right;
+    text-align:right;
+    font-size:@smaller;
+    color:@lightgrey;
+
+    input {
+        outline: none;
+        width:@column/2 + @gutter;
+        margin-right:0;
+        margin-left:5px;
+        padding:2px 5px 2px;
+        .bold;
+        border: 0;
+        .rounded(3px);
+        .box_gradient(@silver * .7);
+        /*
+        &[type=password] {
+            letter-spacing:1px;
+        }
+        */
+        &:focus {
+            .boxglow(@blue*2);
+            .box_gradient(@blue / 2);
+        }
+    }
+
+    #logininfo {
+        .width(2);
+        width: 255px;
+        height: 50px;
+        margin-right: 0;
+        margin-left: @column + @gutter - 3px;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        input, .loginregister {
+            position: relative;
+            //top: 10px;
+	    margin-bottom: 0;
+        }
+        a {
+            cursor: pointer;
+        }
+        .loginform {
+            width: @column * 2;
+            //margin-top: -12px;
+        }
+        span.loggedout:nth-of-type(1) {
+            text-align: right;
+            width: 60%;
+            display: inline-block;
+            a {
+                margin-left: 5px;
+            }
+        }
+        span.loggedout:nth-of-type(2) {
+            width: 40%;
+            display: inline-block;
+        }
+        .updatelink {
+            &:hover {
+            color: @grey * 2;
+            }
+            margin-right: 20px;
+            color: @red;
+            font-size: 99%;
+        }
+        .registerlink {
+            &:hover {
+                color: @yellow;
+            }
+            color: @blue * 1.2;
+            font-size: 99%;
+
+    }
+}
+
+    .loginregister { .smallbutton; float:none; display:inline-block; margin-right:0; margin-left:4px; margin-bottom: 0; .rounded(3px); padding:1px 3px 2px; width:55px; position: relative;}
+    #loginfail, #loginfailupdate { display:none; line-height:10px; color:@red; font-size:@smaller; .bold; .italic; margin-top: 3px; }
+
+    #headerav {
+        .right;
+        width:40px;
+        height:40px;
+        background-size:40px 40px;
+        background-repeat: no-repeat;
+        border: 1px @black solid;
+        .boxshadow;
+        margin-left:15px;
+        .rounded(3px);
+    }
+    #headerav.noavatar {
+        border: none;
+        padding: 1px;
+        box-shadow: none;
+    }
+}
+
+.tooltipPopup {
+    border: solid 1px #000;
+    background: @grey * .5;
+    max-width: 400px;
+    font-size: 9pt;
+    position: absolute;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.75);
+    padding: 2px;
+}
+.ui-helper-hidden-accessible {
+    position: absolute !important;
+    clip: rect(0,0,0,0) !important;
+    top: -99999999999999px !important; //stupid fix for jqueryui tooltips breaking edit profile
 }
 
 nav {
-	display:block;
-	clear:both;
-	position:relative;
-	overflow:auto; 
+    display:block;
+    clear:both;
+    position:relative;
+    overflow: visible;
+    height: 40px;
+
+    #searchbar {
+        display: inline-block;
+        height: 30px;
+        vertical-align: top;
+        position: relative;
+        top: 10px;
+        font-size: 85%;
+    }
+
+    input {
+        outline: none;
+        width:@column/2 + @gutter - 8px;
+        margin-right:0;
+        margin-left:5px;
+        padding:2px 5px 2px;
+        .bold;
+        border: 0;
+        .rounded(3px);
+        .box_gradient(@silver / 2);
+        /*
+        &[type=password] {
+            letter-spacing:1px;
+        }
+        */
+        &:focus {
+            .boxglow(@blue*2);
+            .box_gradient(@blue / 2);
+        }
+    }
+
+    .sbHolder{
+        .rounded(3px);
+        .box_gradient(@silver / 2);
+        .bold;
+        height: 20px;
+        position: relative;
+        width: 89px;
+        display: inline-block;
+        top: 0px;
+    }
+    .sbHolder:focus .sbSelector{
+
+    }
+    .sbSelector{
+        display: block;
+        height: 20px;
+        line-height: 22px;
+        outline: none;
+        overflow: hidden;
+        position: absolute;
+        text-indent: 10px;
+        text-align: left;
+        width: 90px;
+        color:@silver;
+    }
+    .sbSelector:link, .sbSelector:visited, .sbSelector:hover{
+        outline: none;
+        text-decoration: none;
+    }
+    .sbToggle{
+        background: url("http://cdn.speedrunslive.com/images/arrow_down.png") 16px 1px no-repeat;
+        clip:rect(0px, 29px, 20px, 15px);
+        display: block;
+        height: 20px;
+        outline: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 30px;
+    }
+    .sbToggle:hover{
+        background: url("http://cdn.speedrunslive.com/images/arrow_down.png") 4px 1px no-repeat;
+        clip:rect(0px, 29px, 20px, 15px);
+    }
+    .sbToggleOpen{
+        background: url("http://cdn.speedrunslive.com/images/arrow_down.png") 16px 1px no-repeat;
+        clip:rect(0px, 29px, 20px, 15px);
+    }
+    .sbToggleOpen:hover{
+        background: url("http://cdn.speedrunslive.com/images/arrow_down.png") 4x 1px no-repeat;
+        clip:rect(0px, 29px, 20px, 15px);
+    }
+    .sbHolderDisabled{
+
+    }
+    .sbHolderDisabled .sbHolder{
+
+    }
+    .sbHolderDisabled .sbToggle{
+
+    }
+    .sbOptions{
+        background-color: #212121;
+        border: solid 1px #515151;
+        list-style: none;
+        left: -1px;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 20px;
+        width: 75px;
+        z-index: 1;
+        overflow-y: auto;
+    }
+    .sbOptions li{
+        padding: 0 7px;
+        list-style: none;
+        height: 20px;
+    }
+    .sbOptions a{
+        border-bottom: dotted 1px #515151;
+        display: block;
+        outline: none;
+        text-align: left;
+        padding-left: 15px;
+        color: @lightgrey;
+    }
+    .sbOptions a:link, .sbOptions a:visited{
+        color: @lightgrey;
+        text-decoration: none;
+    }
+    .sbOptions a:hover,
+    .sbOptions a:focus,
+    .sbOptions a.sbFocus{
+        color: @silver;
+    }
+    .sbOptions li.last a{
+        border-bottom: none;
+    }
+    .sbOptions .sbDisabled{
+        border-bottom: dotted 1px #515151;
+        color: #999;
+        display: block;
+        padding: 7px 0 7px 3px;
+    }
+    .sbOptions .sbGroup{
+        border-bottom: dotted 1px #515151;
+        display: block;
+        font-weight: bold;
+        padding: 7px 0 7px 3px;
+    }
+    .sbOptions .sbSub{
+        padding-left: 17px;
+    }
+
+    .autocompleteHolder{
+        .bold;
+        height: 20px;
+        position: relative;
+        top: -5px;
+        width: (@column * 2 - @gutter - 1px) - 123px - @gutter;
+        display: inline-block;
+    }
+    .autocompleteDropdown{
+        background-color: #212121;
+        border: solid 1px #515151;
+        list-style: none;
+        left: 5px;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 20px;
+        min-width: @column - 15px;
+        max-width: @column + 55px;
+        z-index: 1;
+        bottom: auto;
+    }
+    .autocompleteDropdown li{
+        padding: 0 7px;
+        list-style: none;
+        height: 20px;
+    }
+    .autocompleteDropdown a{
+        border-bottom: dotted 1px #515151;
+        display: block;
+        outline: none;
+        text-align: left;
+        padding-left: 15px;
+        color: @lightgrey;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .autocompleteDropdown a:link, .autocompleteDropdown a:visited{
+        color: @lightgrey;
+        text-decoration: none;
+    }
+    .autocompleteDropdown a:hover,
+    .autocompleteDropdown a:focus,
+    .autocompleteDropdown a.sbFocus{
+        color: @silver;
+    }
+    .autocompleteDropdown li.last a{
+        border-bottom: none;
+    }
+    .autocompleteDropdown .sbDisabled{
+        border-bottom: dotted 1px #515151;
+        color: #999;
+        display: block;
+        padding: 7px 0 7px 3px;
+    }
+    .autocompleteDropdown .sbGroup{
+        border-bottom: dotted 1px #515151;
+        display: block;
+        font-weight: bold;
+        padding: 7px 0 7px 3px;
+    }
+    .autocompleteDropdown .sbSub{
+        padding-left: 17px;
+    }
+
+    #headersearch {
+        width: (@column * 2 - @gutter - 1px) - 115px - @gutter*2.5;
+    }
+    #logininfo {
+        .width(2);
+        height: 50px;
+        margin-right: 0;
+        margin-left: @column + @gutter - 3px;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        input, .loginregister {
+            position: relative;
+            top: 10px;
+        }
+    }
+
+    .searchregister { .smallbutton; float:none; display:inline-block; margin-right:0; margin-left:4px; margin-bottom: 0; .rounded(3px); padding:1px 3px 2px; width:55px; position: relative; top: -5px;}
+    .loginregister { .smallbutton; float:none; display:inline-block; margin-right:0; margin-left:4px; margin-bottom: 0; .rounded(3px); padding:1px 3px 2px; width:55px; position: relative;}
+    #loginfail, #searchfail { display:none; line-height:10px; color:@red; font-size:@smaller; .bold; .italic; position: relative; text-align: right; top: -2px; }
 }
 
-nav ul {
-	position: absolute; bottom: 4px;
-	.width(6);
-	.left;
-	margin: 0; padding: 0; text-indent:0;
-	li { 
-		list-style-type:none; 
-		margin:0; 
-		padding: 0; 
-		.sans;
-		a { 
-			.smallbuttonstyle; 
-			width:@column - @gutter - 1px; 
-			padding: 2px 0 3px 0; 
-			margin: 0 @gutter 0 0;
-			.customhover(@lightgrey);
-		}
-	
-	#streamsButtonHeader { .customhover(@blue); }
-	#racesButtonHeader { .customhover(@red); }
-	#leaderboardsButtonHeader { .customhover(@coolpurple); }
-	}
+nav ul:not(.autocompleteDropdown):not(.sbOptions) {
+    position: relative; bottom: -10px;
+    .width(6);
+    .left;
+    margin: 0; padding: 0; text-indent:0;
+    li {
+        list-style-type:none;
+        margin:0;
+        padding: 0;
+        .sans;
+        a.headerButton {
+            .smallbuttonstyle;
+            width:@column - @gutter - 1px;
+            padding: 2px 0 3px 0;
+            margin: 0 @gutter 0 0;
+            .customhover(@lightgrey);
+        }
+
+    #streamsButtonHeader {
+        .customhover(@blue);
+        &.current { .pressedbox(@blue * (2/3)); }
+        &.current:hover { .customhover(@blue); }
+    }
+    #racesButtonHeader {
+        .customhover(@red);
+        &.current { .pressedbox(@red * (2/3)); }
+        &.current:hover { .customhover(@red); }
+    }
+    #leaderboardsButtonHeader {
+        .customhover(@coolpurple);
+        &.current { .pressedbox(@coolpurple * (2/3)); }
+        &.current:hover { .customhover(@coolpurple); }
+    }
+    #channelButtonHeader {
+        .customhover(@gold*0.65);
+        &.current { .pressedbox((@gold*0.65) * (2/3)); }
+        &.current:hover { .customhover(@gold*0.65); }
+    }
+    #faqButtonHeader {
+        .customhover(@green/2);
+        &.current { .pressedbox((@green/2) * (2/3)); }
+        &.current:hover { .customhover(@green/2); }
+    }
+    #toolsButtonHeader {
+        &.current { .pressedbox((@lightgrey) * (2/3)); }
+        &.current:hover { .customhover(@lightgrey); }
+    }
+    }
 }
 
 #donation_server {
-	display:block;
-	&:hover {
-		#donation_holder {
-				.box(@lightgrey);
-		}
-	}
-	.right;
-	.width(2);
-	font-size:@evensmaller;
-	.center;
-	#donation_holder {
-		.box(@grey);
-		height:3px;
-		.rounded;
-		width:@column * 2 - @gutter - 1px;
-		padding-bottom:1px;
-	}
-	#donation_bar {
-		.box(@gold);
-		height:3px;
-		.rounded;
-		width:0%;
-	}
-	#amount {
-	display:block;
-	}
+    display:block;
+    color: @silver;
+    &:hover {
+        #donation_holder {
+                .box(@lightgrey);
+        }
+        color: @white;
+    }
+    .left;
+    .width(2);
+    font-size:@smaller;
+    padding: 5px 0px 5px 44px;
+    margin: 0;
+    .center;
+    #donation_holder {
+        .box(@grey);
+        height:3px;
+        .rounded;
+        width:@column * 2 - @gutter - 1px;
+        padding-bottom:1px;
+    }
+    #donation_bar {
+        .box(@gold);
+        height:3px;
+        .rounded;
+        width:0%;
+    }
+    #amount {
+    display:block;
+    }
 }
 
 //
@@ -270,138 +618,139 @@ nav ul {
 // Universal stuff
 //
 
-p {	margin:0px;	padding:0 0 (@gutter * 0.7); line-height:@paragraphline; }
+p { margin:0px; padding:0 0 (@gutter * 0.7); line-height:@paragraphline; }
 a { color:inherit; text-decoration:none; &:hover { color:@white;}} //normal links will need underline added via a class. imagine if everybodys name on the site had underline. we default to text-declaration:none for this reason.
 strong { color:@gold; .bold; }
 
 h1 { .heading; color:@bronze; margin: (@gutter / 2) 0 0; padding: (@gutter/2) 0; img {position:absolute; margin: 0 @gutter/2;} word-wrap: break-word; overflow: hidden; a { text-decoration:underline } }
-// one thing to note about h1 is that its always at the top of every page, 
+// one thing to note about h1 is that its always at the top of every page,
 // and the padding pushes the content down below the header to a comfortable width.
 // when an <h1> element is not present at the top of the page, whatever is there needs the additional padding to deal with this issue.
 
 h2 { display:block; margin:0 0 @gutter/2; color:@gold; .bold; clear:both; font-size:100%;}
+h3 { display:block; margin:0 0 @gutter/2; color:@gold*0.85; .bold; clear:both; font-size:90%;}
 h4 { display:block; margin:(@gutter/2) 0; color:@gold; .bold; } //idk why i dont have h3 lol
 
 table { width:100%; border-spacing: 0px; border-collapse: collapse; padding: 0;}
 td { border: 0; padding:0; }
 th { .box_gradient(@popred); color:@gold; .textshadow; .bold; }
 
-ul { 
-	margin-left: 0;
-	padding-left: 1em;
-	text-indent: -1em; 
-	margin-top:2px;
-	margin-bottom:2px;
-	
-	li { 
-		list-style-type:square; 
-		list-style-position: inside; 
-	}
+ul {
+    margin-left: 0;
+    padding-left: 1em;
+    text-indent: -1em;
+    margin-top:2px;
+    margin-bottom:2px;
+
+    li {
+        list-style-type:square;
+        list-style-position: inside;
+    }
 }
 
 ol {
-	margin-left: 0;
-	margin-top:2px;
-	margin-bottom:2px;
+    margin-left: 0;
+    margin-top:2px;
+    margin-bottom:2px;
 }
 
 li {
-	line-height: @paragraphline;
-	padding-bottom:@gutter * 0.7;
+    line-height: @paragraphline;
+    padding-bottom:@gutter * 0.7;
 }
 
 blockquote {
-	margin: 1em 20px;
-	padding-left: 50px;
-	margin-left:0;
-	background: transparent url("../lbmockup/blockquote.png") no-repeat;
-	min-height:50px;
-	padding-top:20px;
-	font-size:15px;
-	line-height:20px;
-	
-	p { margin-bottom:10px; }
+    margin: 1em 20px;
+    padding-left: 50px;
+    margin-left:0;
+    background: transparent url("../lbmockup/blockquote.png") no-repeat;
+    min-height:50px;
+    padding-top:20px;
+    font-size:15px;
+    line-height:20px;
+
+    p { margin-bottom:10px; }
 }
 
 code {
-	//display:inline-block;
-	.sans;
-	.bold;
-	.box(@darkgrey);
-	.rounded;
-	padding:1px 5px;
-	//.monospace;
+    //display:inline-block;
+    .sans;
+    .bold;
+    .box(@darkgrey);
+    .rounded;
+    padding:1px 5px;
+    //.monospace;
 }
 
 form { }
-.formtext { .bold; font-size:@smaller; padding-bottom:3px; } 
+.formtext { .bold; padding-bottom:3px; }
 .inputstyle {
-		color:@white;
-		width:90px; 
-		margin-right:0; 
-		margin-left:5px;
-		margin-bottom:10px;
-		padding:2px 5px 2px;
-		.bold; 
-		border: 0; 
-		.rounded(3px);
-		.box_gradient(@silver / 2);
-		/*
-		&[type=password] {
-			letter-spacing:1px;
-		}
-		*/
-		&:focus { 
-			.boxglow;
-			.box_gradient(@blue / 2);
-		}
+        color:@white;
+        width:90px;
+        margin-right:0;
+        margin-left:5px;
+        margin-bottom:10px;
+        padding:2px 5px 2px;
+        .bold;
+        border: 0;
+        .rounded(3px);
+        .box_gradient(@silver / 2);
+        /*
+        &[type=password] {
+            letter-spacing:1px;
+        }
+        */
+        &:focus {
+            .boxglow;
+            .box_gradient(@blue / 2);
+        }
 
 /*
-	.rounded;
-	.boxshadow;
-	border:1px black solid;
-	color:white;
-	outline: none;
-	
-	&:focus {
-		border:1px solid @lightgrey;
-	}
+    .rounded;
+    .boxshadow;
+    border:1px black solid;
+    color:white;
+    outline: none;
 
-	.box_gradient(@coolpurple / 2);
-	padding:1px 5px 1px 10px;
-	.heading;
-	font-size:1em;
-	margin: 0 0 5px @gutter;
+    &:focus {
+        border:1px solid @lightgrey;
+    }
+
+    .box_gradient(@coolpurple / 2);
+    padding:1px 5px 1px 10px;
+    .heading;
+    font-size:1em;
+    margin: 0 0 5px @gutter;
 */
 }
 
-	::-webkit-input-placeholder { opacity:0.3; }
-	:-moz-placeholder { /* Firefox 18- */ color: opacity:0.3; }
-	::-moz-placeholder {  /* Firefox 19+ */ color: opacity:0.3; }
-	:-ms-input-placeholder { color: opacity:0.3; }	
+    ::-webkit-input-placeholder { opacity:0.3; }
+    :-moz-placeholder { /* Firefox 18- */ color: opacity:0.3; }
+    ::-moz-placeholder {  /* Firefox 19+ */ color: opacity:0.3; }
+    :-ms-input-placeholder { color: opacity:0.3; }
 
 .inputwidth(@width) { width: @column * @width - 15px - 4px - @gutter; }
 
-input:not([type=submit]):not([type=file]) {
-	.inputstyle;
-	.inputwidth(2);
+input:not([type=submit]):not([type=file]), textarea {
+    .inputstyle;
+    .inputwidth(2);
 }
 
 /*
 .monospace {
-	.cuprum;
-	.bold;
-	font-size:1.05em;
-	color:#ced7e2;
+    .cuprum;
+    .bold;
+    font-size:1.05em;
+    color:#ced7e2;
 }
 
 .irc {
-	display:block;
-	background:@black;
-	padding: 2px 10px;
-	.monospace;
-	margin-bottom: @gutter * 2;
-	.rounded;
+    display:block;
+    background:@black;
+    padding: 2px 10px;
+    .monospace;
+    margin-bottom: @gutter * 2;
+    .rounded;
 }
 */
 
@@ -435,163 +784,163 @@ input:not([type=submit]):not([type=file]) {
 // I cannot let pressedbox push it down 1px because of stupid .click() issue with the span in the button tag. w/e
 .pressedbox(@color) { .box_gradient(@color); .noboxshadow; /*position:relative; top:1px;*/ border-width: 1px 0px 1px 1px; border-style: solid; border-color: lighten(@color, 4%) darken(@color, 25%) darken(@color, 25%) lighten(@color, 2%); }
 .italic { font-style: italic; }
-.bold {	font-weight:700; }
-.left {	float:left; }
+.bold { font-weight:700; }
+.left { float:left; }
 .right { float:right; }
 .center { text-align:center; }
 
 //smoother texture
 .box_st(@color) {
-	.box(@color);
-	.box_st_gradient(@color);
+    .box(@color);
+    .box_st_gradient(@color);
 }
 
 .box_gradient(@color) { // I've been thinking of making a lighter version of the texture to be used with brighter colors. as it stands I feel its too heavy against light colors.
   background-color: @color;
   @gcolor: darken(@color, 7%);
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"), -webkit-gradient(linear, left top, left bottom, from(@color), to(@gcolor)); /* Saf4+, Chrome */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"), -webkit-linear-gradient(top, @color, @gcolor); /* Chrome 10+, Saf5.1+, iOS 5+ */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"),   -moz-linear-gradient(top, @color, @gcolor); /* FF3.6 */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"),    -ms-linear-gradient(top, @color, @gcolor); /* IE10 */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"),     -o-linear-gradient(top, @color, @gcolor); /* Opera 11.10+ */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"),        linear-gradient(to bottom, @color, @gcolor);
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"), -webkit-gradient(linear, left top, left bottom, from(@color), to(@gcolor)); /* Saf4+, Chrome */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"), -webkit-linear-gradient(top, @color, @gcolor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"),   -moz-linear-gradient(top, @color, @gcolor); /* FF3.6 */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"),    -ms-linear-gradient(top, @color, @gcolor); /* IE10 */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"),     -o-linear-gradient(top, @color, @gcolor); /* Opera 11.10+ */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"),        linear-gradient(to bottom, @color, @gcolor);
 }
 
 .box_st_gradient(@color) { // I've been thinking of making a lighter version of the texture to be used with brighter colors. as it stands I feel its too heavy against light colors.
   background-color: @color;
   @gcolor: darken(@color, 10%);
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button_half.png"), -webkit-gradient(linear, left top, left bottom, from(@color), to(@gcolor)); /* Saf4+, Chrome */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button_half.png"), -webkit-linear-gradient(top, @color, @gcolor); /* Chrome 10+, Saf5.1+, iOS 5+ */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button_half.png"),   -moz-linear-gradient(top, @color, @gcolor); /* FF3.6 */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button_half.png"),    -ms-linear-gradient(top, @color, @gcolor); /* IE10 */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button_half.png"),     -o-linear-gradient(top, @color, @gcolor); /* Opera 11.10+ */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button_half.png"),        linear-gradient(to bottom, @color, @gcolor);
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button_half.png"), -webkit-gradient(linear, left top, left bottom, from(@color), to(@gcolor)); /* Saf4+, Chrome */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button_half.png"), -webkit-linear-gradient(top, @color, @gcolor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button_half.png"),   -moz-linear-gradient(top, @color, @gcolor); /* FF3.6 */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button_half.png"),    -ms-linear-gradient(top, @color, @gcolor); /* IE10 */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button_half.png"),     -o-linear-gradient(top, @color, @gcolor); /* Opera 11.10+ */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button_half.png"),        linear-gradient(to bottom, @color, @gcolor);
 }
 
 .invertbox_gradient(@color) {
   background-color: @color;
   @gcolor: lighten(@color, 7%);
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"), -webkit-gradient(linear, left top, left bottom, from(@color), to(@gcolor)); /* Saf4+, Chrome */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"), -webkit-linear-gradient(top, @color, @gcolor); /* Chrome 10+, Saf5.1+, iOS 5+ */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"),   -moz-linear-gradient(top, @color, @gcolor); /* FF3.6 */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"),    -ms-linear-gradient(top, @color, @gcolor); /* IE10 */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"),     -o-linear-gradient(top, @color, @gcolor); /* Opera 11.10+ */
-  background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png"),        linear-gradient(to bottom, @color, @gcolor);
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"), -webkit-gradient(linear, left top, left bottom, from(@color), to(@gcolor)); /* Saf4+, Chrome */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"), -webkit-linear-gradient(top, @color, @gcolor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"),   -moz-linear-gradient(top, @color, @gcolor); /* FF3.6 */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"),    -ms-linear-gradient(top, @color, @gcolor); /* IE10 */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"),     -o-linear-gradient(top, @color, @gcolor); /* Opera 11.10+ */
+  background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png"),        linear-gradient(to bottom, @color, @gcolor);
 }
 
 .transition(@time) { // I dont use this yet but maybe I will at some point
-	transition: all @time linear;
-	-moz-transition: all @time linear; /* Firefox 4 */
-	-webkit-transition: all @time linear; /* Safari and Chrome */
-	-o-transition: all @time linear; /* Opera */
+    transition: all @time linear;
+    -moz-transition: all @time linear; /* Firefox 4 */
+    -webkit-transition: all @time linear; /* Safari and Chrome */
+    -o-transition: all @time linear; /* Opera */
 }
 
 .smallbuttonstyle {
-	background-image: url("http://c15111086.r86.cf2.rackcdn.com/grunge_button.png");
-	.box(@grey);
-	text-align:center;
-	display:block;
-	.bold;
-	color:@silver;
-	margin:0;
-	.left;
-	.boxshadow;
-	.rounded;
-	.noselect;
-	cursor:pointer;
-	
-	&:hover {
-		.box(@blue);
-		color:@white;
-	}
-	
-	&:active {
-		.pressedbox(@darkblue);
-		color:@white;
-	}
+    background-image: url("http://cdn.speedrunslive.com/images/grunge_button.png");
+    .box(@grey);
+    text-align:center;
+    display:block;
+    .bold;
+    color:@silver;
+    margin:0;
+    .left;
+    .boxshadow;
+    .rounded;
+    .noselect;
+    cursor:pointer;
+
+    &:hover {
+        .box(@blue);
+        color:@white;
+    }
+
+    &:active {
+        .pressedbox(@darkblue);
+        color:@white;
+    }
 }
 
 .smallbutton {
-	.smallbuttonstyle;
-	width:@column - @gutter - 1px;
-	margin-right:@gutter;
-	margin-bottom:@gutter / 2;
-	padding: 2px 0 3px 0;
-	text-decoration:none;
+    .smallbuttonstyle;
+    width:@column - @gutter - 1px;
+    margin-right:@gutter;
+    margin-bottom:@gutter / 2;
+    padding: 2px 0 3px 0;
+    text-decoration:none;
 }
 
 .customhover(@color) { // use this with smallbuttons
-		&:hover { .box(@color);	}
-		&:active { .pressedbox(@color * (2/3)); }
+        &:hover { .box(@color); }
+        &:active { .pressedbox(@color * (2/3)); }
 }
 
 #racefeed { .width(4); }
 
 .checkBox {
-	width: 16px;	
-	position: relative;
-	
-	input[type=checkbox] {
-		visibility: hidden;
-	}
-	
-	label {
-		cursor: pointer;
-		position: absolute;
-		width: 16px;
-		height: 16px;
-		top: 0;
-		border-radius: 4px;
+    width: 16px;
+    position: relative;
 
-		-webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-		-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-		box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-		background: #fcfff4;
+    input[type=checkbox] {
+        visibility: hidden;
+    }
 
-		background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-		background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-		background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-		background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-		background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
-		
-		span { display:block; margin-left:25px; width:200px; }
-		
-		&:after {
-			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-			filter: alpha(opacity=0);
-			opacity: 0;
-			content: '';
-			position: absolute;
-			width: 7px;
-			height: 3px;
-			background: transparent;
-			top: 4px;
-			left: 3px;
-			border: 3px solid #333;
-			border-top: none;
-			border-right: none;
+    label {
+        cursor: pointer;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 0;
+        border-radius: 4px;
 
-			-webkit-transform: rotate(-45deg);
-			-moz-transform: rotate(-45deg);
-			-o-transform: rotate(-45deg);
-			-ms-transform: rotate(-45deg);
-			transform: rotate(-45deg);
-		}
-		
-		&:hover::after {
-			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-			filter: alpha(opacity=30);
-			opacity: 0.3;
-		}
-	}
-	
-	input[type=checkbox]:checked + label:after {
-		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-		filter: alpha(opacity=100);
-		opacity: 1;
-	}
-	
+        -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+        -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+        box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+        background: #fcfff4;
+
+        background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+        background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+        background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+        background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+        background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+
+        span { display:block; margin-left:25px; width:200px; }
+
+        &:after {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            opacity: 0;
+            content: '';
+            position: absolute;
+            width: 7px;
+            height: 3px;
+            background: transparent;
+            top: 4px;
+            left: 3px;
+            border: 3px solid #333;
+            border-top: none;
+            border-right: none;
+
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+        &:hover::after {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+            filter: alpha(opacity=30);
+            opacity: 0.3;
+        }
+    }
+
+    input[type=checkbox]:checked + label:after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        filter: alpha(opacity=100);
+        opacity: 1;
+    }
+
 }
 
 //
@@ -624,32 +973,32 @@ input:not([type=submit]):not([type=file]) {
 
 #twitterSide { .width(2); .right; }
 #twitter { color: @twitter; padding-left:33px; a {text-decoration:none;}}
-#twitterbird { position:absolute; margin-left:-33px; width:26px; height:18px; background-image: url('http://c15111086.r86.cf2.rackcdn.com/twitter.png'); }
+#twitterbird { position:absolute; margin-left:-33px; width:26px; height:18px; background-image: url('http://cdn.speedrunslive.com/images/twitter.png'); }
 #twitter a:hover {
-	#twitterbird { background-position: 0 -18px; }
+    #twitterbird { background-position: 0 -18px; }
 }
 
 #twitter_update_list {
-	a {
-		.right; 
-		color:@lightgrey; 
-		text-align:right; 
-		&:hover {color:@twitter;}
-	}
-	
-	text-indent:0; padding-left:0; margin-top:0;
-	
-	span {
-		display:block;
-		a {
-			display:inline;
-			float:none;
-			color:@twitter;
-			&:hover { color:@white; }
-		}
-	}
-	
-	li { display:block; padding-bottom:@gutter; margin-bottom:@gutter;}
+    a {
+        .right;
+        color:@lightgrey;
+        text-align:right;
+        &:hover {color:@twitter;}
+    }
+
+    text-indent:0; padding-left:0; margin-top:0;
+
+    span {
+        display:block;
+        a {
+            display:inline;
+            float:none;
+            color:@twitter;
+            &:hover { color:@white; }
+        }
+    }
+
+    li { display:block; padding-bottom:@gutter; margin-bottom:@gutter;}
 }
 
 //
@@ -659,9 +1008,9 @@ input:not([type=submit]):not([type=file]) {
 //
 
 #randomchamp {
-	.center;
-	margin-top:@gutter * 2;
-	a { .bold; }
+    .center;
+    margin-top:@gutter * 2;
+    a { .bold; }
 }
 
 
@@ -674,82 +1023,85 @@ input:not([type=submit]):not([type=file]) {
 #racesMain { .width(6); .right; }
 @jtv_bar: 31px;
 .racebar {
-	display:block;
-	width: (@column * 6) - (@gutter * 2) - 1px;
-	.box(@grey);
-	.rounded;
-	.boxshadow;
-	overflow:auto;
-	margin-bottom: @gutter/2;
-	padding: (@gutter/4) (@gutter/2) (@gutter/4);
-	.bold;
-	cursor:pointer;
-	
-	&.lit {
-		.box(@darkred);
-		&:hover { .box(lighten(@darkred,10%); }
-	}
-	
-	&:hover {
-		.box(@popred);
-		color:inherit;
-	}
-	
-	&:active {
-		.pressedbox(@darkred);
-		color:inherit;
-	}
-	
-	.right { text-align:right; }
-	.left { .width(4); }
-	div { padding-top:1px; }
-	strong { .heading }
+    display:block;
+    width: (@column * 6) - (@gutter * 2) - 1px;
+    .box(@grey);
+    .rounded;
+    .boxshadow;
+    overflow:auto;
+    margin-bottom: @gutter/2;
+    padding: (@gutter/4) (@gutter/2) (@gutter/4);
+    .bold;
+    cursor:pointer;
+
+    &.lit {
+        .box(@darkred);
+        &:hover { .box(lighten(@darkred,10%); }
+    }
+
+    &:hover {
+        .box(@popred);
+        color:inherit;
+    }
+
+    &:active {
+        .pressedbox(@darkred);
+        color:inherit;
+    }
+
+    .right { text-align:right; }
+    .left { .width(4); }
+    div { padding-top:1px; }
+    strong { .heading }
 }
 
 .race_img {
-	padding-top:0px;
-	.left;
-	.rounded;
-	height:40px;
-	width:80px;
-	margin-right: @gutter/2;
-	.liteboxshadow;
-	background:#000 no-repeat;
-	background-size: 86px 64px;
-	background-position: 0 -3px;
+    padding-top:0px;
+    .left;
+    .rounded;
+    height:40px;
+    width:80px;
+    margin-right: @gutter/2;
+    .liteboxshadow;
+    background:#000 no-repeat;
+    background-size: 86px 64px;
+    background-position: 0 -3px;
 }
 
 #racesNav {
-	.left;
-	.width(2);
-	
-	a {
-		display:block;
-		&:nth-child(2) {.rounded_top;}
-		&:last-child {.rounded_bottom;}
-		width: @column * 2 - @gutter - 20px - 1px;
-		.heading;
-		.textshadow;
-		.box(desaturate((@lightgrey / 2),3%);
-		margin-bottom:1px;
-		color:@silver;
-		text-decoration:none;
-		padding:5px 10px;
-		&:hover {
-			color:@silver * 1.7;
-			.box(@red / 1.4);
-		}
-		&:active {
-			color:@silver * 1.3;
-			.box(@red / 3);
-		}
-		
-		img { float:right; position:relative; top:-5px; opacity:0.18}
-	}
-	
-	.racesHighlighted {
-		.box(@red * 0.5);
-	}
+    .left;
+    .width(2);
+
+    & > a {
+        display:block;
+        &:nth-child(2) {.rounded_top;}
+        &:last-child {.rounded_bottom;}
+        width: @column * 2 - @gutter - 20px - 1px;
+        .heading;
+        .textshadow;
+        .box(desaturate((@lightgrey / 2),3%);
+        margin-bottom:1px;
+        color:@silver;
+        text-decoration:none;
+        padding:5px 10px;
+        &:hover {
+            color:@silver * 1.7;
+            .box(@red / 1.4);
+        }
+        &:active {
+            color:@silver * 1.3;
+            .box(@red / 3);
+        }
+
+        img { float:right; position:relative; top:-5px; opacity:0.18}
+    }
+    & > div {
+        text-align: center;
+    }
+
+    .racesHighlighted {
+        .box(@red * 0.5);
+    }
 }
 
 //
@@ -761,111 +1113,111 @@ input:not([type=submit]):not([type=file]) {
 #seasons_desc { .width(5); }
 #seasons_image { .right; width:@column - @gutter; opacity:0.04; margin-top:@gutter; }
 
-.seasonSelect {
-	//border-top:1px dotted @grey / 2;
-	border-bottom:1px dotted @grey / 2;
-	padding-top:@gutter / 2;
-	margin-bottom:@gutter;
-	font-size:@smaller;
-	a { text-decoration:underline; padding: 0 4px; }
-	color:@lightgrey;
+.seasonSelect, .toolSelect {
+    //border-top:1px dotted @grey / 2;
+    border-bottom:1px dotted @grey / 2;
+    padding-top:@gutter / 2;
+    margin-bottom:@gutter;
+    font-size:@smaller;
+    a { text-decoration:underline; padding: 0 4px; }
+    color:@lightgrey;
 }
 
-.seasonSelected {
-	color:@red;
-	text-decoration:none;
+.seasonSelected, .toolSelected {
+    color:@red;
+    text-decoration:none;
 }
 
 .seasongame {
-	width:@column*3 - @gutter - 1px;
-	.rounded_bottomright;
-	.boxshadow;
-	.left;
-	margin-right:@gutter;
-	&:nth-child(2n) { margin-right:0; }
-	margin-bottom:@gutter;
-	border-right:1px @grey*0.7 dotted;
-	padding-bottom:@gutter/2;
-	border-bottom:1px @grey*0.7 dotted;
-	.season_gametitle {
-		.bold;
-		.bronze;
-		width:@column * 3 - @gutter;
-		display:block;
-		padding:0 0 @gutter/2 0;
-	}
-	img { .left; width: @column * 1 - @gutter - 1px; .rounded; .boxshadow; margin-right: @gutter; margin-top:4px;}
-	table { 
-		th { background:none; color:@gold; text-align:left; padding-bottom:4px; }
-		width:@column*2 - @gutter; 
-		//.raceResults;
-		td:nth-child(1){ width:2.2rem; }
-		td:nth-child(3){ text-align:right; padding-right:@gutter; }
-		.full_list { .grey; display:block; padding-top:4px; .italic; &:hover { color:@white; }}
-	}
+    width:@column*3 - @gutter - 1px;
+    .rounded_bottomright;
+    .boxshadow;
+    .left;
+    margin-right:@gutter;
+    &:nth-child(2n) { margin-right:0; }
+    margin-bottom:@gutter;
+    border-right:1px @grey*0.7 dotted;
+    padding-bottom:@gutter/2;
+    border-bottom:1px @grey*0.7 dotted;
+    .season_gametitle {
+        .bold;
+        .bronze;
+        width:@column * 3 - @gutter;
+        display:block;
+        padding:0 0 @gutter/2 0;
+    }
+    img { .left; width: @column * 1 - @gutter - 1px; .rounded; .boxshadow; margin-right: @gutter; margin-top:4px;}
+    table {
+        th { background:none; color:@gold; text-align:left; padding-bottom:4px; }
+        width:@column*2 - @gutter;
+        //.raceResults;
+        td:nth-child(1){ width:2.2rem; }
+        td:nth-child(3){ text-align:right; padding-right:@gutter; }
+        .full_list { .grey; display:block; padding-top:4px; .italic; &:hover { color:@white; }}
+    }
 }
 
 //
 //
 //
 // Leaderboards Home
-// 
+//
 
-#lbsMain { 
-	.width(6);
-	.right;
+#lbsMain {
+    .width(6);
+    .right;
 }
 
-#missionstatement { 	
-	h2 { clear: none; color:@coolpurple; margin-top:@gutter; }
-	h3 { .sans; color:@coolpurple; }
-	p { .width(5); }
-	ol, ul { .width(4); }
-	.aside { 
-		.width(2); 
-		color:@silver*0.9;
-		text-align: justify;
-		p { width: 100%; font-size:@smaller; }
-		.right; 
-		.box(@darkgrey);
-		.rounded;
-		.boxshadow;
-		margin: @gutter;
-		padding: 0 @gutter;
-	}
+#missionstatement {
+    h2 { clear: none; color:@coolpurple; margin-top:@gutter; }
+    h3 { .sans; color:@coolpurple; }
+    p { .width(5); }
+    ol, ul { .width(4); }
+    .aside {
+        .width(2);
+        color:@silver*0.9;
+        text-align: justify;
+        p { width: 100%; font-size:@smaller; }
+        .right;
+        .box(@darkgrey);
+        .rounded;
+        .boxshadow;
+        margin: @gutter;
+        padding: 0 @gutter;
+    }
 }
 
 #lbsNav {
-	.left;
-	.width(2);
-	
-	a {
-		display:block;
-		&:nth-child(2) {.rounded_top;}
-		&:last-child {.rounded_bottom;}
-		width: @column * 2 - @gutter - 20px - 1px;
-		.heading;
-		.textshadow;
-		.box(desaturate((@lightgrey / 2),3%);
-		margin-bottom:1px;
-		color:@silver;
-		text-decoration:none;
-		padding:5px 10px;
-		&:hover {
-			color:@silver * 1.7;
-			.box(@coolpurple / 1.4);
-		}
-		&:active {
-			color:@silver * 1.3;
-			.box(@coolpurple / 3);
-		}
-		
-		img { float:right; position:relative; top:-5px; opacity:0.18}
-	}
-	
-	.lbsHighlighted {
-		.box(@coolpurple * 0.5);
-	}
+    .left;
+    .width(2);
+
+    a {
+        display:block;
+        &:nth-child(2) {.rounded_top;}
+        &:last-child {.rounded_bottom;}
+        width: @column * 2 - @gutter - 20px - 1px;
+        .heading;
+        .textshadow;
+        .box(desaturate((@lightgrey / 2),3%);
+        margin-bottom:1px;
+        color:@silver;
+        text-decoration:none;
+        padding:5px 10px;
+        &:hover {
+            color:@silver * 1.7;
+            .box(@coolpurple / 1.4);
+        }
+        &:active {
+            color:@silver * 1.3;
+            .box(@coolpurple / 3);
+        }
+
+        img { float:right; position:relative; top:-5px; opacity:0.18}
+    }
+
+    .lbsHighlighted {
+        .box(@coolpurple * 0.5);
+    }
 }
 
 //
@@ -874,31 +1226,31 @@ input:not([type=submit]):not([type=file]) {
 // Leaderboards Recent Activity
 //
 
-.flag { .boxshadow; position:inherit; margin:0; margin:0 @gutter/2 0 0; }
+.flag { /*.boxshadow;*/ position:inherit; margin:0; margin:0 @gutter/2 0 0; }
 // the flag is used in multiple places, so it's not within lbactivity
 
 .lbactivity {
-	width:@column * 5 - @gutter * 3 - 1px;
-	padding:@gutter/2 @gutter;
-	margin-bottom:@gutter/2;
-	.rounded;
-	.boxshadow;
-	.box(@darkgrey);
-	a { color:saturate(lighten(@coolpurple,10%),10%); &:hover { color:@white; }}
-	.lbname { .gold; &:hover { color:@white; } }
-	.lbActivityName { .heading; .left; padding-top:0; margin-top:0; text-decoration:none; margin-bottom:@gutter/2;}
-	.status { .left; position:relative; top:-3px; vertical-align:top; padding-right:@gutter/2; }
-	li { padding:1px 0; font-size:@smaller; }
-	p { padding-bottom: @gutter / 2; clear:left; .textshadow; }
-	.lbActivityVerified { font-size:@smaller; }
-	.lbActivityUpdate { .left; padding-bottom:@gutter/2; }
-	ul { clear:left; margin-bottom:0; margin-top:0; }
+    width:@column * 5 - @gutter * 3 - 1px;
+    padding:@gutter/2 @gutter;
+    margin-bottom:@gutter/2;
+    .rounded;
+    .boxshadow;
+    .box(@darkgrey);
+    a { color:saturate(lighten(@coolpurple,10%),10%); &:hover { color:@white; }}
+    .lbname { .gold; &:hover { color:@white; } }
+    .lbActivityName { .heading; .left; padding-top:0; margin-top:0; text-decoration:none; margin-bottom:@gutter/2;}
+    .status { .left; position:relative; top:-3px; vertical-align:top; padding-right:@gutter/2; }
+    li { padding:1px 0; font-size:@smaller; }
+    p { padding-bottom: @gutter / 2; clear:left; .textshadow; }
+    .lbActivityVerified { font-size:@smaller; }
+    .lbActivityUpdate { .left; padding-bottom:@gutter/2; }
+    ul { clear:left; margin-bottom:0; margin-top:0; }
 }
 
-#lbActivitySort { 
-	.lbsHighlighted {
-		.box(@coolpurple * 0.5);
-	} 
+#lbActivitySort {
+    .lbsHighlighted {
+        .box(@coolpurple * 0.5);
+    }
 }
 .lbActivityGold { .box_st(@gold/4); }
 .lbActivitySilver { .box_st(@silver/4); }
@@ -908,40 +1260,40 @@ input:not([type=submit]):not([type=file]) {
 .lbActivityBlue { .box(@coolpurple/5); }
 
 .lbActivityTime {
-	.right;
-	width:@column;
-	text-align:right;
-	.grey;
-	.italic;
-	.sans;
-	font-size:@smaller;
+    .right;
+    width:@column;
+    text-align:right;
+    .grey;
+    .italic;
+    .sans;
+    font-size:@smaller;
 }
 
 #lbActivitySort {
-	.right;
-	width:@column - @gutter;
-	a { 
-		display:block; 
-		.smallbuttonstyle; 
-		width:@column - @gutter - 1px; 
-		padding: 3px 0; 
-		.not_rounded;
-		&:nth-child(2) {.rounded_top; }
-		&:nth-child(5) {.rounded_bottom; }
-		
-		&:hover {
-			color:@silver * 1.7;
-			.box(@coolpurple / 1.4);
-		}
-		&:active {
-			color:@silver * 1.3;
-			.box(@coolpurple / 3);
-		}
-	}
-	
-	.racesHighlighted {
-		.box(@coolpurple * 0.5);
-	}
+    .right;
+    width:@column - @gutter;
+    a {
+        display:block;
+        .smallbuttonstyle;
+        width:@column - @gutter - 1px;
+        padding: 3px 0;
+        .not_rounded;
+        &:nth-child(2) {.rounded_top; }
+        &:nth-child(5) {.rounded_bottom; }
+
+        &:hover {
+            color:@silver * 1.7;
+            .box(@coolpurple / 1.4);
+        }
+        &:active {
+            color:@silver * 1.3;
+            .box(@coolpurple / 3);
+        }
+    }
+
+    .racesHighlighted {
+        .box(@coolpurple * 0.5);
+    }
 }
 
 //
@@ -954,50 +1306,61 @@ input:not([type=submit]):not([type=file]) {
 #faqNav { .width(2); margin-top:@gutter*1.5 + 3px; .right; a { display:block; }}
 
 #backToTopButton {
-	display:block;
-	position:fixed;
-	bottom:@gutter*3.15; // kind of sketchy but w/e
-	.width(2);
-	text-align:right;
-	.rounded;
-	.box(@darkgrey);
-	padding:3px 10px;
-	.bold;
-	&:hover {.box(@darkred);}
-	&:active { .box(@darkred / 2);}
+    display:block;
+    position:fixed;
+    bottom:@gutter*3.15; // kind of sketchy but w/e
+    .width(2);
+    text-align:right;
+    .rounded;
+    .box(@darkgrey);
+    padding:3px 10px;
+    .bold;
+    &:hover {.box(@darkred);}
+    &:active { .box(@darkred / 2);}
 }
 
 #commandlist {
-	h1 img { position:relative; &:hover { .boxglow; } }
-	h2 { .heading; border-bottom: 1px dotted @grey; padding-bottom:4px; margin-bottom:12px; margin-top:12px; }
-	img { vertical-align:bottom; margin-right:4px; }
+    h1 img { position:relative; &:hover { .boxglow; } }
+    h2 { .heading; border-bottom: 1px dotted @grey; padding-bottom:4px; margin-bottom:12px; margin-top:12px; }
+    img { vertical-align:bottom; margin-right:4px; }
 }
 
 #glossary {
-	a { text-decoration:underline; }
-	h1 { margin-left:@column*2; }
-	.width(6);
-	.left;
-	table {
-		td:first-child { .width(2); text-align:right; .bold; padding-right:@gutter; }
-		td { padding-bottom:@gutter / 2; vertical-align:top; }
-	}
-	.term { .width(2); }
+    a { text-decoration:underline; }
+    h1 { margin-left:@column*2; }
+    .width(6);
+    .left;
+    table {
+        td:first-child { .width(2); text-align:right; .bold; padding-right:@gutter; }
+        td { padding-bottom:@gutter / 2; vertical-align:top; }
+    }
+    .term { .width(2); }
+}
+
+.keywords {
+    font-size: .95em;
+    display: inline-block;
+    margin-left: 1em;
+    line-height: 1.3em;
 }
 
 #faqHead {
-	margin-top:@gutter;
-	a { 
-		.smallbuttonstyle;
-		.box(@green / 2);
-		width: @column*2 - @gutter - 1px;
-		margin-right:@gutter;
-		.left;
-		padding: 5px 0;
-		&:hover { .box(@green * (3/4)); }
-		&:active { .pressedbox(@green / 2); }
-		color:#b6dec7;
-	}
+    margin-top:@gutter;
+    a {
+        .smallbuttonstyle;
+        .box(@green / 2);
+        width: @column*2 - @gutter - 1px;
+        margin-right:@gutter;
+        .left;
+        padding: 5px 0;
+        &:hover { .box(@green * (3/4)); }
+        &:active { .pressedbox(@green / 2); }
+        color:#b6dec7;
+    }
+    a.current {
+        .box(@green * .8);
+        color: #FFF;
+    }
 }
 
 //
@@ -1012,56 +1375,56 @@ input:not([type=submit]):not([type=file]) {
 .icons {margin-right:@gutter / 4; &:hover {cursor:pointer;} }
 
 .avatar{
-	width: @column - @gutter - 2px;
-	height: @column - @gutter - 2px;
-	display: inline-block;
-	border: solid 1px @black;
-	overflow: hidden;
-	.rounded(10px);
-	.boxshadow;
-	margin-bottom:@gutter / 2;
+    width: @column - @gutter - 2px;
+    height: @column - @gutter - 2px;
+    display: inline-block;
+    border: solid 1px @black;
+    overflow: hidden;
+    .rounded(10px);
+    .boxshadow;
+    margin-bottom:@gutter / 2;
 }
 
 #profile_name     { .width(1); .left; }
-#profile_gamelist { 
-	.width(3); 
-	.left; 
-	table { width: 100%; } 
-	td:nth-child(2){text-align:right;}
-	tr:hover { background:@darkblue; color:@white; cursor:pointer; }
+#profile_gamelist {
+    .width(3);
+    .left;
+    table { width: 100%; }
+    td:nth-child(2){text-align:right;}
+    tr:hover { background:@darkblue; color:@white; cursor:pointer; }
 }
 #profile_races    { .width(4); .left; margin-bottom:@gutter; min-height:1000px; }
 
 #awards {
-	
-	figure {
-		text-align: center;
-		margin:0;
-		width: @column - @gutter -1px;
-		.rounded(10px);
-		.boxshadow;
-		margin-bottom:@gutter;
-		.box(@grey);
-		height:64px;
-		cursor:default;
-		
-		figcaption {
-			position:relative;
-			bottom:4px;
-			.center;
-			font-size:@smaller;
-			.rounded;
-			.box(@darkgrey);
-			//background: rgba(0, 0, 0, 0.6);
-			margin: 1px 2px 2px 1px;
-			.bold;
-		}
-		
-	}
-	
-	.special_sticker {
-		.box(#1040a0);
-	}
+
+    figure {
+        text-align: center;
+        margin:0;
+        width: @column - @gutter -1px;
+        .rounded(10px);
+        .boxshadow;
+        margin-bottom:@gutter;
+        .box(@grey);
+        height:64px;
+        cursor:default;
+
+        figcaption {
+            position:relative;
+            bottom:4px;
+            .center;
+            font-size:@smaller;
+            .rounded;
+            .box(@darkgrey);
+            //background: rgba(0, 0, 0, 0.6);
+            margin: 1px 2px 2px 1px;
+            .bold;
+        }
+
+    }
+
+    .special_sticker {
+        .box(#1040a0);
+    }
 }
 
 //
@@ -1071,59 +1434,59 @@ input:not([type=submit]):not([type=file]) {
 //
 
 #changeStats {
-	list-style-position:outside;
-	li { 
-		padding:0 5px;
-		.rounded;
-		.grey;
-		&:nth-child(1) { color:@white; margin-bottom:5px; }
-		&:nth-child(2) { .gold; }
-		&:nth-child(3) { .silver; }
-		&:nth-child(4) { .bronze; }
-		&:hover { background:@darkblue; color:@white; cursor:pointer; }
-	}
+    list-style-position:outside;
+    li {
+        padding:0 5px;
+        .rounded;
+        .grey;
+        &:nth-child(1) { color:@white; margin-bottom:5px; }
+        &:nth-child(2) { .gold; }
+        &:nth-child(3) { .silver; }
+        &:nth-child(4) { .bronze; }
+        &:hover { background:@darkblue; color:@white; cursor:pointer; }
+    }
 }
 
 #buttonCollection {
-	.live { 
-		.bold;
-		position:relative;
-		bottom:7px;
-		font-size: @smaller;
-		color:@red;
-	}
+    .live {
+        .bold;
+        position:relative;
+        bottom:7px;
+        font-size: @smaller;
+        color:@red;
+    }
 }
 
 
 .raceResults { // this can be used for a lot of tables.
-	margin-bottom:@gutter; 
-	.rounded;
-	background-image: url('http://c15111086.r86.cf2.rackcdn.com/greybg.jpg');
-	
-	tr:nth-child(2n) { background:rgba(0, 0, 0, 0.12); }
-	th:first-child{ .rounded_topleft; }
-	th:last-child{ .rounded_topright; }
-	td { padding-bottom:1px; }
-	td:nth-child(1) { padding-left:@gutter / 2; }
-	
-	.boxshadow;
+    margin-bottom:@gutter;
+    .rounded;
+    background-image: url('http://cdn.speedrunslive.com/images/greybg.jpg');
+
+    tr:nth-child(2n) { background:rgba(0, 0, 0, 0.12); }
+    th:first-child{ .rounded_topleft; }
+    th:last-child{ .rounded_topright; }
+    td { padding-bottom:1px; }
+    td:nth-child(1) { padding-left:@gutter / 2; }
+
+    .boxshadow;
 }
 
 .raceFeedRating {
-	color:@lightgrey;
-	text-align:right;
-	width:15px;
-	padding:0;
-	font-size:@smaller;
-	.italic;
+    color:@lightgrey;
+    text-align:right;
+    width:15px;
+    padding:0;
+    font-size:@smaller;
+    .italic;
 }
 
 .raceFeedArrow {
-	text-align:center;
-	width:8px;
-	padding-right:1px;
-	padding-left:7px;
-	font-style:normal;
+    text-align:center;
+    width:8px;
+    padding-right:1px;
+    padding-left:7px;
+    font-style:normal;
 }
 
 
@@ -1134,39 +1497,39 @@ input:not([type=submit]):not([type=file]) {
 
 
 .raceFeedRatingChange {
-	text-align:right;
-	width:10px;
-	padding: 0 @gutter/2;
-	font-size:@smaller;
-	.italic;
+    text-align:right;
+    width:10px;
+    padding: 0 @gutter/2;
+    font-size:@smaller;
+    .italic;
 }
 
 span.raceMessage {
     position:relative;
-	margin-left:4px;
-	z-index:24;
-	.rounded;
-	background:#282828;
-	color:darken(@silver, 10%);
-	font-size:@smaller;
-	}
+    margin-left:4px;
+    z-index:24;
+    .rounded;
+    background:#282828;
+    color:darken(@silver, 10%);
+    font-size:@smaller;
+    }
 span.raceMessage:hover{z-index:25; background-color:@darkblue; color:@white; cursor:default; }
 span.raceMessage span{display: none}
 span.raceMessage:hover span{
     display:block;
-	font-weight:normal;
+    font-weight:normal;
     position:absolute;
-	.rounded;
+    .rounded;
     top:-6px; left:15px; width:192px;
     border:1px solid @darkblue;
-    background-color:@darkgrey; 
-	box-shadow: inset @darkblue 0 0 6px, @black 2px 2px 10px, @darkblue 0 0 2px; // cute glow
-	padding:6px;
-	color:#bec7d2;
-    text-align: center; 
-	margin-bottom:-20px;
-	word-wrap: break-word; // FFFFFFFFFFFFFFFFFFFUUUUUUUUUUUUUUUUUUUUUUUU
-	overflow: hidden;
+    background-color:@darkgrey;
+    box-shadow: inset @darkblue 0 0 6px, @black 2px 2px 10px, @darkblue 0 0 2px; // cute glow
+    padding:6px;
+    color:#bec7d2;
+    text-align: center;
+    margin-bottom:-20px;
+    word-wrap: break-word; // FFFFFFFFFFFFFFFFFFFUUUUUUUUUUUUUUUUUUUUUUUU
+    overflow: hidden;
 }
 
 
@@ -1182,14 +1545,14 @@ span.raceMessage:hover span{
 
 //this is kinda clever
 .ratingcolors (@fg, @bg) {
-	background-image: url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png');
-	border-left:4px @fg solid;
-	.boxshadow;
-	background-color: @bg;
-	tr {
-		color:@fg;
-		&:nth-child(2n) { background:rgba(0, 0, 0, 0.085); }
-	}
+    background-image: url('http://cdn.speedrunslive.com/images/grunge_button.png');
+    border-left:4px @fg solid;
+    .boxshadow;
+    background-color: @bg;
+    tr {
+        color:@fg;
+        &:nth-child(2n) { background:rgba(0, 0, 0, 0.085); }
+    }
 }
 
 // Elo colors:
@@ -1219,7 +1582,7 @@ span.raceMessage:hover span{
 .r100  { .ratingcolors (#200065, #000000); }
 */
 
- // New colors 
+ // New colors
 .r1 { .ratingcolors (#efe3eb, #453b40);  } // white
 .r2 { .ratingcolors (#ff9ff0, #40264b);  } // purple
 .r3 { .ratingcolors (#57c2ff, #232c46);  } // blue
@@ -1228,27 +1591,27 @@ span.raceMessage:hover span{
 .r6 { .ratingcolors (#b4b9bf, #1d2028);  } // silver
 .r7 { .ratingcolors (#d6a59a, #2b1713);  } // bronze
 .r8 { .ratingcolors (#808080, #1b1b1b);  } // unranked
-#unranked { 
-	.center;
-	&:hover { 
-		cursor:pointer;
-		color:@white; 
-	}
+#unranked {
+    .center;
+    &:hover {
+        cursor:pointer;
+        color:@white;
+    }
 }
 
-.rwhite { .ratingtxtcolors (#efe3eb, #453b40);  } 
+.rwhite { .ratingtxtcolors (#efe3eb, #453b40);  }
 .rpurple { .ratingtxtcolors (#ff9ff0, #40264b); }
-.rblue { .ratingtxtcolors (#57c2ff, #232c46);   } 
+.rblue { .ratingtxtcolors (#57c2ff, #232c46);   }
 .rgreen { .ratingtxtcolors (#68df98, #223025);  }
-.rgold { .ratingtxtcolors (#e4c17c, #282422);   } 
-.rsilver { .ratingtxtcolors (#b4b9bf, #1d2028); } 
+.rgold { .ratingtxtcolors (#e4c17c, #282422);   }
+.rsilver { .ratingtxtcolors (#b4b9bf, #1d2028); }
 .rbronze { .ratingtxtcolors (#d6a59a, #2b1713); }
 .rgrey { .ratingtxtcolors (@lightgrey, @black); }
 
 
 .ratingtxtcolors (@fg, @bg) {
-	color: @fg; // lol I dont even use @bg at all here but w/e
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), 0 0 1px @fg*(4/7); // this makes the text look very slightly better in both chrome/ff
+    color: @fg; // lol I dont even use @bg at all here but w/e
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7), 0 0 1px @fg*(4/7); // this makes the text look very slightly better in both chrome/ff
 }
 
 
@@ -1276,13 +1639,13 @@ span.raceMessage:hover span{
 .jiano { color:#5cb3f0; }
 .sluip { color:#d9ca69; }
 
-#aboutSRL { 
-	margin-top:@gutter;
-	.width(5); margin-left:@column * 2; 
-	a { .left; width:@column*2 - @gutter; .bold; text-align:right; }
-	p { clear:both; }
-	span { .right; width:@column*3 - @gutter; margin-left:@gutter; .grey; }
-	.separation { clear:both; .width(2); margin-left:@column; height:@gutter/2; margin-bottom:@gutter/2; border-bottom:1px @grey/2 dotted; }
+#aboutSRL {
+    margin-top:@gutter;
+    .width(5); margin-left:@column * 2;
+    a { .left; width:@column*2 - @gutter; .bold; text-align:right; }
+    p { clear:both; }
+    span { .right; width:@column*3 - @gutter; margin-left:@gutter; .grey; }
+    .separation { clear:both; .width(2); margin-left:@column; height:@gutter/2; margin-bottom:@gutter/2; border-bottom:1px @grey/2 dotted; }
 }
 
 //
@@ -1303,36 +1666,36 @@ span.raceMessage:hover span{
 // Tools
 //
 
-#tools { 
-	a { text-decoration:underline; }
-	
-	.newcard {
-		.smallbuttonstyle;
-		width:@column - @gutter - 1px;
-		margin-right:@gutter;
-		margin-bottom:@gutter / 2;
-		padding: 4px 0;
-		text-decoration:none;
-		
-		&:nth-child(2n) { margin-right:0; }
-	}
-	
+#tools {
+    a { text-decoration:underline; }
+
+    .newcard {
+        .smallbuttonstyle;
+        width:@column - @gutter - 1px;
+        margin-right:@gutter;
+        margin-bottom:@gutter / 2;
+        padding: 4px 0;
+        text-decoration:none;
+
+        &:nth-child(2n) { margin-right:0; }
+    }
+
 }
 #tools_left { .width(4); .left; }
 #tools_right { .width(4); .right; }
 #bingo_desc { .width(2); }
 
-#bingo_list { 
-	.width(2); .right; margin-right:0;
-	
-	.oot{       .customhover(#c72027); }
-	.mm{        .customhover(#8b3eb2); }
-	.sm{        .customhover(#f88010); }
-	.sotn{      .customhover(#b99b8f); }
-	.sm64{      .customhover(#e72c2c); }
-	.smw{       .customhover(#48d024); }
-	.pokemonrb{ .customhover(#7387c2); }
-	.pokemoncrystal { .customhover(#9acfd7);}
+#bingo_list {
+    .width(2); .right; margin-right:0;
+
+    .oot{       .customhover(#c72027); }
+    .mm{        .customhover(#8b3eb2); }
+    .sm{        .customhover(#f88010); }
+    .sotn{      .customhover(#b99b8f); }
+    .sm64{      .customhover(#e72c2c); }
+    .smw{       .customhover(#48d024); }
+    .pokemonrb{ .customhover(#7387c2); }
+    .pokemoncrystal { .customhover(#9acfd7);}
 }
 
 //
@@ -1342,151 +1705,151 @@ span.raceMessage:hover span{
 //
 
 #gameSort {
-	.right;
-	width:@column - @gutter;
-	a { 
-		display:block; 
-		.smallbuttonstyle; 
-		width:@column - @gutter - 1px; 
-		padding: 3px 0; 
-		.not_rounded;
-		&:nth-child(2) {.rounded_top; }
-		&:nth-child(5) {.rounded_bottom; }
-		
-		&:hover {
-			color:@silver * 1.7;
-			.box(@red / 1.4);
-		}
-		&:active {
-			color:@silver * 1.3;
-			.box(@red / 3);
-		}
-	}
-	
-	.racesHighlighted {
-		.box(@red * 0.5);
-	}
+    .right;
+    width:@column - @gutter;
+    a {
+        display:block;
+        .smallbuttonstyle;
+        width:@column - @gutter - 1px;
+        padding: 3px 0;
+        .not_rounded;
+        &:nth-child(2) {.rounded_top; }
+        &:nth-child(5) {.rounded_bottom; }
+
+        &:hover {
+            color:@silver * 1.7;
+            .box(@red / 1.4);
+        }
+        &:active {
+            color:@silver * 1.3;
+            .box(@red / 3);
+        }
+    }
+
+    .racesHighlighted {
+        .box(@red * 0.5);
+    }
 }
 
 #gamelist {
-	.very_popular {
-		display:block;
-		.racebar;
-		width: @column * 5 - @gutter*2 - 1;
-		margin-right:@gutter;
-		margin-bottom:1px;
-		.rounded(0);
-		cursor:pointer;
-		
-		&:nth-child(2) { .rounded_top; .gamerank {color:@gold;}}
-		&:nth-child(3) { .gamerank {color:@silver;}}
-		&:nth-child(4) { .gamerank {color:@bronze;}}
-		&:last-child { .rounded_bottom; }
-		//&:nth-child(2n+1) { .box(darken(@grey, 6%); } /* no longer needed because of the linear gradient. */
-		&:hover { .box(@popred); .popBar{background:@popred;} }
-		&:active { .pressedbox(@darkred); .popBar{background:@darkred;} }
-		strong {color:@silver;}
-		
-		.popBar {
-			display:block;
-			float:left;
-			margin-top:7px;
-			.rounded;
-			background: @grey;
-			height:7px;
-		}
-	}
-	
-	h1 { clear:both; }
-	
-	.popularity {
-		.left;
-		.width(5);
-	}
-	
-	.alphabetical {
-		.left;
-		.width(5);
-	}
-	
-	#alphalist {
-		//height:1217px; this was the old height for like 25 games
-		height:600px;
-		overflow-y:scroll;
-		
-		margin-top:@gutter / 2;
-		border-top:2px @grey solid;
-		border-bottom:2px @grey solid;
-		.boxshadow;
-	}
-	
-	.gamerank {
-		.right;
-		color:@lightgrey;
-	}
-	
-	.letterpicker {
-		letter-spacing:5px;
-		width:100%;
-		.heading;
-		text-align:center;
-		
-		a { padding-left:5px; padding-top:3px; padding-bottom:3px; }
-		
-		a:hover {
-			color:@gold;
-			background:@darkred;
-			.rounded;
-			.boxshadow;
-		}
-	}
+    .very_popular {
+        display:block;
+        .racebar;
+        width: @column * 5 - @gutter*2 - 1;
+        margin-right:@gutter;
+        margin-bottom:1px;
+        .rounded(0);
+        cursor:pointer;
+
+        &:nth-child(2) { .rounded_top; .gamerank {color:@gold;}}
+        &:nth-child(3) { .gamerank {color:@silver;}}
+        &:nth-child(4) { .gamerank {color:@bronze;}}
+        &:last-child { .rounded_bottom; }
+        //&:nth-child(2n+1) { .box(darken(@grey, 6%); } /* no longer needed because of the linear gradient. */
+        &:hover { .box(@popred); .popBar{background:@popred;} }
+        &:active { .pressedbox(@darkred); .popBar{background:@darkred;} }
+        strong {color:@silver;}
+
+        .popBar {
+            display:block;
+            float:left;
+            margin-top:7px;
+            .rounded;
+            background: @grey;
+            height:7px;
+        }
+    }
+
+    h1 { clear:both; }
+
+    .popularity {
+        .left;
+        .width(5);
+    }
+
+    .alphabetical {
+        .left;
+        .width(5);
+    }
+
+    #alphalist {
+        //height:1217px; this was the old height for like 25 games
+        height:600px;
+        overflow-y:scroll;
+
+        margin-top:@gutter / 2;
+        border-top:2px @grey solid;
+        border-bottom:2px @grey solid;
+        .boxshadow;
+    }
+
+    .gamerank {
+        .right;
+        color:@lightgrey;
+    }
+
+    .letterpicker {
+        letter-spacing:5px;
+        width:100%;
+        .heading;
+        text-align:center;
+
+        a { padding-left:5px; padding-top:3px; padding-bottom:3px; }
+
+        a:hover {
+            color:@gold;
+            background:@darkred;
+            .rounded;
+            .boxshadow;
+        }
+    }
 }
 
 //
 //
 //
-// Game page 
+// Game page
 //
 
 #gamepage {
-	#playerslist {
-		.width(2);
-		.left;
-		
-		table tr td:nth-child(1) { width:30px;	}
-		table tr td:nth-child(3) { text-align:right; width:50px; }
-	}
-	
-	#rightside {
-		overflow:visible;
-		.right;
-		.width(2);
-		img { .width(2); .rounded; .boxshadow; }
-		object { .width(2); .rounded; margin-right:0;}
-		
-		a {text-decoration:underline;}
-		table { margin-bottom:@gutter; a { text-decoration:none; }}
-		th { .box_gradient(@popred*0.8); }
-	}
-	
-	#centercolumn {
-		.left;
-		.width(4);
-	}
-	
-	#racefeed {
-	}
-	
-	#rules {
-		.width(4);
-		.left;
-		margin-bottom:@gutter;
-		a { text-decoration:underline }
-	}
-	
-	#side_popgoals {
-		.raceResults th { .rounded_top; }
-	}
+    #playerslist {
+        .width(2);
+        .left;
+
+        table tr td:nth-child(1) { width:30px;  }
+        table tr td:nth-child(3) { text-align:right; width:50px; }
+    }
+
+    #rightside {
+        overflow:visible;
+        .right;
+        .width(2);
+        img { .width(2); .rounded; .boxshadow; }
+        object { .width(2); .rounded; margin-right:0;}
+
+        a {text-decoration:underline;}
+        table { margin-bottom:@gutter; a { text-decoration:none; }}
+        th { .box_gradient(@popred*0.8); }
+    }
+
+    #centercolumn {
+        .left;
+        .width(4);
+    }
+
+    #racefeed {
+    }
+
+    #rules {
+        .width(4);
+        .left;
+        margin-bottom:@gutter;
+        a { text-decoration:underline }
+    }
+
+    #side_popgoals {
+        .raceResults th { .rounded_top; }
+    }
 }
 
 
@@ -1497,19 +1860,19 @@ span.raceMessage:hover span{
 //
 
 #megaman_bossorder {
-	margin-top:@gutter;
-	.right;
-	background: url('http://c15111086.r86.cf2.rackcdn.com/bossorder_bg.gif');
-	.width(4);
-	height:462px;
-	.rounded;
-	.boxshadow;
-	
-	#imageholder {
-		padding-top:56px;
-		padding-left: 64px;
-		img { margin: 0 38px 38px 0; }
-	}
+    margin-top:@gutter;
+    .right;
+    background: url('http://cdn.speedrunslive.com/images/bossorder_bg.gif');
+    .width(4);
+    height:462px;
+    .rounded;
+    .boxshadow;
+
+    #imageholder {
+        padding-top:56px;
+        padding-left: 64px;
+        img { margin: 0 38px 38px 0; }
+    }
 }
 
 //
@@ -1519,28 +1882,28 @@ span.raceMessage:hover span{
 //
 
 #leaderboardcontainer {
-	.width(4);
+    .width(4);
 }
 #siteleaderboard {
-	.raceResults;
-	th { .box_gradient(@popred); color:@white; .textshadow; .bold; }
-	tr td { .center; padding: 2px 0 1px 0; }
-	color:@lightgrey;
-	tr:nth-child(2) { .gold; }
-	tr:nth-child(3) { .silver; }
-	tr:nth-child(4) { .bronze; }
+    .raceResults;
+    th { .box_gradient(@popred); color:@white; .textshadow; .bold; }
+    tr td { .center; padding: 2px 0 1px 0; }
+    color:@lightgrey;
+    tr:nth-child(2) { .gold; }
+    tr:nth-child(3) { .silver; }
+    tr:nth-child(4) { .bronze; }
 }
 
-.lbButton { 
-	&:hover {
-		cursor:pointer;
-		.gold;
-		.litColumn;
-	}
+.lbButton {
+    &:hover {
+        cursor:pointer;
+        .gold;
+        .litColumn;
+    }
 }
 
 .litColumn {
-	.insetboxshadow2;
+    .insetboxshadow2;
 }
 
 //
@@ -1550,61 +1913,61 @@ span.raceMessage:hover span{
 //
 
 #leaderboard {
-	#playerslist {
-		.width(2);
-		.left;
-		
-		table tr td:nth-child(1) { width:30px;	}
-		table tr td:nth-child(3) { text-align:right; width:50px; }
-	}
-	
-	#rightside {
-		.right;
-		.width(2);
-		a {text-decoration:underline;}
-		
-		table { 
-			.raceResults; 
-			a { text-decoration:none;} 
-			td:nth-child(1) { width: @column * (1/3); color:@lightgrey; }
-			td:nth-child(3) { text-align:right; padding-right:@gutter / 2; }
-			.smaller { font-size:@smaller; }
-		}
-		
-		.randomchampion { 
-			a { color:@gold; text-decoration:none; &:hover { color:@white; }}
-			
-		}
-	}
-	
-	#middle {
-		.left;
-		.width(4);
-		
-		table { 
-			.raceResults; 
-			a { text-decoration:none;} 
-			td:nth-child(1) { width: @column * (1/3); color:@lightgrey; }
-			td:nth-child(3) { text-align:right; padding-right: @gutter / 2; }
-			td:nth-child(4) { .width(2); text-align:right; padding: 0 @gutter/2 }
-		}
-		
-		#highestratings {
-			clear:both;
-		}
-		
-		#populartables {
-			table {
-				.width(2);
-				.left;
-			}
-			
-			h1 { clear:both; }
-			
-			.gamepic { .right; .width(2); margin:0; .boxshadow; .rounded; max-height: 3/4 * (@column*2 - @gutter) }
-		}
-	}
-	
+    #playerslist {
+        .width(2);
+        .left;
+
+        table tr td:nth-child(1) { width:30px;  }
+        table tr td:nth-child(3) { text-align:right; width:50px; }
+    }
+
+    #rightside {
+        .right;
+        .width(2);
+        a {text-decoration:underline;}
+
+        table {
+            .raceResults;
+            a { text-decoration:none;}
+            td:nth-child(1) { width: @column * (1/3); color:@lightgrey; }
+            td:nth-child(3) { text-align:right; padding-right:@gutter / 2; }
+            .smaller { font-size:@smaller; }
+        }
+
+        .randomchampion {
+            a { color:@gold; text-decoration:none; &:hover { color:@white; }}
+
+        }
+    }
+
+    #middle {
+        .left;
+        .width(4);
+
+        table {
+            .raceResults;
+            a { text-decoration:none;}
+            td:nth-child(1) { width: @column * (1/3); color:@lightgrey; }
+            td:nth-child(3) { text-align:right; padding-right: @gutter / 2; }
+            td:nth-child(4) { .width(2); text-align:right; padding: 0 @gutter/2 }
+        }
+
+        #highestratings {
+            clear:both;
+        }
+
+        #populartables {
+            table {
+                .width(2);
+                .left;
+            }
+
+            h1 { clear:both; }
+
+            .gamepic { .right; .width(2); margin:0; .boxshadow; .rounded; max-height: 3/4 * (@column*2 - @gutter) }
+        }
+    }
+
 }
 
 //
@@ -1614,10 +1977,10 @@ span.raceMessage:hover span{
 //
 
 #error404 {
-	.width(8);
-	.center;
-	h1 { .red }
-	margin-top:@column;
+    .width(8);
+    .center;
+    h1 { .red }
+    margin-top:@column;
 }
 
 //
@@ -1627,65 +1990,65 @@ span.raceMessage:hover span{
 //
 #buttonholder { width:100%; }
 #bingoPage {
-	#results { .left; .width(5); text-align:right;}
+    #results { .left; .width(5); text-align:right;}
 
-	.newcard {
-		.smallbuttonstyle;
-		width:@column - @gutter - 1px;
-		margin-right:@gutter;
-		padding: 4px 0;
-		&:last-child { margin-right:0; }
-	}
-	
-	#bingo {
-		margin-top:@gutter;
-		.noselect;
-		
-		.rowcol {
-			background:#000811;
-			font-size:@evensmaller;
-			color:@blue;
-			.bold;
-			border:1px @darkblue/2 solid;
-			
-			&:hover { color:@white; background:@darkblue; }
-		}
-		
-		tr {
-			&:first-child, &:last-child { 
-				td { height:30px; .rowcol; }
-			}
-		
-			td { 
-				.insetboxshadow;
-				&:first-child {	width:35px;	.rowcol; }
-				
-				padding:0 5px;
-				cursor:pointer;
-				width:95px;
-				height:90px;
-				text-align:center;
-				border:1px @grey solid;
-				background: #000;
-				&:hover, &.hover { background:#001a36; color:#fff; }
-				
-				&.greensquare {
-					background:#005511;
-					&:hover, &.hover { background:#007722; }
-				}
-				
-				&.redsquare {
-					background:#550011;
-					&:hover, &.hover { background:#770022; }
-				}
-			}
-		}
-	}
+    .newcard {
+        .smallbuttonstyle;
+        width:@column - @gutter - 1px;
+        margin-right:@gutter;
+        padding: 4px 0;
+        &:last-child { margin-right:0; }
+    }
 
-	#about_bingo {
-		.right;
-		.width(3);
-	}
+    #bingo {
+        margin-top:@gutter;
+        .noselect;
+
+        .rowcol {
+            background:#000811;
+            font-size:@evensmaller;
+            color:@blue;
+            .bold;
+            border:1px @darkblue/2 solid;
+
+            &:hover { color:@white; background:@darkblue; }
+        }
+
+        tr {
+            &:first-child, &:last-child {
+                td { height:30px; .rowcol; }
+            }
+
+            td {
+                .insetboxshadow;
+                &:first-child { width:35px; .rowcol; }
+
+                padding:0 5px;
+                cursor:pointer;
+                width:95px;
+                height:90px;
+                text-align:center;
+                border:1px @grey solid;
+                background: #000;
+                &:hover, &.hover { background:#001a36; color:#fff; }
+
+                &.greensquare {
+                    background:#005511;
+                    &:hover, &.hover { background:#007722; }
+                }
+
+                &.redsquare {
+                    background:#550011;
+                    &:hover, &.hover { background:#770022; }
+                }
+            }
+        }
+    }
+
+    #about_bingo {
+        .right;
+        .width(3);
+    }
 
 }
 
@@ -1695,29 +2058,29 @@ span.raceMessage:hover span{
 // Races / Streams!
 //
 
-#streamData { display:none; } 
-#featuredStream { 
-	.width(6);
-	object { 
-		width: (@column * 6) - @gutter;
-		height: (9/16) * ((@column * 6) - @gutter) + @jtv_bar;
-		.boxshadow;
-	}
-	
-	h1 a {
-		text-decoration:none;
-	}
-	
-	.morestreams {
-		.grey;
-		&:hover { color:@white; }
-		.right;
-	}
+#streamData { display:none; }
+#featuredStream {
+    .width(6);
+    object {
+        width: (@column * 6) - @gutter;
+        height: (9/16) * ((@column * 6) - @gutter) + @jtv_bar;
+        .boxshadow;
+    }
+
+    h1 a {
+        text-decoration:none;
+    }
+
+    .morestreams {
+        .grey;
+        &:hover { color:@white; }
+        .right;
+    }
 }
 
 #featuredStreamContainer {
-	//min-height: (9/16) * ((@column * 5) - @gutter) + @jtv_bar + 20px;
-	//min-height:435px;
+    //min-height: (9/16) * ((@column * 5) - @gutter) + @jtv_bar + 20px;
+    //min-height:435px;
 }
 
 
@@ -1737,40 +2100,40 @@ span.raceMessage:hover span{
 }
 
 .ls_objectContainer {
-	width:auto;
-	div {position:absolute; overflow:hidden;}
-	object {height:100%;}
-	img {padding-bottom: @jtv_bar; z-index:-1000;}
-	margin-left:@gutter;
+    width:auto;
+    div {position:absolute; overflow:hidden;}
+    object {height:100%;}
+    img {padding-bottom: @jtv_bar; z-index:-1000;}
+    margin-left:@gutter;
 }
 
 .liquidstream {
-	width:100%;
-	float:left;
-	margin-bottom:@gutter;
+    width:100%;
+    float:left;
+    margin-bottom:@gutter;
 }
 
-.ls_small {	width: 100%; }
+.ls_small { width: 100%; }
 
 .ls_namebar {
-	margin-left:@gutter;
-	overflow:hidden;
+    margin-left:@gutter;
+    overflow:hidden;
 }
 
 .ls_name {
-	height:21px;
-	.box(@darkred);
-	.rounded_topleft;
-	width:100%;
+    height:21px;
+    .box(@darkred);
+    .rounded_topleft;
+    width:100%;
 }
 
-#noStreams { 
-	.heading;
-	text-align:center;
-	.left;
-	margin-left:@gutter;
-	.red;
-	.textshadow;
+#noStreams {
+    .heading;
+    text-align:center;
+    .left;
+    margin-left:@gutter;
+    .red;
+    .textshadow;
 }
 
 #streamBlock { display:none; }
@@ -1779,47 +2142,47 @@ span.raceMessage:hover span{
 .ls_padder { padding:3px 8px;}
 
 .ls_icons {
-	width:25px;
-	
-	a {
-		display:block;
-		width: 25px; //width:42px;
-		height:21px;
-	}
+    width:25px;
+
+    a {
+        display:block;
+        width: 25px; //width:42px;
+        height:21px;
+    }
 }
 
-.chatIcon { 	
-	background-position:-9px 0;
-	.box(@darkred);
-	&:hover { .box(@popred); cursor:pointer; background-image: url('http://c15111086.r86.cf2.rackcdn.com/icon_chat.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png'); background-position: -9px -21px; } // this seems sloppy but what can I do??
-	&:active { .pressedbox(@darkred * 3/4); background-image: url('http://c15111086.r86.cf2.rackcdn.com/icon_chat.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png'); background-position: -9px -21px; }
-	background-image: url('http://c15111086.r86.cf2.rackcdn.com/icon_chat.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png');
-	span { display:none; }
+.chatIcon {
+    background-position:-9px 0;
+    .box(@darkred);
+    &:hover { .box(@popred); cursor:pointer; background-image: url('http://cdn.speedrunslive.com/images/icon_chat.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png'); background-position: -9px -21px; } // this seems sloppy but what can I do??
+    &:active { .pressedbox(@darkred * 3/4); background-image: url('http://cdn.speedrunslive.com/images/icon_chat.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png'); background-position: -9px -21px; }
+    background-image: url('http://cdn.speedrunslive.com/images/icon_chat.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png');
+    span { display:none; }
 }
-.closeStreamIcon { 	
-	background-position:-9px 0;
-	.box(@darkred);
-	&:hover { .box(@popred); cursor:pointer; background-image: url('http://c15111086.r86.cf2.rackcdn.com/closeStream.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png'); background-position: -9px -21px; }
-	&:active { .pressedbox(@darkred * 3/4); background-image: url('http://c15111086.r86.cf2.rackcdn.com/closeStream.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png'); background-position: -9px -21px; }
-	background-image: url('http://c15111086.r86.cf2.rackcdn.com/closeStream.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png');
-	.rounded_topright;
-	span { display:none; }
+.closeStreamIcon {
+    background-position:-9px 0;
+    .box(@darkred);
+    &:hover { .box(@popred); cursor:pointer; background-image: url('http://cdn.speedrunslive.com/images/closeStream.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png'); background-position: -9px -21px; }
+    &:active { .pressedbox(@darkred * 3/4); background-image: url('http://cdn.speedrunslive.com/images/closeStream.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png'); background-position: -9px -21px; }
+    background-image: url('http://cdn.speedrunslive.com/images/closeStream.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png');
+    .rounded_topright;
+    span { display:none; }
 }
-.collapseIcon { 
-	display:block;
-	width:25px;
-	height:21px;
-	.box(@darkred);
-	background-position:-9px 0;
-	&:hover { .box(@popred); cursor:pointer; background-image: url('http://c15111086.r86.cf2.rackcdn.com/icon_collapse2.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png'); background-position: -9px -21px; }
-	&:active { .pressedbox(@darkred * 3/4); background-image: url('http://c15111086.r86.cf2.rackcdn.com/icon_collapse2.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png'); background-position: -9px -21px; }
-	background-image: url('http://c15111086.r86.cf2.rackcdn.com/icon_collapse2.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png');
-	span { display:none; }
+.collapseIcon {
+    display:block;
+    width:25px;
+    height:21px;
+    .box(@darkred);
+    background-position:-9px 0;
+    &:hover { .box(@popred); cursor:pointer; background-image: url('http://cdn.speedrunslive.com/images/icon_collapse2.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png'); background-position: -9px -21px; }
+    &:active { .pressedbox(@darkred * 3/4); background-image: url('http://cdn.speedrunslive.com/images/icon_collapse2.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png'); background-position: -9px -21px; }
+    background-image: url('http://cdn.speedrunslive.com/images/icon_collapse2.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png');
+    span { display:none; }
 }
 .collapseIcon2 { // this is the + icon, toggled via jquery
-	background-position:-51px 0;
-	&:hover { background-position: -51px -21px; }
-	&:active { background-position: -51px -21px; }
+    background-position:-51px 0;
+    &:hover { background-position: -51px -21px; }
+    &:active { background-position: -51px -21px; }
 }
 
 .showhide_streams { .smallbutton; }
@@ -1828,86 +2191,86 @@ span.raceMessage:hover span{
 .ls_column { .left; }
 
 .numperrow {
-	.smallbutton;
-	width: (@column / 2) - @gutter - 1px;
-	.left;
+    .smallbutton;
+    width: (@column / 2) - @gutter - 1px;
+    .left;
  }
 
 #ls_sidebar { width:@column * 2; .right; }
 #ls_controls { margin-top:@gutter; }
-#ls_container {	width:100%; clear:both; }
+#ls_container { width:100%; clear:both; }
 #ls_entrants {
-	.boxshadow;
-	
-	#raceTable {
-	
-		white-space: nowrap; //to hell with your username.
-		td:nth-child(3) { text-align:right; padding-right:@gutter; } // make room for long usernames
-		border-bottom:2px @darkblue*(2/3) solid;
-		margin:0; padding:0; 
+    .boxshadow;
 
-		.raceResults;
-		
-		tr:nth-child(1) > td:nth-child(1) { margin:0; padding:0; }
+    #raceTable {
 
-		#entrantsBar {
-			.rounded_topleft;
-			.box(@darkblue);
-			.bold;
-			height:21px;
-			line-height:21px;
-			padding-left:10px;
-			margin-left:0;
-			color:@white;
-		}
-		
-		#popoutTd {
-			width:35px;
-		}
-		
-		#popoutHeader {
-			padding:0;
-			margin:0;
-			
-			.popoutIcon {
-				width:35px;
-				display:block;
-				.box(@darkblue);
-				height:21px;
-				float:right;
-				background-position:-4px 0;
-				&:hover { .box(@blue); cursor:pointer; background-image: url('http://c15111086.r86.cf2.rackcdn.com/popOut.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png'); background-position: -4px -21px; } // this seems sloppy but what can I do??
-				&:active { .pressedbox(@darkblue * 3/4); background-image: url('http://c15111086.r86.cf2.rackcdn.com/popOut.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png'); background-position: -4px -21px; }
-				background-image: url('http://c15111086.r86.cf2.rackcdn.com/popOut.png'), url('http://c15111086.r86.cf2.rackcdn.com/grunge_button.png');
-				span { display:none; }
-			}
-			
-		}
-		
-	}
+        white-space: nowrap; //to hell with your username.
+        td:nth-child(3) { text-align:right; padding-right:@gutter; } // make room for long usernames
+        border-bottom:2px @darkblue*(2/3) solid;
+        margin:0; padding:0;
 
-	/*
-	
-	span {
-		a {
-			text-decoration:none; 
-			color:inherit;
-			display:block;
-			.left;
-			height:22px;
-			width:@column - 1px;
-			padding-top:5px;
-			background:lighten(@darkgrey, 4%); 
-			text-align:center;
-			font-weight:bold;
-			text-shadow: 2px 2px 1px #1a1a1a;
-		}
-		a:hover {text-decoration:none; color:#fff; background:lighten(@darkgrey, 8%); }
-		a:nth-child(1) { margin-right:2px; .rounded_bottomleft; &:hover { background:#205020; color:#62ffd1; } }
-		a:nth-child(2):hover { background:#482048; color:#ffb4f4; } // green and purple, a bit random but I like it.
-	}
-	
-	*/
+        .raceResults;
+
+        tr:nth-child(1) > td:nth-child(1) { margin:0; padding:0; }
+
+        #entrantsBar {
+            .rounded_topleft;
+            .box(@darkblue);
+            .bold;
+            height:21px;
+            line-height:21px;
+            padding-left:10px;
+            margin-left:0;
+            color:@white;
+        }
+
+        #popoutTd {
+            width:35px;
+        }
+
+        #popoutHeader {
+            padding:0;
+            margin:0;
+
+            .popoutIcon {
+                width:35px;
+                display:block;
+                .box(@darkblue);
+                height:21px;
+                float:right;
+                background-position:-4px 0;
+                &:hover { .box(@blue); cursor:pointer; background-image: url('http://cdn.speedrunslive.com/images/popOut.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png'); background-position: -4px -21px; } // this seems sloppy but what can I do??
+                &:active { .pressedbox(@darkblue * 3/4); background-image: url('http://cdn.speedrunslive.com/images/popOut.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png'); background-position: -4px -21px; }
+                background-image: url('http://cdn.speedrunslive.com/images/popOut.png'), url('http://cdn.speedrunslive.com/images/grunge_button.png');
+                span { display:none; }
+            }
+
+        }
+
+    }
+
+    /*
+
+    span {
+        a {
+            text-decoration:none;
+            color:inherit;
+            display:block;
+            .left;
+            height:22px;
+            width:@column - 1px;
+            padding-top:5px;
+            background:lighten(@darkgrey, 4%);
+            text-align:center;
+            font-weight:bold;
+            text-shadow: 2px 2px 1px #1a1a1a;
+        }
+        a:hover {text-decoration:none; color:#fff; background:lighten(@darkgrey, 8%); }
+        a:nth-child(1) { margin-right:2px; .rounded_bottomleft; &:hover { background:#205020; color:#62ffd1; } }
+        a:nth-child(2):hover { background:#482048; color:#ffb4f4; } // green and purple, a bit random but I like it.
+    }
+
+    */
 }
 
 .ls_streams { margin-right:@column * 2 + @gutter; }
@@ -1918,28 +2281,28 @@ span.raceMessage:hover span{
 .ls_entrants_hide { display:none; }
 
 #gameAndGoal {
-	width: 70%;
-	h1 > a { text-decoration:none; }
-	padding-left:@gutter;
-	.race_img {
-		position:relative;
-		top:@gutter/2;
-		height:48px;
-	}
+    width: 70%;
+    h1 > a { text-decoration:none; }
+    padding-left:@gutter;
+    .race_img {
+        position:relative;
+        top:@gutter/2;
+        height:48px;
+    }
 }
 #hideControls {
-	.right;
-	text-align:right;
-	padding-top:@gutter;
-//	.smallbuttonstyle {
-//		width: 100px;
-//		padding: @gutter/8 @gutter/4;
-//		float:right;
-//		font-size:@smaller;
-//	}
+    .right;
+    text-align:right;
+    padding-top:@gutter;
+//  .smallbuttonstyle {
+//      width: 100px;
+//      padding: @gutter/8 @gutter/4;
+//      float:right;
+//      font-size:@smaller;
+//  }
 }
 #timer {
-	color:@green;
+    color:@green;
 }
 
 //
@@ -1949,93 +2312,93 @@ span.raceMessage:hover span{
 //
 
 #past_results {
-	min-height:900px;
-	.width(4);
-	.left;
-	
-	#racefeed {
-		//float:right;
-	}
+    min-height:900px;
+    .width(4);
+    .left;
+
+    #racefeed {
+        //float:right;
+    }
 }
 
 #globalStats {
-	.width(2);
-	.right;
-	margin-right:0;
+    .width(2);
+    .right;
+    margin-right:0;
 }
 
-		//Monthly stats
-		.meteryear {
-			margin-bottom:10px;
-			.noselect;
-			
-			h5 {
-				color: @gold;
-				margin-bottom:3px;
-				.heading;
-				.bold;
-				word-spacing:8px;
-				letter-spacing:2px;
-				text-align:center;
-				font-size:13px;
-				line-height:15px;
-				padding-top:0px;
-				margin-top:0px;
-			}
-			
-			.morestats {
-				display:none;
-				background: #0b0b0b;
-				.boxshadow;
-				padding-left:10px;
-				margin-bottom:1px;
-				font-size:@smaller;
-			}
-			
-			.meterbg {
-				position: relative;
-				width: 100%; 
-				height: 20px;
-				background: #151515;
-				&:hover { background:#202020; cursor:pointer;}
-				margin-bottom:1px;
-				.boxshadow;
-				
-				&:nth-child(2) { .rounded_top; .meterfill { .rounded_top }}
-				&:nth-last-child(2) { .rounded_bottom; .meterfill { .rounded_bottom }}
+        //Monthly stats
+        .meteryear {
+            margin-bottom:10px;
+            .noselect;
 
-				.meterfill {
-					width: 100%;
-					height: 20px;
-					.box_gradient(@popred*0.55);
-					&:hover { .box_gradient(@popred*0.75); }
-					
-					.metervalue {
-						position: absolute;
-						top:0; left:0;
-						padding-top: 1px;
-						padding-bottom:1px;
-						height: 20px;
-						.bold;
-						.bronze;
-						padding-left:10px;
-						width: 100%;
-						
-						&:link, &:visited {text-decoration:none; color:@silver;}
-						&:hover, &:active {text-decoration:none; color:@white;}
-						
-						span {
-							.right;
-							margin-right:20px;
-							color:@lightgrey;
-							.italic;
-							font-weight:normal;
-							font-size:@smaller;
-						}
-					}
-				}
-			}
-		}
+            h5 {
+                color: @gold;
+                margin-bottom:3px;
+                .heading;
+                .bold;
+                word-spacing:8px;
+                letter-spacing:2px;
+                text-align:center;
+                font-size:13px;
+                line-height:15px;
+                padding-top:0px;
+                margin-top:0px;
+            }
+
+            .morestats {
+                display:none;
+                background: #0b0b0b;
+                .boxshadow;
+                padding-left:10px;
+                margin-bottom:1px;
+                font-size:@smaller;
+            }
+
+            .meterbg {
+                position: relative;
+                width: 100%;
+                height: 20px;
+                background: #151515;
+                &:hover { background:#202020; cursor:pointer;}
+                margin-bottom:1px;
+                .boxshadow;
+
+                &:nth-child(2) { .rounded_top; .meterfill { .rounded_top }}
+                &:nth-last-child(2) { .rounded_bottom; .meterfill { .rounded_bottom }}
+
+                .meterfill {
+                    width: 100%;
+                    height: 20px;
+                    .box_gradient(@popred*0.55);
+                    &:hover { .box_gradient(@popred*0.75); }
+
+                    .metervalue {
+                        position: absolute;
+                        top:0; left:0;
+                        padding-top: 1px;
+                        padding-bottom:1px;
+                        height: 20px;
+                        .bold;
+                        .bronze;
+                        padding-left:10px;
+                        width: 100%;
+
+                        &:link, &:visited {text-decoration:none; color:@silver;}
+                        &:hover, &:active {text-decoration:none; color:@white;}
+
+                        span {
+                            .right;
+                            margin-right:20px;
+                            color:@lightgrey;
+                            .italic;
+                            font-weight:normal;
+                            font-size:@smaller;
+                        }
+                    }
+                }
+            }
+        }
 
 //
 //
@@ -2044,33 +2407,42 @@ span.raceMessage:hover span{
 //
 
 .disabled {
-	opacity:0.65;
-	span { opacity:0.25; }
+    opacity:0.65;
+    span { opacity:0.25; }
 }
 
-	#pageSorter {
-		height:40px;
-		button {
-			.smallbutton;
-			width:@column - @gutter;
-			span {
-				display:block;
-				background-position:center 0;
-				min-height:16px;
-			}
-			
-			&:nth-child(4) { margin-right:0; }
-		}
-		
-		#first span { background: url('http://c15111086.r86.cf2.rackcdn.com/arrow_first.png') top center no-repeat; }
-		#prev span { background: url('http://c15111086.r86.cf2.rackcdn.com/arrow_prev.png') top center no-repeat; }
-		#next span { background: url('http://c15111086.r86.cf2.rackcdn.com/arrow_next.png') top center no-repeat; }
-		#last span { background: url('http://c15111086.r86.cf2.rackcdn.com/arrow_last.png') top center no-repeat; }
-		#first:hover { span { background-position:center -16px; }}
-		#prev:hover { span { background-position:center -16px; }}
-		#next:hover { span { background-position:center -16px; }}
-		#last:hover { span { background-position:center -16px; }}
-	}
+    #pageSorter {
+        height:40px;
+        button {
+            .smallbutton;
+            width:@column - @gutter;
+            &:hover {
+            .box(@red);
+            color:@white;
+            }
+
+            &:active {
+            .pressedbox(@darkred);
+            color:@white;
+            }
+            span {
+                display:block;
+                background-position:center 0;
+                min-height:16px;
+            }
+
+            &:nth-child(4) { margin-right:0; }
+        }
+
+        #first span { background: url('http://cdn.speedrunslive.com/images/arrow_first.png') top center no-repeat; }
+        #prev span { background: url('http://cdn.speedrunslive.com/images/arrow_prev.png') top center no-repeat; }
+        #next span { background: url('http://cdn.speedrunslive.com/images/arrow_next.png') top center no-repeat; }
+        #last span { background: url('http://cdn.speedrunslive.com/images/arrow_last.png') top center no-repeat; }
+        #first:hover { span { background-position:center -16px; }}
+        #prev:hover { span { background-position:center -16px; }}
+        #next:hover { span { background-position:center -16px; }}
+        #last:hover { span { background-position:center -16px; }}
+    }
 
 //
 //
@@ -2079,72 +2451,72 @@ span.raceMessage:hover span{
 //
 
 .halfpage {
-	.width(4);
-	.left;
+    .width(4);
+    .left;
 }
 
 .racenum {
-	.right;
-	font-size:@evensmaller;
-	color:@silver;
-	background:@black;
-	vertical-align:top;
+    .right;
+    font-size:@evensmaller;
+    color:@silver;
+    background:@black;
+    vertical-align:top;
 }
 
 .bigtitle {
-	font-size:115%;
-	background:@silver;
+    font-size:115%;
+    background:@silver;
 }
 
 .bigtest {
-	font-size:3em;
-	float:left;
+    font-size:3em;
+    float:left;
 }
 
 .testrace {
-	tr:nth-child(2) {
-		.box_gradient(@darkred);
-		border-bottom:1px solid rgba(20,20,20,0.65);
-		border-top:1px solid @darkred * (7/10);
-	}
-	th{
-		height:22px;
-		padding:0;
-		margin:0;
-		&:first-child { 
-			text-align:left;
-			padding-left:@gutter/2;
-			.heading;
-		}
-		&:last-child { 
-			color:@silver;
-			padding-top:1px;
-			padding-right:8px;
-			padding-left:4px;
-			text-align:right;
-		}
-	}
-	td{
-		padding-top:1px;
-		padding-bottom:1px;
-	}
-	.datetime {
-		.note;
-		color:@grey + @darkred + #222;
-		text-align:right;
-		padding-right:@gutter/2;
-	}
-	.raceGoal {
-		.silver;
-		overflow-wrap:break-word;
-	}
+    tr:nth-child(2) {
+        .box_gradient(@darkred);
+        border-bottom:1px solid rgba(20,20,20,0.65);
+        border-top:1px solid @darkred * (7/10);
+    }
+    th{
+        height:22px;
+        padding:0;
+        margin:0;
+        &:first-child {
+            text-align:left;
+            padding-left:@gutter/2;
+            .heading;
+        }
+        &:last-child {
+            color:@silver;
+            padding-top:1px;
+            padding-right:8px;
+            padding-left:4px;
+            text-align:right;
+        }
+    }
+    td{
+        padding-top:1px;
+        padding-bottom:1px;
+    }
+    .datetime {
+        .note;
+        color:@grey + @darkred + #222;
+        text-align:right;
+        padding-right:@gutter/2;
+    }
+    .raceGoal {
+        .silver;
+        overflow-wrap:break-word;
+    }
 }
 
 .unranked {
-	text-align:center;
-	.grey;
-	font-size:@smaller;
-	.italic;
+    text-align:center;
+    .grey;
+    font-size:@smaller;
+    .italic;
 }
 
 //
@@ -2153,62 +2525,62 @@ span.raceMessage:hover span{
 // Ajax spinner using CSS3
 //
 
-	#ajaxstage {
-		margin: 20px auto;
-	}
-	
-	#ajaxspin {
-		width: 30px;
-		height: 30px;
-		
-		margin:0 auto;
-		
-		border-width: 2px;
-		border-style: dotted;
-		border-color: @grey*0.5 @bronze*0.6 @silver*0.7 @gold*0.8;
-		border-radius: 40px;
-		
-		-webkit-animation: spin 1s linear infinite; 
-		-moz-animation: spin 1s linear infinite;
-	}
-	
-	@-webkit-keyframes spin  
-	{  
-	    from { -webkit-transform: rotate(0deg); }  
-    	50%  { -webkit-transform: rotate(180deg); }  
-	    to   { -webkit-transform: rotate(360deg); }  
-	}
-	@-moz-keyframes spin  
-	{  
-	    from { -moz-transform: rotate(0deg); }  
-    	50%  { -moz-transform: rotate(180deg); }  
-	    to   { -moz-transform: rotate(360deg); }  
-	}
+    #ajaxstage {
+        margin: 20px auto;
+    }
 
-	#ajaxloading {
-		.bold;
-		margin-top:10px;
-		font-size:@smaller;
-		color: #808080;
-		text-align: center;
+    #ajaxspin {
+        width: 30px;
+        height: 30px;
 
-		-webkit-animation: bounce 1.5s linear infinite; 
-		-moz-animation: bounce 1.5s linear infinite;
-	}
-	@-webkit-keyframes bounce  
-	{  
-		from { -webkit-transform: rotate(0deg); opacity: 0.4; }
-		50%  { -webkit-transform: rotate(0deg); opacity: 1; }
-		to   { -webkit-transform: rotate(0deg); opacity: 0.4; }
+        margin:0 auto;
 
-	}
-	@-moz-keyframes bounce  
-	{  
-		from { -moz-transform: rotate(0deg); opacity: 0.6; }
-		50%  { -moz-transform: rotate(0deg); opacity: 1; }
-		to   { -moz-transform: rotate(0deg); opacity: 0.6; }
-	}
-	
+        border-width: 2px;
+        border-style: dotted;
+        border-color: @grey*0.5 @bronze*0.6 @silver*0.7 @gold*0.8;
+        border-radius: 40px;
+
+        -webkit-animation: spin 1s linear infinite;
+        -moz-animation: spin 1s linear infinite;
+    }
+
+    @-webkit-keyframes spin
+    {
+        from { -webkit-transform: rotate(0deg); }
+        50%  { -webkit-transform: rotate(180deg); }
+        to   { -webkit-transform: rotate(360deg); }
+    }
+    @-moz-keyframes spin
+    {
+        from { -moz-transform: rotate(0deg); }
+        50%  { -moz-transform: rotate(180deg); }
+        to   { -moz-transform: rotate(360deg); }
+    }
+
+    #ajaxloading {
+        .bold;
+        margin-top:10px;
+        font-size:@smaller;
+        color: #808080;
+        text-align: center;
+
+        -webkit-animation: bounce 1.5s linear infinite;
+        -moz-animation: bounce 1.5s linear infinite;
+    }
+    @-webkit-keyframes bounce
+    {
+        from { -webkit-transform: rotate(0deg); opacity: 0.4; }
+        50%  { -webkit-transform: rotate(0deg); opacity: 1; }
+        to   { -webkit-transform: rotate(0deg); opacity: 0.4; }
+
+    }
+    @-moz-keyframes bounce
+    {
+        from { -moz-transform: rotate(0deg); opacity: 0.6; }
+        50%  { -moz-transform: rotate(0deg); opacity: 1; }
+        to   { -moz-transform: rotate(0deg); opacity: 0.6; }
+    }
+
 //
 //
 //
@@ -2216,87 +2588,416 @@ span.raceMessage:hover span{
 //
 
 #featured {
-	.featuredstreamcontainer { 
-		.width(5);
-		.left;
-		margin-bottom:@gutter / 2;
-	}
-	.featuredstream {
-		margin-top:4px;
-		// object { width:100%; height:364px; }
-		object {
-			width: 100%;
-			height: (9/16) * ((@column * 5) - @gutter) + @jtv_bar;
-			.boxshadow;
-		}
-	}
-	.featuredgame{
-		font-weight:normal;
-		.sans;
-	}
-	.featuredchat {
-		.width(3);
-		margin-top:@gutter;
-		.right;
-		iframe { .rounded(2px); height: (9/16) * ((@column * 5) - @gutter) + @jtv_bar + 37px; .boxshadow; }
-	}
-	
-	.biggerFeaturedStream {
-		.width(8);
-		object { 
-			width: (@column * 8) - @gutter;
-			height: (9/16) * ((@column * 8) - @gutter) + @jtv_bar;
-			.boxshadow;
-		}
-	}
+    .featuredstreamcontainer {
+        .width(5);
+        .left;
+        margin-bottom:@gutter / 2;
+    }
+    .featuredstream {
+        margin-top:4px;
+        // object { width:100%; height:364px; }
+        object {
+            width: 100%;
+            height: (9/16) * ((@column * 5) - @gutter) + @jtv_bar;
+            .boxshadow;
+        }
+    }
+    .featuredgame{
+        font-weight:normal;
+        .sans;
+    }
+    .featuredchat {
+        .width(3);
+        margin-top:@gutter;
+        .right;
+        iframe { .rounded(2px); height: (9/16) * ((@column * 5) - @gutter) + @jtv_bar + 7px; .boxshadow; }
+    }
+
+    .featuredstreamcontainer.fullscreen {
+        width: ~"calc(100vw - 382px)";
+        margin-right: 0;
+        margin-bottom: 0;
+        padding-left: 8px;
+        object, .hitboxframe, .twitchframe {
+            height: ~"calc(100vh - 48px)";
+        }
+        #featuredtitle {
+            margin-top: 0;
+            padding-bottom: 0;
+            #left_titletext {
+                position: relative;
+                top: -5px;
+                width: auto;
+            }
+        }
+    }
+    .featuredstreamcontainer.fullscreen.biggerFeaturedStream {
+        width: ~"calc(99.7vw - 8px)";
+        margin-right: 0;
+        object, .hitboxframe, .twitchframe {
+            width: ~"calc(99.7vw - 8px)";
+        }
+    }
+    .featuredchat.fullscreen {
+        padding-right: 0;
+        margin-top: 8px;
+        margin-right: 8px;
+        #chat_embed {
+            height: ~"calc(100vh - 19px)";
+        }
+    }
+
+    .biggerFeaturedStream {
+        .width(8);
+        object {
+            width: (@column * 8) - @gutter;
+            height: (9/16) * ((@column * 8) - @gutter) + @jtv_bar;
+            .boxshadow;
+        }
+    }
+}
+.sortmethod {
+    width: (@column * 8) - @gutter;
+    input[type="radio"] {
+        width: 13px !important;
+    }
+}
+.streamsearch {
+    width: @column * (8/3) - @gutter;
+}
+.eventstreams {
+    .smallbutton;
+    .sans;
+    margin:0;
+    .bold;
+    .gold;
+    float: right;
+    width: @column * (3/2) - @gutter;
+
+    &:hover {
+      .box(@blue);
+    }
+    &.active {
+      .pressedbox(@blue * (2/3));
+    }
 }
 
-.twitchstreamer {
-	display:block;
-	.boxshadow;
-	.box_st(@grey*0.9);
-	.rounded;
-	width: @column * 4 - @gutter;
-	&:nth-child(2n - 1) { margin-right:@gutter; }
-	.left;
-	min-height:65px;
-	padding: 0;
-	margin-top:@gutter/2;
-	.ava { .rounded(10px); border: solid 1px @black; .boxshadow; .left; margin:@gutter*0.333; margin-right:@gutter*0.666; width:70px; height:70px; }
-	.streamerinfo { padding-top:@gutter / 2; }
-	.name { .heading; .gold; }
-	.viewers { .right; margin-right:@gutter; }
-	.description { display:block; margin-top:@gutter /2; padding-right:5px; .bronze; overflow:hidden; word-wrap: break-word; max-height: 38px; padding-right:@gutter;}
-	.description a { background:rgba(0,0,0,0.5); padding:0 4px; .rounded; }
-	&:hover { 
-		cursor:pointer;
-		.box_st(@darkblue*0.9); 
-		.name { color:@gold + #333; }
-		.description { color:@blue + #555 }
-	}
-	&:active { .pressedbox(@darkblue /2); }
+.streamsdivider {
+    display:block;
+    .boxshadow;
+    .box_st(@grey*0.9);
+    .rounded;
+    .gold;
+    .heading;
+    width: @column * 8 - @gutter + 2px;
+    margin-right: 0;
+    .left;
+    height:30px;
+    padding: 0;
+    margin-top:0;
+    p {
+        margin-left: @gutter/2;
+        line-height: 28px;
+    }
+    .numstreams {
+        float: right;
+        margin-right: @gutter/2;
+        .bronze;
+        font-size: small;
+        vertical-align: middle;
+        display: inline-block;
+    }
+    &:hover {
+        cursor:pointer;
+        .box_st(@darkblue*0.9);
+        .name { color:@gold + #333; }
+        .description { color:@blue + #555 }
+    }
+    &:active { .pressedbox(@darkblue /2); }
+}
+.streamsdivideropen {
+    margin-bottom: @gutter/2;
+    .box_st(@blue * 0.6);
+}
+.faqdivider {
+    border-bottom: 1px dotted #646464;
+}
+.endoflist {
+    display: block;
+    .left;
+    width: @column * 8 - @gutter + 2px;
+    height: 10px;
+}
+.pinned > .endoflist + .endoflist {
+    display: none;
+}
+.pinned > .endoflist:first-child:nth-last-child(2) {
+    display: none;
+}
+.pinned .twitchstreamer ~ .endoflist, .pinned .streamsdivider ~ .endoflist,
+.pinned .endoflist:first-child {
+    border-top: 1px dotted #646464;
+    font-size: 8pt;
+    text-align: center;
+    line-height: 0;
+    span {
+        background-color: @darkgrey;
+        position: relative;
+        top: -2px;
+    }
+}
+.pinned .twitchstreamer ~ .endoflist { margin-top: 16px; }
+.pinned .streamsdivider ~ .endoflist { margin-top: @gutter/2 + 16px; }
+.pinned .streamsdivideropen + .gamestreamlist + .endoflist { margin-top: 16px; }
+.endoflist.hiddenlistlink {
+    display: block;
+    .left;
+    width: @column * 8 - @gutter + 2px;
+    height: 10px;
+}
+.endoflist.hiddenlistlink + .endoflist.hiddenlistlink {
+    display: none;
+}
+.endoflist.hiddenlistlink a {
+    cursor: pointer;
+}
+.hiddenlist.isHidden + .endoflist {
+    display: none;
+}
+div.hiddenlist + span.endoflist {
+    margin-top: 16px;
+}
+.gamestreamlist ~ .hiddenlistlink {
+    margin-top: @gutter/2;
+}
+.endoflist span {
+    width: 50px;
+    height: 11px;
+    display: inline-block;
+    top: 0px;
+    a {
+        width: @column * 8 - @gutter + 2px;
+        margin-left: -(@column * 4 - (@gutter/2) + 1px) + 25px;
+        display: inline-block;
+        height: 11px;
+        position: relative;
+        top: -5px;
+        line-height: 11px;
+    }
+}
+.endoflist.hiddenlistlink, .endoflist.hiddenlistlink,
+.endoflist.hiddenlistlink:first-child {
+    border-top: 1px dotted #646464;
+    font-size: 8pt;
+    text-align: center;
+    line-height: 0;
+    span {
+        background-color: @darkgrey;
+        position: relative;
+        top: -2px;
+    }
+}
+.gamestreamlist div {
+    &:nth-child(3n) { margin-right: -1px !important; }
+}
+.twitchstreamerg[style*="display: none;"] {
+    &:nth-of-type(3n+1) { margin-right: @gutter; }
+    &:nth-child(n+4) { margin-top: 0; }
+    margin-bottom: @gutter/2;
+}
+.pinned, .hiddenlist {
+    width: @column * 8 - @gutter + 3;
+    overflow: visible;
+    .twitchstreamer:last-child:not(.streamsdivider .twitchstreamer) {
+        margin-bottom: @gutter * 1.5;
+    }
+}
+.twitchstreamer, .twitchstreamerg {
+    display:block;
+    .boxshadow;
+    .box_st(@grey*0.9);
+    .rounded;
+    width: @column * (8/3) - @gutter;
+    margin-right: @gutter;
+    overflow: visible;
+    .left;
+    min-height:85px;
+    padding: 0;
+    margin-bottom:@gutter/2;
+    .ava { .rounded(10px); border: solid 1px @black; .boxshadow; .left; margin:@gutter*0.333; margin-right:@gutter*0.666; margin-bottom: -4px; width:70px; height:70px; }
+    .streamerinfo { padding-top:@gutter / 2; }
+    .streamerbuttons {
+        float: right;
+        margin-right: @gutter / 2;
+        position: relative;
+        .dropdown, .disableddropdown {
+            .smallbutton;
+            .right;
+            .sans;
+            margin:0;
+            .bold;
+            width: 20px;
+            height: 10px;
+            line-height: 10px;
+        }
+        .disableddropdown {
+            .disabled;
+            opacity: .3;
+        }
+    }
+    .name { .heading; .gold; overflow: hidden; display: inline-block; white-space: nowrap; text-overflow: ellipsis; line-height: 1.4rem; margin-top: -3px; max-width: 200px; }
+    .apiicon { position: relative; top: 2px; margin-left: 4px; left: 2px; width: 12px; height: 12px; }
+    .viewers { display: inline; .right; margin-right:@gutter/2; position: relative; top: 2px; font-size: .8em; }
+    .description { display:block; font-size: .9em; height: 30px; padding-right:5px; color: #C7AE8E; text-shadow: 1px 1px 0px rgba(0,0,0,0.6), 0 0 1px @bronze*(4/7); overflow:hidden; word-wrap: break-word; padding-right:@gutter;}
+    .description a { background:rgba(0,0,0,0.5); padding:0 4px; .rounded; }
+    .description p { height: 2em; line-height: 1.25em; }
+    .game { .darkbronze; position: relative; top: 2px; font-size: .8em; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    &:hover:not(.overdropdown) {
+        cursor:pointer;
+        .box_st(@darkblue*0.9);
+        .name { color:@gold + #333; }
+        .description { color:@blue + #555 }
+    }
+    &:active:not(.overdropdown) { .pressedbox(@darkblue /2); }
+    .dropdownmenu, .dropdownmenua, .dropdownmenuh {
+        background-color: #212121;
+        border: solid 1px #515151;
+        list-style: none;
+        left: 0px;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 18px;
+        width: 92px;
+        left: -72px;
+        z-index: 1;
+        text-indent: 0;
+        font-size: 9pt;
+    }
+    @dropdownheight: 17px;
+    .dropdownmenu {
+        height: @dropdownheight * 5;
+    }
+    .dropdownmenua {
+        height: @dropdownheight * 7;
+    }
+    .dropdownmenuh {
+        height: @dropdownheight * 6;
+    }
+    .dropdownmenu li, .dropdownmenua li, .dropdownmenuh li {
+        padding: 0 7px;
+        list-style: none;
+    }
+    .dropdownmenu li, .dropdownmenuh li, .dropdownmenua li {
+        height: @dropdownheight;
+        line-height: @dropdownheight;
+    }
+    .dropdownmenu a, .dropdownmenua a, .dropdownmenuh a {
+        border-bottom: dotted 1px #515151;
+        display: block;
+        outline: none;
+        text-align: left;
+        color: @lightgrey * 1.5;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        z-index: 1;
+    }
+    .dropdownmenu a.viewprofile, .dropdownmenua a.viewprofile, .dropdownmenuh a.viewprofile,
+    .dropdownmenu a.hideplayer, .dropdownmenua a.hideplayer, .dropdownmenuh a.hideplayer,
+    .dropdownmenua a.hidegame, .dropdownmenuh a.hidegame,  {
+        border-bottom: solid 1px #515151;
+    }
+    .dropdownmenu a:link, .dropdownmenu a:visited, .dropdownmenua a:link, .dropdownmenua a:visited, .dropdownmenuh a:link, .dropdownmenuh a:visited {
+        color: @lightgrey * 1.5;
+        text-decoration: none;
+    }
+    .dropdownmenu a:hover,
+    .dropdownmenu a:focus,
+    .dropdownmenu a.sbFocus,
+    .dropdownmenua a:hover,
+    .dropdownmenua a:focus,
+    .dropdownmenua a.sbFocus,
+    .dropdownmenuh a:hover,
+    .dropdownmenuh a:focus,
+    .dropdownmenuh a.sbFocus
+    {
+        color: @silver;
+    }
+    .dropdownmenu li.last a, .dropdownmenua li.last a, .dropdownmenuh li.last a {
+        border-bottom: none;
+    }
+    .dropdownmenu .sbDisabled, .dropdownmenua .sbDisabled, .dropdownmenuh .sbDisabled {
+        border-bottom: dotted 1px #515151;
+        color: #999;
+        display: block;
+        padding: 7px 0 7px 3px;
+    }
+    .dropdownmenu .sbGroup, .dropdownmenua .sbGroup, .dropdownmenuh .sbGroup {
+        border-bottom: dotted 1px #515151;
+        display: block;
+        font-weight: bold;
+        padding: 7px 0 7px 3px;
+    }
+    .dropdownmenu .sbSub, .dropdownmenua .sbSub, .dropdownmenuh .sbSub {
+        padding-left: 17px;
+    }
 }
 
 #left_titletext {
-	display:block;
-	.left;
-	padding-top:@gutter / 2;
+    display:block;
+    .left;
+    padding-top:@gutter / 2;
+    width: @column * 4.75 - (2 * (@column - @gutter - 1px));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: @white;
+    font-weight: normal;
+    .streamer {
+        font-weight: bold;
+    }
+    #racingFlag {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-right: @gutter/2;
+        img {
+            margin: 0 4px;
+        }
+    }
 }
 
-#featuredtitle { a {text-decoration:none; .gold; } a:hover{color:@white;} 
-	.closechat {
-		.smallbutton;
-		.right;
-		.sans;
-		margin:0;
-		.bold;
-	}
+#featuredtitle { a {text-decoration:none; .gold; } a:hover{color:@white;}
+    .closechat, .fullscreen {
+        .smallbutton;
+        .right;
+        .sans;
+        margin:0;
+        .bold;
+    }
+    .fullscreen {
+        margin-right: @gutter/2;
+    }
 }
 
 .watching {
-	.box_st(@blue * 0.6); 
-	.name { color:@gold + #333; }
-	.description { color:@blue + #555 }
+    .box_st(@blue * 0.6);
+    .name { color:@gold + #333; }
+    .description { color:@blue + #555 }
+}
+
+.customstream {
+    background-image: url('http://cdn.speedrunslive.com/images/grunge_button_half_twitch.png'), linear-gradient(to bottom, #3B3B3B, #222);
+}
+
+.customstream:hover:not(.overdropdown) {
+    background-image: url('http://cdn.speedrunslive.com/images/grunge_button_half_twitch.png'), linear-gradient(to bottom, #1241A1, #0D2E73);
+}
+
+.customstream.watching {
+    background-image: url('http://cdn.speedrunslive.com/images/grunge_button_half_twitch.png'), linear-gradient(to bottom, @blue * 0.6, darken(@blue * 0.6, 10%));
 }
 
 //
@@ -2306,8 +3007,8 @@ span.raceMessage:hover span{
 //
 
 #individual_race_result {
-	.right;
-	.width(6);
+    .right;
+    .width(6);
 }
 
 
@@ -2323,111 +3024,111 @@ span.raceMessage:hover span{
 .lbpic { .width(2); margin:0; .boxshadow; .rounded; max-height: 3/4 * (@column*2 - @gutter); .right; margin-bottom:@gutter; }
 
 #lbsidebar {
-	.width(2);
-	.right;
-	
-	#filterlist { margin-top:@gutter; font-size:@smaller; padding-bottom:2px; border-bottom:1px dotted @grey/2; }
-	.filtertitle { .bold; .center; border-top:1px dotted @grey/2; padding-top:2px; margin-top:2px; }
-	.indent { padding-left:@gutter; }
-	.check { width:@gutter; float:left; color:@grey*(2/3);}
-	.checked { color:@coolpurple; }
-	.filteroption {
-		padding-left:2px;
-		.rounded(3px);
-		&:hover { background:@coolpurple/4; .boxshadow; color:@white; cursor:pointer; }
-		}
+    .width(2);
+    .right;
+
+    #filterlist { margin-top:@gutter; font-size:@smaller; padding-bottom:2px; border-bottom:1px dotted @grey/2; }
+    .filtertitle { .bold; .center; border-top:1px dotted @grey/2; padding-top:2px; margin-top:2px; }
+    .indent { padding-left:@gutter; }
+    .check { width:@gutter; float:left; color:@grey*(2/3);}
+    .checked { color:@coolpurple; }
+    .filteroption {
+        padding-left:2px;
+        .rounded(3px);
+        &:hover { background:@coolpurple/4; .boxshadow; color:@white; cursor:pointer; }
+        }
 }
 #lbmaincontainer { .width(6); .left; }
 
 #catInfo { a {text-decoration:underline; color:@blue; &:hover {color:@white} } }
 
 #recordLeaderboard {
-	margin-bottom:@gutter; 
-	.rounded;
-	.acceptedemu { color:#efabce; }
-	.officialrelease { color:#99e0ef; }
-	background-image: url('http://c15111086.r86.cf2.rackcdn.com/greybg.jpg');
-	a {color:#CCCCEE; &:hover {color:@white} }
-	tr:nth-child(2n) { background:rgba(0, 0, 0, 0.12); }
-	tr:hover { background:rgba(255, 255, 255, 0.03); }
-	th { .box_gradient(@coolpurple); .rounded_top; color:@coolpurple * 2.5;}
-	td:nth-child(n+4) { font-size:100%; }
-	tr td { line-height:20px; .boxshadow; height:20px; padding:1px 6px 1px; box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); -moz-box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); -webkit-box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); font-size:110%; img{vertical-align:middle; margin:0px 5px;} &:last-child { box-shadow:0 0 0 #000; -moz-box-shadow:0 0 0 #000; -webkit-box-shadow:0 0 0 #000; } }
-	td:nth-child(1) { padding-left:@gutter / 2; .grey;}
-	td:nth-child(2) { text-align:left; }
-	.lbDivide { .box_gradient(@grey / 2.5); border-bottom:1px solid rgba(20,20,20,0.65); padding-bottom:1px; font-size:@smaller; .milestone { color:@silver - #222; .bold;}}
-	.lbCategory { .heading; padding:4px; }
-	tr:nth-child(2){ .box_gradient(@coolpurple / 2); border-bottom:1px solid rgba(20,20,20,0.65); border-top:1px solid @coolpurple * (7/10); .bold; td{.center; color:@coolpurple * 1.5; font-size:90%;}}
-	.boxshadow;
+    margin-bottom:@gutter;
+    .rounded;
+    .acceptedemu { color:#efabce; }
+    .officialrelease { color:#99e0ef; }
+    background-image: url('http://cdn.speedrunslive.com/images/greybg.jpg');
+    a {color:#CCCCEE; &:hover {color:@white} }
+    tr:nth-child(2n) { background:rgba(0, 0, 0, 0.12); }
+    tr:hover { background:rgba(255, 255, 255, 0.03); }
+    th { .box_gradient(@coolpurple); .rounded_top; color:@coolpurple * 2.5;}
+    td:nth-child(n+4) { font-size:100%; }
+    tr td { line-height:20px; .boxshadow; height:20px; padding:1px 6px 1px; box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); -moz-box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); -webkit-box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); font-size:110%; img{vertical-align:middle; margin:0px 5px;} &:last-child { box-shadow:0 0 0 #000; -moz-box-shadow:0 0 0 #000; -webkit-box-shadow:0 0 0 #000; } }
+    td:nth-child(1) { padding-left:@gutter / 2; .grey;}
+    td:nth-child(2) { text-align:left; }
+    .lbDivide { .box_gradient(@grey / 2.5); border-bottom:1px solid rgba(20,20,20,0.65); padding-bottom:1px; font-size:@smaller; .milestone { color:@silver - #222; .bold;}}
+    .lbCategory { .heading; padding:4px; }
+    tr:nth-child(2){ .box_gradient(@coolpurple / 2); border-bottom:1px solid rgba(20,20,20,0.65); border-top:1px solid @coolpurple * (7/10); .bold; td{.center; color:@coolpurple * 1.5; font-size:90%;}}
+    .boxshadow;
 }
 
 #gameTitle { .width(6); .left; padding-top:8px; }
 
-.filterOptions { 
-	position:relative;
-	background:#000;
+.filterOptions {
+    position:relative;
+    background:#000;
 }
 
 #submitTime {
-	.smallbuttonstyle;
-	margin-top:8px;
-	width:@column*2 - @gutter - 1px;
-	padding: 8px 0;
-	color:#CCCCEE;
-	.heading;
-	.textshadow;
-	margin-left:@column;
-	
-	.box(@coolpurple * 1);
-	&:hover {
-		.box(@coolpurple * 1.5);
-		color:@white;
-	}
-	
-	&:active {
-		.pressedbox(@coolpurple * 0.8);
-		color:@white;
-	}
+    .smallbuttonstyle;
+    margin-top:8px;
+    width:@column*2 - @gutter - 1px;
+    padding: 8px 0;
+    color:#CCCCEE;
+    .heading;
+    .textshadow;
+    margin-left:@column;
+
+    .box(@coolpurple * 1);
+    &:hover {
+        .box(@coolpurple * 1.5);
+        color:@white;
+    }
+
+    &:active {
+        .pressedbox(@coolpurple * 0.8);
+        color:@white;
+    }
 }
 
 #categorySelect {
-	a {
-		display:block;
-		&:nth-child(1) {.rounded_top;}
-		&:last-child {.rounded_bottom;}
-		width:100%;
-		font-size:90%;
-		.textshadow;
-		.center;
-		.box(desaturate((@coolpurple / 2),10%);
-		margin-bottom:1px;
-		color:@coolpurple * 1.5;
-		span { font-size:115%; display:block; .bold; padding-bottom:3px; color:@coolpurple * 2.5}
-		text-decoration:none;
-		padding:3px 0;
-		&:hover {
-			color:@coolpurple * 1.7;
-			.box(@coolpurple / 1.4);
-		}
-		&:active {
-			color:@coolpurple * 1.3;
-			.box(@coolpurple / 3);
-		}
-	}
+    a {
+        display:block;
+        &:nth-child(1) {.rounded_top;}
+        &:last-child {.rounded_bottom;}
+        width:100%;
+        font-size:90%;
+        .textshadow;
+        .center;
+        .box(desaturate((@coolpurple / 2),10%);
+        margin-bottom:1px;
+        color:@coolpurple * 1.5;
+        span { font-size:115%; display:block; .bold; padding-bottom:3px; color:@coolpurple * 2.5}
+        text-decoration:none;
+        padding:3px 0;
+        &:hover {
+            color:@coolpurple * 1.7;
+            .box(@coolpurple / 1.4);
+        }
+        &:active {
+            color:@coolpurple * 1.3;
+            .box(@coolpurple / 3);
+        }
+    }
 
-	.lbHighlighted {
-		.box(@coolpurple);
-		color:@coolpurple * 2;
-		
-		&:hover {
-			color:@coolpurple * 2.3;
-			.box(@coolpurple * 1.1);
-		}
-		&:active {
-			color:@coolpurple * 1.7;
-			.box(@coolpurple * 0.9);
-		}
-	}
+    .lbHighlighted {
+        .box(@coolpurple);
+        color:@coolpurple * 2;
+
+        &:hover {
+            color:@coolpurple * 2.3;
+            .box(@coolpurple * 1.1);
+        }
+        &:active {
+            color:@coolpurple * 1.7;
+            .box(@coolpurple * 0.9);
+        }
+    }
 }
 
 //
@@ -2437,69 +3138,69 @@ span.raceMessage:hover span{
 //
 
 #runComments {
-	.left;
-	.width(6);
-	
-	.author {
-		.grey;
-		padding-left:50px;
-		.italic;
-	}
+    .left;
+    .width(6);
+
+    .author {
+        .grey;
+        padding-left:50px;
+        .italic;
+    }
 }
 
 #runInfo {
-	.right;
-	.width(2);
-	
-	.infoGroup {
-		padding:1px @gutter/2;
-		.rounded;
-		.box(#111111);
-		.grey;
-		&:nth-of-type(1) {border-left:2px @red solid; }
-		&:nth-of-type(2) {border-left:2px @blue solid; }
-		&:nth-of-type(3) {border-left:2px @yellow solid; }
-		&:nth-of-type(4) {border-left:2px @green solid; }
-	}
-	
-	h2 {
-		color: @bronze;
-		margin-bottom:3px;
-		.heading;
-		.bold;
-		word-spacing:5px;
-		letter-spacing:1px;
-		text-align:center;
-		font-size:13px;
-		line-height:15px;
-		padding-top:0px;
-		margin-top:@gutter;
+    .right;
+    .width(2);
 
-	}
-	
-	.infoLine {
-		padding:3px 0;
-		div {
-			display:inline-block;
-			img { position:relative; top:-3px; vertical-align:top; padding-left:5px; }
-			
-			&:nth-child(2n) {
-				.right; 
-				text-align:right;
-				color:@silver;
-			} 
-			
-		}
-	}
-	
-	.verificationbutton {
-		.smallbutton;
-		.left;
-		margin-top:@gutter / 2;
-		img { position:relative; top:-3px; vertical-align:top; padding-left:5px; }
-		height:15px;
-		.width(1);
-	}
+    .infoGroup {
+        padding:1px @gutter/2;
+        .rounded;
+        .box(#111111);
+        .grey;
+        &:nth-of-type(1) {border-left:2px @red solid; }
+        &:nth-of-type(2) {border-left:2px @blue solid; }
+        &:nth-of-type(3) {border-left:2px @yellow solid; }
+        &:nth-of-type(4) {border-left:2px @green solid; }
+    }
+
+    h2 {
+        color: @bronze;
+        margin-bottom:3px;
+        .heading;
+        .bold;
+        word-spacing:5px;
+        letter-spacing:1px;
+        text-align:center;
+        font-size:13px;
+        line-height:15px;
+        padding-top:0px;
+        margin-top:@gutter;
+
+    }
+
+    .infoLine {
+        padding:3px 0;
+        div {
+            display:inline-block;
+            img { position:relative; top:-3px; vertical-align:top; padding-left:5px; }
+
+            &:nth-child(2n) {
+                .right;
+                text-align:right;
+                color:@silver;
+            }
+
+        }
+    }
+
+    .verificationbutton {
+        .smallbutton;
+        .left;
+        margin-top:@gutter / 2;
+        img { position:relative; top:-3px; vertical-align:top; padding-left:5px; }
+        height:15px;
+        .width(1);
+    }
 }
 
 //
@@ -2510,187 +3211,187 @@ span.raceMessage:hover span{
 
 #submitpage {
 
-	.wrapper-dropdown-1 {
-		/* Size and position */
-		position: relative; /* Enable absolute positionning for children and pseudo elements */
-		width: @column * 3 - 20px - 3px - @gutter;
-		padding: 5px 10px;
-		margin: 0px 0 10px 0;
+    .wrapper-dropdown-1 {
+        /* Size and position */
+        position: relative; /* Enable absolute positionning for children and pseudo elements */
+        width: @column * 3 - 20px - 3px - @gutter;
+        padding: 5px 10px;
+        margin: 0px 0 10px 0;
 
-		/* Styles */
-		.box(@coolpurple/2);
-		.rounded;
-		.boxshadow;
-		color: @silver;
-		outline: none;
-		cursor: pointer;
-		
-		ul { margin: 0; padding: 0; text-indent: 0; }
-		li { margin: 0; padding: 0; list-style: none; }
-		li a { padding: 3px 10px; }
-		
-		&:hover {
-			.box(@coolpurple*0.7);
-			color:@white;
-		}
-		
-		.placeholder { opacity:0.3; }
-	}
+        /* Styles */
+        .box(@coolpurple/2);
+        .rounded;
+        .boxshadow;
+        color: @silver;
+        outline: none;
+        cursor: pointer;
 
-	.wrapper-dropdown-1:after { // this is the little arrow
-		content: "";
-		width: 0;
-		height: 0;
-		position: absolute;
-		right: 16px;
-		top: 50%;
-		margin-top: -6px;
-		border-width: 6px 0 6px 6px;
-		border-style: solid;
-		border-color: transparent @coolpurple;    
-	}
+        ul { margin: 0; padding: 0; text-indent: 0; }
+        li { margin: 0; padding: 0; list-style: none; }
+        li a { padding: 3px 10px; }
 
-	.wrapper-dropdown-1 .dropdown {
-		/* Size & position */
-		position: absolute;
-		top: 100%;
-		z-index:5;
-		left: -1px;
-		right: 0;
+        &:hover {
+            .box(@coolpurple*0.7);
+            color:@white;
+        }
 
-		/* Styles */
-		.box_gradient(@grey);
-		border-bottom:2px #000 solid;
-		.boxshadow;
-		.rounded_bottom;
-		border-top:1px #000 solid;
-		&:active { outline: none; }
-		color:@silver;
-		
-		/* Hiding */
-		opacity: 0;
-		pointer-events: none;
-	}
+        .placeholder { opacity:0.3; }
+    }
 
-	.wrapper-dropdown-1 .dropdown ul {
-		padding:0;
-		margin:0;
-		list-style: none;
-	}
-	
-	.wrapper-dropdown-1 .dropdown li:last-child a { .rounded_bottom; }
-	
-	.wrapper-dropdown-1 .dropdown li a {
-		display: block;
-		text-decoration: none;
-		.sans;
-		border-left: 1px @grey solid; 
-	}
+    .wrapper-dropdown-1:after { // this is the little arrow
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        margin-top: -6px;
+        border-width: 6px 0 6px 6px;
+        border-style: solid;
+        border-color: transparent @coolpurple;
+    }
 
-	/* Hover state */
-	.wrapper-dropdown-1 .dropdown li:hover a {
-		.box_gradient(@lightgrey);
-		border-left: 1px @lightgrey solid;
-		color:@white;
-	}
+    .wrapper-dropdown-1 .dropdown {
+        /* Size & position */
+        position: absolute;
+        top: 100%;
+        z-index:5;
+        left: -1px;
+        right: 0;
 
-	/* Active state */
-	.wrapper-dropdown-1.active .dropdown {
-		opacity: 1;
-		pointer-events: auto;
-	}
+        /* Styles */
+        .box_gradient(@grey);
+        border-bottom:2px #000 solid;
+        .boxshadow;
+        .rounded_bottom;
+        border-top:1px #000 solid;
+        &:active { outline: none; }
+        color:@silver;
 
-	.wrapper-dropdown-1.active:after {
-		border-color: @coolpurple*2 transparent;
-		border-width: 6px 6px 0 6px ;
-		margin-top: -3px;
-	}
+        /* Hiding */
+        opacity: 0;
+        pointer-events: none;
+    }
 
-	.wrapper-dropdown-1.active {
-	  .box(@coolpurple * 0.7);
-	  .rounded_top;
-	}
+    .wrapper-dropdown-1 .dropdown ul {
+        padding:0;
+        margin:0;
+        list-style: none;
+    }
 
-	/* No CSS3 support */
+    .wrapper-dropdown-1 .dropdown li:last-child a { .rounded_bottom; }
 
-	.no-opacity       .wrapper-dropdown-1 .dropdown,
-	.no-pointerevents .wrapper-dropdown-1 .dropdown {
-		display: none;
-		opacity: 1; /* If opacity support but no pointer-events support */
-		pointer-events: auto; /* If pointer-events support but no pointer-events support */
-	}
+    .wrapper-dropdown-1 .dropdown li a {
+        display: block;
+        text-decoration: none;
+        .sans;
+        border-left: 1px @grey solid;
+    }
 
-	.no-opacity       .wrapper-dropdown-1.active .dropdown,
-	.no-pointerevents .wrapper-dropdown-1.active .dropdown {
-		display: block;
-	}
+    /* Hover state */
+    .wrapper-dropdown-1 .dropdown li:hover a {
+        .box_gradient(@lightgrey);
+        border-left: 1px @lightgrey solid;
+        color:@white;
+    }
 
-	#gameinfo {
-		width:@column * 8 - @gutter;
-		min-height:200px;
-		#gamepic object, img { .width(2); margin-right:0; .right; .rounded; margin-top:@gutter/2; }
-		border-bottom:#1B1B1B 1px solid;
-		margin-bottom:@gutter;
-	}
-	
-	#info {
-	
-		.left;
-		//font-size:90%;
-		//.heading;
-		.width(4);
-		
-		#rtaplayer { width:@column * 2 - 15px - 4px - @gutter; margin-right: @column; }
-		#rtatime { width: @column * 1 - 15px - 4px - @gutter; margin-right: @column * 2; }
-		#rtavideo { width: @column * 3 - 15px - 4px - @gutter; }
-		#rtahours { width:30px; .rounded_left; border-right: 1px black solid; letter-spacing:1px; }
-		#rtaminutes { width:30px; .not_rounded; border-left: 1px black solid; border-right: 1px black solid; margin-left:0; letter-spacing:1px; }
-		#rtaseconds { width:30px; .rounded_right; border-left: 1px black solid; margin-left:0; letter-spacing:1px; }	
-		#rtamonth { width:30px; .rounded_left; border-right: 1px black solid; letter-spacing:1px; }
-		#rtaday { width:30px; .not_rounded; border-left: 1px black solid; border-right: 1px black solid; margin-left:0; letter-spacing:1px; }
-		#rtayear { width:50px; .rounded_right; border-left: 1px black solid; margin-left:0; letter-spacing:1px; }
-		.wrapper-dropdown-1 { display:inline-block; margin-left: @gutter; }
-		.tagtext { color:@white }
-	}
-	
-	#comments {
-		.right;
-		.heading;
-		.width(4);
-		textarea {
-			.inputstyle;
-			.box_gradient(@darkgrey);
-			margin:@gutter/2 0;
-			padding:4px 6px;
-			border:2px @grey solid;
-			.sans;
-			resize:vertical;
-			
-			::-webkit-input-placeholder { opacity:0.4; }
-			:-moz-placeholder { /* Firefox 18- */ color: opacity:0.4; }
-			::-moz-placeholder {  /* Firefox 19+ */ color: opacity:0.4; }
-			:-ms-input-placeholder { color: opacity:0.4; }
-			
-			&:active {
-				::-webkit-input-placeholder { opacity:0.15; }
-				:-moz-placeholder { /* Firefox 18- */ color: opacity:0.15; }
-				::-moz-placeholder {  /* Firefox 19+ */ color: opacity:0.15; }
-				:-ms-input-placeholder { color: opacity:0.15; }
-			}
-			
-			color:@silver;
-			width:@column * 4 - @gutter * 2 - 4px;
-			height:200px;
-			font-size:110%;
-			max-height:500px;
-		}
-		
-		p { font-size:100%; .sans; color:@lightgrey; }
-	}
-	
-	#submit {
-		clear:both;
-	}
+    /* Active state */
+    .wrapper-dropdown-1.active .dropdown {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .wrapper-dropdown-1.active:after {
+        border-color: @coolpurple*2 transparent;
+        border-width: 6px 6px 0 6px ;
+        margin-top: -3px;
+    }
+
+    .wrapper-dropdown-1.active {
+      .box(@coolpurple * 0.7);
+      .rounded_top;
+    }
+
+    /* No CSS3 support */
+
+    .no-opacity       .wrapper-dropdown-1 .dropdown,
+    .no-pointerevents .wrapper-dropdown-1 .dropdown {
+        display: none;
+        opacity: 1; /* If opacity support but no pointer-events support */
+        pointer-events: auto; /* If pointer-events support but no pointer-events support */
+    }
+
+    .no-opacity       .wrapper-dropdown-1.active .dropdown,
+    .no-pointerevents .wrapper-dropdown-1.active .dropdown {
+        display: block;
+    }
+
+    #gameinfo {
+        width:@column * 8 - @gutter;
+        min-height:200px;
+        #gamepic object, img { .width(2); margin-right:0; .right; .rounded; margin-top:@gutter/2; }
+        border-bottom:#1B1B1B 1px solid;
+        margin-bottom:@gutter;
+    }
+
+    #info {
+
+        .left;
+        //font-size:90%;
+        //.heading;
+        .width(4);
+
+        #rtaplayer { width:@column * 2 - 15px - 4px - @gutter; margin-right: @column; }
+        #rtatime { width: @column * 1 - 15px - 4px - @gutter; margin-right: @column * 2; }
+        #rtavideo { width: @column * 3 - 15px - 4px - @gutter; }
+        #rtahours { width:30px; .rounded_left; border-right: 1px black solid; letter-spacing:1px; }
+        #rtaminutes { width:30px; .not_rounded; border-left: 1px black solid; border-right: 1px black solid; margin-left:0; letter-spacing:1px; }
+        #rtaseconds { width:30px; .rounded_right; border-left: 1px black solid; margin-left:0; letter-spacing:1px; }
+        #rtamonth { width:30px; .rounded_left; border-right: 1px black solid; letter-spacing:1px; }
+        #rtaday { width:30px; .not_rounded; border-left: 1px black solid; border-right: 1px black solid; margin-left:0; letter-spacing:1px; }
+        #rtayear { width:50px; .rounded_right; border-left: 1px black solid; margin-left:0; letter-spacing:1px; }
+        .wrapper-dropdown-1 { display:inline-block; margin-left: @gutter; }
+        .tagtext { color:@white }
+    }
+
+    #comments {
+        .right;
+        .heading;
+        .width(4);
+        textarea {
+            .inputstyle;
+            .box_gradient(@darkgrey);
+            margin:@gutter/2 0;
+            padding:4px 6px;
+            border:2px @grey solid;
+            .sans;
+            resize:vertical;
+
+            ::-webkit-input-placeholder { opacity:0.4; }
+            :-moz-placeholder { /* Firefox 18- */ color: opacity:0.4; }
+            ::-moz-placeholder {  /* Firefox 19+ */ color: opacity:0.4; }
+            :-ms-input-placeholder { color: opacity:0.4; }
+
+            &:active {
+                ::-webkit-input-placeholder { opacity:0.15; }
+                :-moz-placeholder { /* Firefox 18- */ color: opacity:0.15; }
+                ::-moz-placeholder {  /* Firefox 19+ */ color: opacity:0.15; }
+                :-ms-input-placeholder { color: opacity:0.15; }
+            }
+
+            color:@silver;
+            width:@column * 4 - @gutter * 2 - 4px;
+            height:200px;
+            font-size:110%;
+            max-height:500px;
+        }
+
+        p { font-size:100%; .sans; color:@lightgrey; }
+    }
+
+    #submit {
+        clear:both;
+    }
 }
 
 //
@@ -2700,102 +3401,250 @@ span.raceMessage:hover span{
 //
 
 #loginhead {
-	.left;
-	margin-top:@gutter;
-	margin-bottom:@gutter;
-	.width(8);
-	.center;
-	.heading;
-	.silver;
-		
-	.login {
-		display:inline-block;
-		.width(2);
-		margin-left:@column;
-		.left;
-		.gold;
-	}
-	.or {
-		display:inline-block;
-		.width(2);
-		.left;
-		.grey;
-	}
-	.register {
-		display:inline-block;
-		.width(2);
-		.left;
-		.gold;
-	}
+    .left;
+    margin-top:@gutter;
+    margin-bottom:@gutter;
+    .width(8);
+    .center;
+    .heading;
+    .silver;
+
+    .login {
+        display:inline-block;
+        .width(2);
+        margin-left:@column;
+        .left;
+        .gold;
+    }
+    .or {
+        display:inline-block;
+        .width(2);
+        .left;
+        .grey;
+    }
+    .register {
+        display:inline-block;
+        .width(2);
+        .left;
+        .gold;
+    }
 }
 
 #loginpage {
-	
-	.style {
-		.box(#423c3a);
-		.rounded;
-		.boxshadow;
-		width: (@column * 4) - @gutter - 1px;
-		margin-right:@gutter;
-		padding:@gutter/4 0;
-	}
-	
-	p {clear: both; padding:0; margin-bottom:@gutter/2;}
-	
-	.inputtext {
-		.left;
-		font-size:@smaller;
-		text-align:right;
-		padding-top:10px;
-		width:@column - @gutter - 1px;
-		color:@bronze;
-		.textshadow;
-	}
-	
-	input {
-		.rounded;
-		.heading;
-		.right;
-		margin-right:@gutter;
-		.invertbox(#262120);
-		width:(@column * 3) - (@gutter * 3) - 1px;
-		padding:3px @gutter/2;
-		color:@silver;
-		&:focus {
-			outline-width: 0;
-			.invertbox(#120e0d);
-			color:@white;
-		}
-	}
-	
-	button { 
-		.right;
-		.rounded;
-		color:@silver;
-		.boxshadow;
-		.box(#423c3a);
-		.bold;
-		margin-right:@gutter + 1px;
-		&:hover { 
-			.box(#423c3a + #111111);
-		}
-		&:active {
-			.pressedbox(#262120);
-		}
-	}
-	
-	#loginhalf {
-		.style;
-		.left;
-		.heading;
-		height:100px;
-	}
-	
-	#registerhalf {
-		.style;
-		.right;
-	}
 
+    .style {
+        .box(#423c3a);
+        .rounded;
+        .boxshadow;
+        width: (@column * 4) - @gutter - 1px;
+        margin-right:@gutter;
+        padding:@gutter/4 0;
+    }
+
+    p {clear: both; padding:0; margin-bottom:@gutter/2;}
+
+    .inputtext {
+        .left;
+        font-size:@smaller;
+        text-align:right;
+        padding-top:10px;
+        width:@column - @gutter - 1px;
+        color:@bronze;
+        .textshadow;
+    }
+
+    input {
+        .rounded;
+        .heading;
+        .right;
+        margin-right:@gutter;
+        .invertbox(#262120);
+        width:(@column * 3) - (@gutter * 3) - 1px;
+        padding:3px @gutter/2;
+        color:@silver;
+        &:focus {
+            outline-width: 0;
+            .invertbox(#120e0d);
+            color:@white;
+        }
+    }
+
+    button {
+        .right;
+        .rounded;
+        color:@silver;
+        .boxshadow;
+        .box(#423c3a);
+        .bold;
+        margin-right:@gutter + 1px;
+        &:hover {
+            .box(#423c3a + #111111);
+        }
+        &:active {
+            .pressedbox(#262120);
+        }
+    }
+
+    #loginhalf {
+        .style;
+        .left;
+        .heading;
+        height:100px;
+    }
+
+    #registerhalf {
+        .style;
+        .right;
+    }
+
+}
+
+//
+//
+//
+// voice tool stuff
+//
+
+div.adminlog tr td, div.purgelist tr td {
+    color: @silver;
+}
+
+.adminLogBody .searchButton {
+    .smallbutton;
+    float: none;
+    display: inline-block;
+    margin-left: @gutter/2;
+}
+
+.adminLogBody, .gameGoals {
+    .width(8);
+}
+
+.adminLogSource, .adminLogTarget {
+    font-weight: bold;
+}
+.adminLogDate, .goalEditorId { color: @silver*.7; }
+.adminLogSource { .gold; }
+.adminLogTarget { .bronze; }
+.accessDenied {
+    font-size: smaller;
+    color: @red;
+}
+.toolDenied {
+    display: none;
+    font-size: smaller;
+    color: @red;
+}
+
+.adminLogTable {
+    td:nth-child(1) {
+        .width(2);
+    }
+    td:nth-child(2) {
+        .width(6);
+        word-break: break-all;
+    }
+}
+
+.purgeListTable {
+    td:nth-child(1) {
+        width: @column;
+    }
+    td:nth-child(2) {
+        width: @column/1.5;
+    }
+    td:nth-child(3) {
+        width: @column * 2.25;
+    }
+    .purgeListNoData {
+        color: @grey * 1.5;
+        font-style: italic;
+    }
+}
+
+.goalEditorTable {
+    td:nth-child(1) {
+        width: @column * .6 - @gutter;
+        margin-right:@gutter;
+    }
+    td:nth-child(2) {
+        width: @column * 2.4 - @gutter;
+        margin-right:@gutter;
+    }
+    td:nth-child(3) {
+        .width(5);
+    }
+    a {
+        cursor: pointer;
+    }
+    button {
+        .smallbutton;
+        float: none;
+        margin: 0;
+        margin-left: @gutter/2;
+        display: inline-block;
+    }
+}
+.goalMergerBody {
+    input {
+        .width(1) !important;
+        margin-right: @gutter/2 !important;
+    }
+    button {
+        .smallbutton;
+        float: none;
+        margin: 0;
+        margin-left: @gutter/2;
+        display: inline-block;
+
+    }
+}
+.timeEditorTable {
+    .timeEditorEntrant {
+        padding-left: @gutter/2;
+    }
+    td:nth-child(1) {
+        width: @column * .8 - @gutter;
+        margin-right:@gutter;
+    }
+    td:nth-child(2) {
+        width: @column * 2.2 - @gutter;
+        margin-right:@gutter;
+        input {
+            width: @column / 2;
+        }
+    }
+    td:nth-child(3) {
+        .width(5);
+    }
+    a {
+        cursor: pointer;
+    }
+    button {
+        .smallbutton;
+        float: none;
+        margin: 0;
+        margin-left: @gutter/2;
+        display: inline-block;
+    }
+}
+.nameChangerBody {
+    input:nth-of-type(1) {
+        margin-right: @gutter/4 !important;
+    }
+    button {
+        .smallbutton;
+        float: none;
+        margin: 0;
+        margin-left: @gutter/2;
+        display: inline-block;
+    }
+    .notice, .notice2 {
+        color: @red;
+        font-size: smaller;
+        font-style: italic;
+        font-weight: bold;
+    }
 }
 
 //
@@ -2804,48 +3653,153 @@ span.raceMessage:hover span{
 // edit profile
 //
 
-#editprofile { 
-	.width(4);
-//	h1 { margin-left:@column; }
-//	button { margin-left:@column; }
+#editprofile {
+    .width(3.9);
+    &:nth-of-type(1) {
+        margin-right: 28px;
+        .formtext {
+            font-size: @smaller;
+        }
+    }
+    input[type=checkbox] {
+        width: auto;
+        margin-top: 5px;
+    }
+    &:nth-of-type(2), &:nth-of-type(3) {
+        .width(2.05);
+        margin-right: 0;
+    }
+    margin-right: 4px;
+    display: inline-block;
+    vertical-align: top;
+
+    .formitem a.autodetecthelp {
+            vertical-align: super;
+            font-size: smaller;
+            cursor: pointer;
+            line-height: 10px;
+            color: @bronze;
+    }
+
+    select {
+        .rounded(3px);
+        .box_gradient(@silver / 2);
+        .width(2);
+        &:not(#countrylist) { height: 160px; }
+        &[size~="9"] {
+            height: 153px;
+        }
+        margin-bottom: 5px;
+        /*
+        &[type=password] {
+            letter-spacing:1px;
+        }
+        */
+    }
+    .streams ~ .formitem .streamwarning {
+        line-height: 12px;
+    }
+    a {
+        color: @blue;
+        &:hover {
+            color: @blue * 1.2;
+        }
+    }
+    .stream {
+        width: 2 * ( @column - @gutter ) + 6px;
+        margin-bottom: 5px;
+    }
+    select {
+        color: @white;
+    }
+
+    #submit {
+        margin-bottom: 30px; // don't fall under the footer
+    }
+}
+
+.formitem.streams {
+    padding-bottom: @gutter * 2;
 }
 
 .formitem {
-	width:100%;
-	padding-bottom:@gutter/2;
-	border-bottom:1px @grey/2 dotted;
-	margin-bottom:@gutter/2;
-	
-	img {
-		vertical-align:top;
-		padding-right:@gutter/2;
-	}
-	
-	input:not([type=submit]):not([type=file]) {
-		margin:0 auto; 
-		outline:0;
-		.rounded; 
-	}
+    width:100%;
+    padding-bottom:@gutter/2;
+    border-bottom:1px @grey/2 dotted;
+    margin-bottom:@gutter/2;
+    .autocompleteWrapper {
+        display: inline-block;
+    }
+
+    .autocompleteStreams {
+        position: absolute;
+        background: transparent !important;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    img {
+        vertical-align:top;
+        padding-right:@gutter/2;
+    }
+
+    input:not([type=submit]):not([type=file]), textarea {
+        margin:0 auto;
+        outline:0;
+        .rounded;
+    }
+    textarea {
+        resize: none;
+        .inputwidth(2.2);
+        height: 6em;
+    }
+    input.frontpageselect, input.apiselectt, input.apiselecthb {
+        width: 10px;
+    }
+    .frontpageselectwarning {
+        font-size: smaller;
+        color: @red;
+    }
+    .streams {
+        padding-bottom: @gutter * 2;
+    }
+    .streamwarning {
+        font-size: smaller;
+    }
+    .add, .remove {
+        .smallbutton;
+    }
+    .add {
+        margin-right: 18px;
+    }
+    .remove {
+        margin-right: 0px;
+    }
 }
 
-#editsrlname { 
-	.box_gradient(@grey);
-	&:focus { .boxglow(@gold); .box_gradient(@grey * 0.7); }
+#editsrlname {
+    .box_gradient(@grey);
+    &:focus { .boxglow(@gold); .box_gradient(@grey * 0.7); }
 }
 
-#edittwitch { 
-	.box_gradient(@coolpurple / 2);
-	&:focus { .boxglow(@coolpurple * 1.5); .box_gradient(@coolpurple / 2 * 0.7); }
+#edittwitch {
+    .box_gradient(@coolpurple / 2);
+    &:focus { .boxglow(@coolpurple * 1.5); .box_gradient(@coolpurple / 2 * 0.7); }
 }
 
-#edittwitter { 
-	.box_gradient(@twitter / 2); 
-	&:focus { .boxglow(@twitter * 1.5); .box_gradient(@twitter / 2 * 0.7); }
+#edithitbox {
+    .box_gradient(@coolgreen / 2);
+    &:focus { .boxglow(@coolgreen * 1.5); .box_gradient(@coolgreen / 2 * 0.7); }
 }
 
-#edityoutube { 
-	.box_gradient(@red / 2); 
-	&:focus { .boxglow(@red * 1.5); .box_gradient(@red / 2 * 0.7); }
+#edittwitter {
+    .box_gradient(@twitter / 2);
+    &:focus { .boxglow(@twitter * 1.5); .box_gradient(@twitter / 2 * 0.7); }
+}
+
+#edityoutube {
+    .box_gradient(@red / 2);
+    &:focus { .boxglow(@red * 1.5); .box_gradient(@red / 2 * 0.7); }
 }
 
 //
@@ -2855,24 +3809,24 @@ span.raceMessage:hover span{
 //
 
 .bulletininfo {
-	background: rgba(40, 40, 40, 0.10);
-	&:nth-child(2n) { background: rgba(40, 40, 40, 0.12); }
-	&:first-of-type { border-top:dotted 1px @grey/2; }
-	&:hover { background: rgba(40, 40, 40, 0.2); }
-	overflow:auto; 
-	border-bottom:dotted 1px @grey/2;
-	padding:@gutter/4 @gutter/2;
-	div.gamerequest {
-		color:@red * 1.6;
-		.gametitle { color:@white; }
-		padding-bottom:2px;
-	}
-	div.requestee {
-		.left;
-		font-size:@smaller;
-		.grey;
-		position:relative;
-	}
+    background: rgba(40, 40, 40, 0.10);
+    &:nth-child(2n) { background: rgba(40, 40, 40, 0.12); }
+    &:first-of-type { border-top:dotted 1px @grey/2; }
+    &:hover { background: rgba(40, 40, 40, 0.2); }
+    overflow:auto;
+    border-bottom:dotted 1px @grey/2;
+    padding:@gutter/4 @gutter/2;
+    div.gamerequest {
+        color:@red * 1.6;
+        .gametitle { color:@white; }
+        padding-bottom:2px;
+    }
+    div.requestee {
+        .left;
+        font-size:@smaller;
+        .grey;
+        position:relative;
+    }
 }
 
 //
@@ -2882,23 +3836,23 @@ span.raceMessage:hover span{
 //
 
 #update_streams {
-	#blacklist { 
-		.width(4);
-		.right;
-	}
-	#whitelist {
-		.width(4);
-		.left;
-	}
-	
-	ol {
-		font-size:@smaller;
-		li { 
-			padding:0;	margin:0; 
-			a { color:@green; .textshadow; &:nth-of-type(2) { color:@red; } &:hover {color:@white;} }
-		}
-	}
-	h2 { margin-top:@gutter; }
+    #blacklist {
+        .width(4);
+        .right;
+    }
+    #whitelist {
+        .width(4);
+        .left;
+    }
+
+    ol {
+        font-size:@smaller;
+        li {
+            padding:0;  margin:0;
+            a { color:@green; .textshadow; &:nth-of-type(2) { color:@red; } &:hover {color:@white;} }
+        }
+    }
+    h2 { margin-top:@gutter; }
 }
 
 //
@@ -2908,20 +3862,20 @@ span.raceMessage:hover span{
 //
 
 #lb_verification_nav {
-	.width(2);
-	.left;
+    .width(2);
+    .left;
 }
 
 #lb_verification {
-	.width(6);
-	.right;
-	
-	table {
-		.raceResults;
-		th {.box_gradient(@coolpurple); color:@white; .textshadow; .bold; }
-		tr:nth-child(2n) { background: rbga(0,0,0,0.15) }
-		tr td { .boxshadow; min-width:60px; padding:1px 6px 1px; box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); -moz-box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); -webkit-box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); img{vertical-align:middle; margin:0px 5px;} &:last-child { box-shadow:0 0 0 #000; -moz-box-shadow:0 0 0 #000; -webkit-box-shadow:0 0 0 #000; } }
-	}
+    .width(6);
+    .right;
+
+    table {
+        .raceResults;
+        th {.box_gradient(@coolpurple); color:@white; .textshadow; .bold; }
+        tr:nth-child(2n) { background: rbga(0,0,0,0.15) }
+        tr td { .boxshadow; min-width:60px; padding:1px 6px 1px; box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); -moz-box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); -webkit-box-shadow: 1px 0px 1px rgba(0, 0, 0, .3); img{vertical-align:middle; margin:0px 5px;} &:last-child { box-shadow:0 0 0 #000; -moz-box-shadow:0 0 0 #000; -webkit-box-shadow:0 0 0 #000; } }
+    }
 }
 
 /* quick fix for long names in entrants list */
@@ -2929,4 +3883,20 @@ td[class*='entrant'] {
     width: 132px;
     display: block;
     overflow: hidden;
+}
+.twitchframe {
+    width: 100%;
+    height: (9/16) * ((@column * 5) - @gutter);
+}
+.biggerFeaturedStream .twitchframe {
+    width: 100%;
+    height: (9/16) * ((@column * 8) - @gutter);
+}
+.hitboxframe {
+    width: 100%;
+    height: (9/16) * ((@column * 5) - @gutter) + @jtv_bar;
+}
+.biggerFeaturedStream .hitboxframe {
+    width: 100%;
+    height: (9/16) * ((@column * 8) - @gutter) + @jtv_bar;
 }

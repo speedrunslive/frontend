@@ -19,7 +19,7 @@
 function getLeaderboard( id ) {
 	$.ajax({
 		type : "GET",
-		url : apiUrl + "/leaderboard?pageSize=200&sortField=" + id,
+		url : apiUrl + "/leaderboard?sortField=" + id,
 		processData : true,
 		data : {},
 		dataType : "jsonp",

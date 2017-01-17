@@ -68,8 +68,8 @@ function updateStream2() {
 jwplayer("myElement3").setup({
     file: "rtmp://vpn.sluip.com/srl2016/mmx",
 image: 'http://cdn.speedrunslive.com/images/logo_SpeedRunsLive_outline.png',
-    width: 640,
-    height: 360
+    width: 960,
+    height: 540
 
 });
 </script>

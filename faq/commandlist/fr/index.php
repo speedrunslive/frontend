@@ -45,7 +45,7 @@
 	<div id="faq">
 	
 	<div id="commandlist">
-	<h1>Liste complète des commandes de RaceBot&ensp;<a href="../"><img class="flag" src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/United_States_of_America.png" alt="En"/></a> <a href="../jp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Japan.png" class="flag" alt="Jp"/></a> <a href=""><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/France.png" class="flag" alt="Fr"/></a> <a href="../sp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Spain.png" class="flag" alt="Sp"/></a></h1>
+	<h1>Liste complète des commandes de RaceBot&ensp;<a href="../"><img class="flag" src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="En"/></a> <a href="../jp/"><img src="http://cdn.speedrunslive.com/images/flags/Japan.png" class="flag" alt="Jp"/></a> <a href=""><img src="http://cdn.speedrunslive.com/images/flags/France.png" class="flag" alt="Fr"/></a> <a href="../sp/"><img src="http://cdn.speedrunslive.com/images/flags/Spain.png" class="flag" alt="Sp"/></a></h1>
 
 
 	<h2 id="startrace">.startrace <em>jeu</em> <span class="grey right">(#speedrunslive)</span></h2>
@@ -53,8 +53,8 @@
 	<p>Ouvre une nouvelle course que les joueurs peuvent rejoindre.</p>
 	<p>A noter que cette commande utilise l'abréviation du jeu, et pas le nom complet. Vous trouverez les abréviations sur les <a href="/races/#!/gamelist/alphabetical">pages respectives</a> de chaque jeu.</p>
 	
-	<p><img src="http://c15111086.r86.cf2.rackcdn.com/error.gif" /><code>.startrace Super Mario 64</code></p>
-	<p><img src="http://c15111086.r86.cf2.rackcdn.com/success.gif" /><code>.startrace sm64</code></p>
+	<p><img src="http://cdn.speedrunslive.com/images/error.gif" /><code>.startrace Super Mario 64</code></p>
+	<p><img src="http://cdn.speedrunslive.com/images/success.gif" /><code>.startrace sm64</code></p>
 	<p>Si vous démarrez une course pour un jeu qui n'a pas encore été joué sur SpeedRunsLive, utilisez une abréviation qui a du sens.</p>
 	<p>Ne démarrez pas une course avant d'avoir trouvé au moins un adversaire. Demandez autour de vous!</p>
 	

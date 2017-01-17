@@ -11,6 +11,7 @@
 	<?php include($_SERVER['DOCUMENT_ROOT'] . '/header.php'); ?>
 <div id="faqHead">
 <script type="text/javascript" src="/scripts/backtotop.js"></script>
+<script type="text/javascript" src="/faq/highlightactive.js"></script>
         <a href="/faq/rules/sp">Reglas de Carreras</a>
 		<a href="/faq/sp/">Preguntas Frecuentes</a>
 		<a href="/faq/commandlist/sp">Lista de Comandos RaceBot</a>
@@ -50,8 +51,8 @@
 	<div id="faq">
 	
 
-<h1>Preguntas Frecuentes&ensp;<a href="../"><img class="flag" src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/United_States_of_America.png" alt="En"/></a><a href=""><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Spain.png" class="flag" alt="Sp"/></a></h1>
-
+<h1>Preguntas Frecuentes&ensp;<a href="../"><img class="flag" src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="En"/></a><a href=""><img src="http://cdn.speedrunslive.com/images/flags/Spain.png" class="flag" alt="Sp"/></a></h1>
+<strong><font color="red">¡Esta sección de Preguntas Frecuentes no está al día con el <a href="/faq/">FAQ en inglés</a>!</font> </strong>
 <h1 id="what">¿Qué es Speedrunning?</h1>
 <p>Speedrunning no es más que jugar un juego con la intención de terminarlo lo más rápido posible.</p>
 <p.Los Speedrunners se desafían mutuamente para llevar el juego hasta el límite y obtener mayor conocimiento del mismo.</p>

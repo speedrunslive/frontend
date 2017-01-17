@@ -63,7 +63,7 @@ function updateStream2() {
 	});
 }
 jwplayer("myElement3").setup({
-    file: "rtmp://vpn.sluip.com/jrta/marathon",
+    file: "rtmp://vpn.sluip.com/jrta/jrta",
 image: 'http://cdn.speedrunslive.com/images/logo_SpeedRunsLive_outline.png',
     width: 960,
     height: 540	

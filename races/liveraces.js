@@ -1,7 +1,7 @@
 function getStreams() {
 	$.ajax({
 		type : "GET",
-		url : "http://api.twitch.tv/api/team/srl/live_channels.json",
+		url : "http://api.twitch.tv/api/team/srl/live_channels.json?client_id=" + CLIENT_ID,
 		processData : true,
 		data : {},
 		dataType : "jsonp",

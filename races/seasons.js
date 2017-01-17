@@ -46,7 +46,7 @@ function selectSeason( season ) {
 }
 
 function selectSeasonGame( choice, seasonID ) {
-	return '<div class="seasongame"><span class="season_gametitle">' + choice.game.name + '</span><img src="http://c15111072.r72.cf2.rackcdn.com/' + choice.game.abbrev + '.jpg" alt=""/><table><tr><th colspan="3">' + choice.name + '</th></tr>' + seasonPlayer( choice.leaders ) + seasonLink( choice.id, seasonID );
+	return '<div class="seasongame"><span class="season_gametitle">' + choice.game.name + '</span><img src="http://cdn.speedrunslive.com/images/games/' + choice.game.abbrev + '.jpg" alt=""/><table><tr><th colspan="3">' + choice.name + '</th></tr>' + seasonPlayer( choice.leaders ) + seasonLink( choice.id, seasonID );
 }
 
 function seasonPlayer( players ) {

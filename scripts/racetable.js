@@ -32,10 +32,10 @@ function renderRace(data, seasonSkill) {
 }
 
 function gameImage(abbrev) {
-	return ('http://c15111072.r72.cf2.rackcdn.com/' + abbrev + '.jpg');
+	return ('http://cdn.speedrunslive.com/images/games/' + abbrev + '.jpg');
 }
 function siteImage(imagename) {
-	return ('http://c15111086.r86.cf2.rackcdn.com/' + imagename);
+	return ('http://cdn.speedrunslive.com/images/' + imagename);
 }
 
 function getGoal (goal) {
@@ -220,11 +220,11 @@ function is_int(input){
 function getComment( msg, lastComment ) {
 	var charLimit = 60;
 	if ( msg ) {
-		if( lastComment && msg.length > charLimit ) {
-			var msgEnd = msg.substring(charLimit, msg.length);
-			var spaceIndex = msgEnd.indexOf(" ");
-			msg = msg.substring( 0, charLimit + spaceIndex ) + "...";
-		}
+		//if( lastComment && msg.length > charLimit ) {
+		//	var msgEnd = msg.substring(charLimit, msg.length);
+		//	var spaceIndex = msgEnd.indexOf(" ");
+		//	msg = msg.substring( 0, charLimit + spaceIndex ) + "...";
+		//}
 		return '<td><span class="raceMessage">&ensp;Comment&ensp;<span>' + msg + '</span></span></td>';
 	}
 	return '<td></td>';

@@ -62,14 +62,20 @@
 
 		<h1 id="pasth1">Latest Races</h1> 
 		<div id="pageSorter">
-			<button title="First" class="disabled" id="first"><span>&nbsp;</span></button>
-			<button title="Prev" class="disabled" id="prev"><span>&nbsp;</span></button>
-			<button title="Next" class="disabled" id="next"><span>&nbsp;</span></button>   
-			<button title="Last" class="disabled" id="last"><span>&nbsp;</span></button>
+			<button title="First" class="disabled first" id="first"><span>&nbsp;</span></button>
+			<button title="Prev" class="disabled prev" id="prev"><span>&nbsp;</span></button>
+			<button title="Next" class="disabled next" id="next"><span>&nbsp;</span></button>   
+			<button title="Last" class="disabled last" id="last"><span>&nbsp;</span></button>
 		</div>
 		<div id="racefeed">
 
 		</div>
+		<div id="pageSorter">
+			<button title="First" class="disabled first" id="first"><span>&nbsp;</span></button>
+			<button title="Prev" class="disabled prev" id="prev"><span>&nbsp;</span></button>
+			<button title="Next" class="disabled next" id="next"><span>&nbsp;</span></button>   
+			<button title="Last" class="disabled last" id="last"><span>&nbsp;</span></button>
+		</div>		
 	</div>
 		
 	<?php include($_SERVER['DOCUMENT_ROOT'] . '/footer.php'); ?>

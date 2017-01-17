@@ -21,8 +21,8 @@
 	</div>
 	
 	<div id="faq">
-	<h1>Racing Rules&ensp;<a href=""><a href="."><img class="flag" src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/United_States_of_America.png" alt="En"/></a><a href="sp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Spain.png" class="flag" alt="Sp"/></a></h1>
-	<p> <br>Below are the rules for racing on the #speedrunslive IRC network. While we recommend reading the <a href="../">FAQ</a> in full, you <em>must</em> familiarize yourself with the following rules, or you put yourself at a high risk of being DQed from races or banned from the IRC channel.</p>
+	<h1>Racing Rules&ensp;<a href=""><a href="."><img class="flag" src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="En"/></a><a href="sp/"><img src="http://cdn.speedrunslive.com/images/flags/Spain.png" class="flag" alt="Sp"/></a></h1>
+	<p> <br>Below are the rules for racing on the SRL IRC network. While we recommend reading the <a href="../">FAQ</a> in full, you <em>must</em> familiarize yourself with the following rules, or you put yourself at a high risk of being DQed from races or banned from the IRC channel.</p>
 
 <h1 id="before">Rules before starting a race</h1>
 <ul>
@@ -41,18 +41,26 @@
 
 <h1 id="while">Rules while racing</h1>
 <ul>
-<li>Absolutely no emulator functions, such as savestates or speedups. No turbo-fire functions unless it is available on the original controller. No external devices such as game genie or gameshark. No scripts unless specifically allowed. See <a href="../#turboetc">FAQ</a> for more details. 	
-	<br><b>Result:</b> DQed from race and perma-banned from #speedrunslive. We take this matter VERY seriously, and we hold a zero tolerance policy on cheating.</li><br>
+<li>Absolutely no emulator functions, such as savestates or speedups. No turbo-fire functions unless it is available on the original controller. No external devices such as game genie or gameshark. No scripts unless specifically allowed. No typing .done if you haven't finished the goal. See <a href="../#turboetc">FAQ</a> for more details. 	
+	<br><b>Result:</b> DQed from race and perma-banned from <strong>#speedrunslive</strong>. We take this matter VERY seriously, and we hold a zero tolerance policy on cheating.</li><br>
 
 <li>You must stream if you are playing on emulator or are playing a PC game. See <a href="../#proofcall">FAQ</a> for more details.
 	<br><b>Result:</b> If caught playing on emulator or PC game without streaming, DQed from the race. If playing on console, and you are proof-called but cannot provide proof, DQed from the race. If you are highly suspected of cheating in either case, you may be added to a list requiring you to stream all future races, or become temporarily or permanently banned, depending on the circumstances.
 <br><br><b>Note:</b> In the “Videos” section of your twitch settings, it is highly recommended you enable the “Automatically archive my broadcasts” option. This will allow anyone to watch your VOD after you stop streaming.<em> If you livestreamed your race but cannot provide a video upon being proofcalled, you may be DQed.</em> Note that this option is off by default.</li><br>
 
-<li>You may not use the SNES emulators ZSNES or SNES9x 1.4x. You may not use the N64 emulator Project 64 2.x.
-	<br><b>Result:</b> DQ with a warning; may be banned if repeated.</li><br>
+<li>You may not use the following emulators for racing:<br>
+     
+    <b>&nbsp&nbsp&nbsp&nbspSNES</b> - ZSNES, snes9x 1.4x<br>
+    <b>&nbsp&nbsp&nbsp&nbspN64</b> - Project64 2.x<br>
+    <b>&nbsp&nbsp&nbsp&nbspGB/GBC</b> - VBA, VBA-M<br>
+    <b>&nbsp&nbsp&nbsp&nbspGBA</b> - VBA-M (use VBA instead. If VBA does not support your GBA game, please contact an op.)<br>
+
+<b>Result:</b> DQ with a warning; may be banned if repeated.</li><br>
+
+	
 <li>If you need to change a goal mid-race, be sure that every single entrant still racing agrees to it.
         <br><b>Result:</b> If even one person doesn’t respond or disagrees, the goal must stay as is.</li><br>
-<li>No extended breaks, such as sleeping, during a race.
+<li>No extended breaks, such as sleeping, during a race.  A safe go by is no more than 10 minutes at a time, per hour.
         <br><b>Result:</b> DQ'd from race.</li>
 
 </ul>
@@ -63,8 +71,8 @@
 <br><b>Result:</b> Ban as long as you use that service.</li><br>
 <li>No racing on more than 1 nick.
 <br><b>Result:</b> May be banned if repeated.</li><br>
-<li>If you consistently stream material that is clearly unacceptable, you will be warned.
-<br><b>Result:</b> If it continues (or is severe enough to not deserve a warning), you may be blacklisted from the frontpage.</li><br>
+<li>If you consistently stream material that is clearly unacceptable to the front page, you will be warned.
+<br><b>Result:</b> If it continues (or is severe enough to not deserve a warning), you may be blacklisted from the front page.</li><br>
 <li>Do not use derogatory terms. Do not harass other members.
 <br><b>Result:</b> Warning, temporary ban, or permanent ban depending on the circumstances.</li><br>
 <li>Do not ban evade.</li>

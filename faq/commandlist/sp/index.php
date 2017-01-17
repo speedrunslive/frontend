@@ -11,6 +11,7 @@
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/header.php'); ?>
     <div id="faqHead">
         <script type="text/javascript" src="/scripts/backtotop.js"></script>
+        <script type="text/javascript" src="/faq/highlightactive.js"></script>
         <a href="/faq/rules/sp">Reglas de Carreras</a>
         <a href="/faq/sp/">Preguntas Frecuentes</a>
         <a href="/faq/commandlist/sp">Lista de Comandos RaceBot</a>
@@ -52,14 +53,14 @@
     <div id="faq">
     
     <div id="commandlist">
-    <h1>Lista Completa de comandos de RaceBot&ensp;<a href=".."><img class="flag" src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/United_States_of_America.png" alt="En"/></a> <a href="../jp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Japan.png" class="flag" alt="Jp"/></a> <a href="../fr/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/France.png" class="flag" alt="Fr"/></a> <a href="../sp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Spain.png" class="flag" alt="Sp"/></a></h1>
+    <h1>Lista Completa de comandos de RaceBot&ensp;<a href=".."><img class="flag" src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="En"/></a> <a href="../jp/"><img src="http://cdn.speedrunslive.com/images/flags/Japan.png" class="flag" alt="Jp"/></a> <a href="../fr/"><img src="http://cdn.speedrunslive.com/images/flags/France.png" class="flag" alt="Fr"/></a> <a href="../sp/"><img src="http://cdn.speedrunslive.com/images/flags/Spain.png" class="flag" alt="Sp"/></a></h1>
 
     <h2 id="startrace">.startrace <em>juego</em> <span class="grey right">(#speedrunslive)</span></h2>
     
     <p>Ésto creará una nueva carrera para que la gente se una.</p>
     <p>Nota: éste comando utiliza <em>abreviaciones</em> de juegos, NO el nombre completo del juego. Puedes encontrar la abreviación de cada juego en sus páginas respectivas. Un Ejemplo:</p>
-    <p><img src="http://c15111086.r86.cf2.rackcdn.com/error.gif"><code>.startrace Super Mario 64</code></p>
-    <p><img src="http://c15111086.r86.cf2.rackcdn.com/success.gif"><code>.startrace sm64</code></p>
+    <p><img src="http://cdn.speedrunslive.com/images/error.gif"><code>.startrace Super Mario 64</code></p>
+    <p><img src="http://cdn.speedrunslive.com/images/success.gif"><code>.startrace sm64</code></p>
     <p>Si estás empezando una carrera por algún juego en el cúal nunca antes se ha jugado, entonces debes crear una abreviación con sentido común respecto del nombre del juego.</p>
     <p>No empieces una carrera a menos que ya tengas un oponente como mínimo que se una a tu carrera. Puedes preguntar en el chat principal por si alguien quiere jugar contra ti.</p>
     

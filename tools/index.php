@@ -31,28 +31,28 @@
 
 			<h1>Video Capture Software</h1>
 			
-			<p><a href="http://www.amarectv.com/english/amarectv_e.htm">AmaRecTV</a>
+			<p><a href="http://www.amarectv.com/download_amarectv.htm">AmaRecTV</a>
 			&mdash; Video capture &amp; preview. The AmaRec codec has a watermark but you can use any codec such as 
 			<a href="http://lags.leetcode.net/codec.html">LAGS</a>. Using AmaRecTV as a video source for 
 			streaming works well and enables lossless video capture and streaming simultaneously. Highly recommended 
-			over Pinnacle if you use a Dazzle.</p>
+			over Pinnacle if you use a Dazzle.  Click the first link on the page to download.</p>
 
 
 			<h1>Timers</h1>
 
-			<p><a href="http://www.mediafire.com/download/x6e6g8d0m5daa3q/WSplit_1.5.2.zip">WSplit</a> 
+			<p><a href="http://cdn.speedrunslive.com/tools/WSplit_1.5.2.zip">WSplit</a> 
 			&mdash; Very awesome timer that tracks how far ahead or behind you are of set checkpoints. 
 			Lots of new options for image support, color customization, etc. Created by Wodanaz of SDA
 			and currently maintained by Nitrofski.</p>
 
-			<p><a href="http://jenmaarai.com/xunkar/llanfair/">Llanfair 1.2</a>
+			<p><a href="http://jenmaarai.com/llanfair/">Llanfair</a>
 			&mdash; New alternative to WSplit.</p>
 			
 			<p><a href="http://livesplit.org/downloads/">LiveSplit</a> 
 			&mdash; A sleek highly customizable timer for speedrunners.
 			Supports SRL racing and split comparisons.</p>
 
-			<p><a href="http://cdn.rainbowism.net/tools/BKST%20LapTool%20Eng1.2.rar">BKST + LapTool English (v1.2)</a> 
+			<p><a href="http://cdn.speedrunslive.com/tools/BKST%20LapTool%20Eng1.2.rar">BKST + LapTool English (v1.2)</a> 
 			&mdash; Translated LapTool, by Lutepin.</p>
 
 			<p><a href="http://www.kazamit.com/index.php?p=5">Kazami Timer</a> 
@@ -81,14 +81,15 @@
 			<h1>Bingo</h1>
 			
 			<div id="bingo_list">
-				<a class="newcard oot" href="/tools/bingo-oot/?seed=<?php echo rand(1, 999999); ?>">Zelda OoT</a>
-				<a class="newcard mm" href="/tools/bingo-mm/?seed=<?php echo rand(1, 999999); ?>">Zelda MM</a>
-				<a class="newcard sm" href="/tools/bingo-supermetroid/?seed=<?php echo rand(1, 999999); ?>">Super Metroid</a>
-				<a class="newcard sotn" href="/tools/bingo-sotn/?seed=<?php echo rand(1, 999999); ?>">CV:SotN</a>
-				<a class="newcard sm64" href="/tools/bingo-sm64/?seed=<?php echo rand(1, 999999); ?>">SM64</a>
-				<a class="newcard smw" href="/tools/bingo-smw/?seed=<?php echo rand(1, 999999); ?>">SMW</a>
-				<a class="newcard pokemonrb" href="/tools/bingo-redblue/?seed=<?php echo rand(1, 999999); ?>">Pok&eacute; Red/Blue</a>
-				<a class="newcard pokemoncrystal" href="/tools/bingo-crystal/?seed=<?php echo rand(1, 999999); ?>">Pok&eacute; Crystal</a>
+				<a class="newcard oot" href="/tools/oot-bingo/?seed=<?php echo rand(1, 999999); ?>">Zelda OoT</a>
+				<a class="newcard mm" href="/tools/mm-bingo/?seed=<?php echo rand(1, 999999); ?>">Zelda MM</a>
+				<a class="newcard sm" href="/tools/supermetroid-bingo/?seed=<?php echo rand(1, 999999); ?>">Super Metroid</a>
+				<a class="newcard sotn" href="/tools/sotn-bingo/?seed=<?php echo rand(1, 999999); ?>">CV:SotN</a>
+				<a class="newcard sm64" href="/tools/sm64-bingo/?seed=<?php echo rand(1, 999999); ?>">SM64</a>
+				<a class="newcard smw" href="/tools/smw-bingo/?seed=<?php echo rand(1, 999999); ?>">SMW</a>
+				<a class="newcard pokemonrb" href="/tools/redblue-bingo/?seed=<?php echo rand(1, 999999); ?>">Pok&eacute; Red/Blue</a>
+				<a class="newcard pokemoncrystal" href="/tools/crystal-bingo/?seed=<?php echo rand(1, 999999); ?>">Pok&eacute; Crystal</a>
+				<a class="newcard oot" href="/tools/dk64-bingo/?seed=<?php echo rand(1, 999999); ?>">Donkey Kong 64</a>
 			</div>
 
 			<div id="bingo_desc">

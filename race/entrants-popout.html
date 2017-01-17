@@ -27,7 +27,7 @@
 <body>
 	<table id="raceTable">
 	</table>
-	
+	<script type="text/javascript" src="/scripts/globals.js"></script>	
 	<script type="text/javascript">
 
 function getTrueskill ( skill ) {
@@ -74,9 +74,9 @@ $( document ).ready( function(){
 	updateEntrants ( raceid );
 	var update = function(){ 
 		updateEntrants( raceid ); 
-		setTimeout( update, 10000 ); 
+		setTimeout( update, 45000 ); 
 	}
-	setTimeout( update, 5000 ); 
+	setTimeout( update, 45000 ); 
 });
 
 	</script>

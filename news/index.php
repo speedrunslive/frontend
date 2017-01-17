@@ -3,16 +3,17 @@
 <head>
 
 
-	<!-- Title -->
-	<title>News - SpeedRunsLive</title>
+    <!-- Title -->
+    <title>News - SpeedRunsLive</title>
 
-	<?php include($_SERVER['DOCUMENT_ROOT'] . '/header.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/header.php'); ?>
 <br>
 <br>
 <h1>News</h1> 
 
-<p><h2><a href="/news/get-yourself-speedrunning-sgdq-2016/">Get Yourself Speedrunning #4</a></h2><small>July 26th, 2015 </small> </p>
-<p><h2><a href="/news/get-yourself-speedrunning-2016/">Get Yourself Speedrunning #3</a></h2><small>December 30th, 2015 </small> </p>
+<p><h2><a href="/news/get-yourself-speedrunning-agdq-2017/">Get Yourself Speedrunning #5</a></h2><small>January 7th, 2017 </small> </p>
+<p><h2><a href="/news/get-yourself-speedrunning-sgdq-2016/">Get Yourself Speedrunning #4</a></h2><small>July 26th, 2016 </small> </p>
+<p><h2><a href="/news/get-yourself-speedrunning-2016/">Get Yourself Speedrunning #3</a></h2><small>December 30th, 2016 </small> </p>
 <p><h2><a href="/news/announcement-07-12-15/">Developer race and Get Yourself Speedrunning!</a></h2><small>July 12th, 2015 </small> </p>
 <p><h2><a href="/news/get-yourself-speedrunning-2015/">Get Yourself Speedrunning!</a></h2><small>December 30th, 2014 </small> </p>
 <p><h2><a href="/news/mmx2-race-dec/">Big Mega Man X2 race!</a></h2><small>December 8th, 2014 </small> </p>
@@ -21,4 +22,4 @@
 <p><h2><a href="/news/hitbox/">Hitbox update</a></h2><small>August 9th, 2014 </small> </p> 
 
 
-	<?php include($_SERVER['DOCUMENT_ROOT'] . '/footer.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/footer.php'); ?>

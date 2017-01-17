@@ -341,7 +341,16 @@ function renderGameSeason (abbrev, gamestring, seasonID) {
 	$("#gamelist").hide();
 	$("#gamepageloader").show();
 	$("#gamepageloader").append('<div id="ajaxstage"><div id="ajaxspin">&nbsp;</div><div id="ajaxloading">LOADING...</div></div>');
-	$("#gamepage").append('<div id="playerslist"></div><div id="rightside"><div id="side_gamepic"></div><div id="side_gamerules"></div><div id="side_gamestats"></div><div id="side_popgoals"></div></div><div id="centercolumn"><h1 id="pasth1">Latest Races</h1><div id="pageSorter"><button title="First" class="disabled" id="first"><span>&nbsp;</span></button><button title="Prev" class="disabled" id="prev"><span>&nbsp;</span></button><button title="Next" class="disabled" id="next"><span>&nbsp;</span></button><button title="Last" class="disabled" id="last"><span>&nbsp;</span></button></div><div id="racefeed"></div></div>');
+	$("#gamepage").append('<div id="playerslist">\
+		</div><div id="rightside"><div id="side_gamepic"></div><div id="side_gamerules"></div>\
+		<div id="side_gamestats"></div>\
+		<div id="side_popgoals"></div>\
+		</div>\
+		<div id="centercolumn"><h1 id="pasth1">Latest Races</h1>\
+		<div id="pageSorter"><button title="First" class="disabled first" id="first"><span>&nbsp;</span></button><button title="Prev" class="disabled prev" id="prev"><span>&nbsp;</span></button><button title="Next" class="disabled next" id="next"><span>&nbsp;</span></button><button title="Last" class="last disabled" id="last"><span>&nbsp;</span></button></div>\
+		<div id="racefeed"></div>\
+		<div id="pageSorter"><button title="First" class="disabled first" id="first"><span>&nbsp;</span></button><button title="Prev" class="disabled prev" id="prev"><span>&nbsp;</span></button><button title="Next" class="disabled next" id="next"><span>&nbsp;</span></button><button title="Last" class="last disabled" id="last"><span>&nbsp;</span></button></div>\
+		</div>');
 	getLeaderboard(abbrev + "?season=" + seasonID); // we need to actually check if this is a valid game name before we try to render anything.
 	getRaces(gamestring + "&season=" + seasonID);
 	getStats('?game=' + abbrev + "&season=" + seasonID);

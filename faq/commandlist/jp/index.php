@@ -45,7 +45,7 @@
 	<div id="faq">
 	
 	<div id="commandlist">
-	<h1>RaceBot用全コマンドリスト&ensp;<a href="../"><img class="flag" src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/United_States_of_America.png" alt="En"/></a> <a href="../jp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Japan.png" class="flag" alt="Jp"/></a> <a href="../fr/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/France.png" class="flag" alt="Fr"/></a> <a href="../sp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Spain.png" class="flag" alt="Sp"/></a></h1>
+	<h1>RaceBot用全コマンドリスト&ensp;<a href="../"><img class="flag" src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="En"/></a> <a href="../jp/"><img src="http://cdn.speedrunslive.com/images/flags/Japan.png" class="flag" alt="Jp"/></a> <a href="../fr/"><img src="http://cdn.speedrunslive.com/images/flags/France.png" class="flag" alt="Fr"/></a> <a href="../sp/"><img src="http://cdn.speedrunslive.com/images/flags/Spain.png" class="flag" alt="Sp"/></a></h1>
 
 	<h2 id="startrace">.startrace (ゲーム名) <span class="grey right">(#speedrunslive)</span></h2>
 	
@@ -53,8 +53,8 @@
 	<p>このコマンドを使う時にはゲームの略語を使用します。フルネームは使用しないでください。
 	略語はSpeedRunsLive内のゲームのページで確認できます。</p>
 	
-	<p><img src="http://c15111086.r86.cf2.rackcdn.com/error.gif" /><code>.startrace Super Mario 64</code></p>
-	<p><img src="http://c15111086.r86.cf2.rackcdn.com/success.gif" /><code>.startrace sm64</code></p>
+	<p><img src="http://cdn.speedrunslive.com/images/error.gif" /><code>.startrace Super Mario 64</code></p>
+	<p><img src="http://cdn.speedrunslive.com/images/success.gif" /><code>.startrace sm64</code></p>
 	<p>過去にレースが行われたことのないゲームのレースをする場合は、そのゲームだとわかる略語を使用してください。</p>
 	<p>最低1人競争相手が見つかるまでは、このコマンドを使用しないでください。いない場合は周りの人に声をかけてみてください。 </p>
 	

@@ -1,3 +1,5 @@
+var CLIENT_ID = "77j5cesl781f4gpduf1278i38j8icr1";
+
 function getStats(string) {
 	$.ajax({
 		type : "GET",
@@ -63,11 +65,25 @@ function getRaces(player) {
 function getTwitch(twitchname) {
 	$.ajax({
 		type : "GET",
-		url : "http://api.justin.tv/api/user/show/" + twitchname + ".json?jsonp=?",
+		url : "https://api.twitch.tv/kraken/channels/" + twitchname + "?client_id=" + CLIENT_ID,
 		processData : true,
 		data : {},
 		dataType : "jsonp",
 		jsonpCallback : "renderTwitchStuff",
+		cache : true
+	});
+};
+
+function getHitbox(hitboxname) {
+	$.ajax({
+		type : "GET",
+		url : "https://api.hitbox.tv/user/" + hitboxname,
+		processData : true,
+		data : {},
+		dataType : "json",
+		success : function(data) {
+			renderHitboxStuff(data);
+		},
 		cache : true
 	});
 };
@@ -88,8 +104,14 @@ function checkIfLive(twitchname) {
 
 function renderInfo (data) {
 	if (data.channel != "") {
-		$("#buttonCollection").append('<a target="_blank" title="Twitch" href="http://www.twitch.tv/' + data.channel + '"><img class="icons" src="' + siteImage('ttv_icon20px.png') + '"/></a>');
-		getTwitch(data.channel);
+		if ( data.api == "hitbox" ) {
+			$("#buttonCollection").append('<a target="_blank" title="Hitbox" href="http://www.hitbox.tv/' + data.channel + '"><img class="icons" src="' + siteImage('hb_icon20px.png') + '"/></a>');
+			getHitbox(data.channel);
+		}
+		else if ( data.api == "twitch" ) {
+			$("#buttonCollection").append('<a target="_blank" title="Twitch" href="http://www.twitch.tv/' + data.channel + '"><img class="icons" src="' + siteImage('ttv_icon20px.png') + '"/></a>');
+			getTwitch(data.channel);
+		}
 	}
 	if (data.twitter != "") {
 		$("#buttonCollection").append('<a target="_blank" title="Twitter" href="http://www.twitter.com/' + data.twitter + '"><img class="icons" src="' + siteImage('twitter_icon20px.png') + '"/></a>');
@@ -100,7 +122,14 @@ function renderInfo (data) {
 }
 
 function renderTwitchStuff (data) {
-	$("#avatarHolder").append('<img class="avatar" src="' + data.image_url_medium + '" alt="avatar"/>');
+	var avatar = data.logo.replace("300x300", "150x150");
+	$("#avatarHolder").append('<img class="avatar" src="' + avatar + '" alt="avatar"/>');
+}
+
+function renderHitboxStuff (data) {
+	var cdn = "http://edge.sf.hitbox.tv";
+	var avatar = data.user_logo;
+	$("#avatarHolder").append('<img class="avatar" src="' + cdn +  avatar + '" alt="avatar"/>');
 }
 
 /*

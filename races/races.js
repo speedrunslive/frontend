@@ -29,7 +29,7 @@ function hashChange () {
 					$( '#racesMain' ).html( '<div id="liveRaces"><h1>Live Races <img src="' + siteImage('ajax-loader.gif') + '" /></h1>' );
 					getLiveRaces(); 
 				}
-					timerid = setTimeout( updateraces, 30000 ); 
+					timerid = setTimeout( updateraces, 90000 ); 
 			}
 			updateraces();
 		}
@@ -37,7 +37,10 @@ function hashChange () {
 			if ($( '#past_results' ).length == 0) {
 				$('.racesHighlighted').removeClass('racesHighlighted')
 				$( '#buttonPastResults' ).addClass( 'racesHighlighted' );
-				$( '#racesMain' ).html( '<div id="past_results"><h1 id="pasth1">Past Results</h1><div id="pageSorter"><button title="First" class="disabled" id="first"><span>&nbsp;</span></button><button title="Prev" class="disabled" id="prev"><span>&nbsp;</span></button><button title="Next" class="disabled" id="next"><span>&nbsp;</span></button><button title="Last" class="disabled" id="last"><span>&nbsp;</span></button></div><div id="racefeed" data-max="0"></div>' ); 
+				$( '#racesMain' ).html( '<div id="past_results"><h1 id="pasth1">Past Results</h1>\
+					<div id="pageSorter"><button title="First" class="disabled first" id="first"><span>&nbsp;</span></button><button title="Prev" class="disabled prev" id="prev"><span>&nbsp;</span></button><button title="Next" class="disabled next" id="next"><span>&nbsp;</span></button><button title="Last" class="disabled last" id="last"><span>&nbsp;</span></button></div>\
+					<div id="racefeed" data-max="0"></div>\
+					<div id="pageSorter"><button title="First" class="disabled first" id="first"><span>&nbsp;</span></button><button title="Prev" class="disabled prev" id="prev"><span>&nbsp;</span></button><button title="Next" class="disabled next" id="next"><span>&nbsp;</span></button><button title="Last" class="disabled last" id="last"><span>&nbsp;</span></button></div>' ); 
 				buttons(pathArray);
 				loadRaces( pathArray );
 			}
@@ -93,7 +96,7 @@ function hashChange () {
 			if ($( '#seasonselectcontainer' ).length == 0) {
 				$('.racesHighlighted').removeClass('racesHighlighted')
 				$( '#buttonSeasons' ).addClass( 'racesHighlighted' );
-				$( '#racesMain' ).html( '<img id="seasons_image" src="http://c15111086.r86.cf2.rackcdn.com/seasons_big.png" /><div id="seasons_desc"></div><div id="seasonselectcontainer"></div><div id="seasongamecontainer"></div><div id="ajaxstage"><div id="ajaxspin">&nbsp;</div><div id="ajaxloading">LOADING...</div></div>' );
+				$( '#racesMain' ).html( '<img id="seasons_image" src="http://cdn.speedrunslive.com/images/seasons_big.png" /><div id="seasons_desc"></div><div id="seasonselectcontainer"></div><div id="seasongamecontainer"></div><div id="ajaxstage"><div id="ajaxspin">&nbsp;</div><div id="ajaxloading">LOADING...</div></div>' );
 				getSeasons();
 			}
 			var page = findPageNum(pathArray);

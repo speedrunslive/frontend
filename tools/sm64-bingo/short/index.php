@@ -110,7 +110,7 @@
 			// this produces a suck url if lang is the first option, but i lazy
 			?>
 
-			<a href="<?php echo $lang_url ?>"><img src="http://c15111086.r86.cf2.rackcdn.com/en_flag.jpg" alt="English" /></a>&emsp;<a href="<?php echo $lang_url ?>&lang=jp"><img src="http://c15111086.r86.cf2.rackcdn.com/jp_flag.jpg" alt="Japanese" /></a>
+			<a href="<?php echo $lang_url ?>"><img src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="English" /></a>&emsp;<a href="<?php echo $lang_url ?>&lang=jp"><img src="http://cdn.speedrunslive.com/images/flags/Japan.png" alt="Japanese" /></a>
 
 		</div>
 	</div>

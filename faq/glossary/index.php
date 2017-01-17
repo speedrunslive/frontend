@@ -16,7 +16,7 @@
 		</div>
 	
 	<div id="glossary">
-		<h1>Speedrunning Glossary&ensp;<a href="../"><a href=""><img class="flag" src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/United_States_of_America.png" alt="En"/></a><a href="sp/"><img src="http://7b47f8f8b78332798868-a285273e418667e03d0d7008c32eb72c.r4.cf2.rackcdn.com/Spain.png" class="flag" alt="Sp"/></a></h1>
+		<h1>Speedrunning Glossary&ensp;<a href="../"><a href=""><img class="flag" src="http://cdn.speedrunslive.com/images/flags/United_States_of_America.png" alt="En"/></a><a href="sp/"><img src="http://cdn.speedrunslive.com/images/flags/Spain.png" class="flag" alt="Sp"/></a></h1>
 
 		
 		<table><col class="term"><col class="description">

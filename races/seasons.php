@@ -38,7 +38,7 @@
 		<div id="seasongamecontainer">
 			<div class="seasongame">
 				<span class="season_gametitle">The Legend of Zelda: A Link to the Past</span>
-				<img src="http://c15111072.r72.cf2.rackcdn.com/alttp.jpg" alt=""/>
+				<img src="http://cdn.speedrunslive.com/images/games/alttp.jpg" alt=""/>
 				<table>
 					<tr><th colspan="3">Any% No OoB/S+Q</th></tr>
 					<tr><td><span class="gold">#1</span></td><td>Kryssstal</td><td>1134</td></tr>
@@ -52,7 +52,7 @@
 			
 			<div class="seasongame">
 				<span class="season_gametitle">Super Mario 64</span>
-				<img src="http://c15111072.r72.cf2.rackcdn.com/sm64.jpg" alt=""/>
+				<img src="http://cdn.speedrunslive.com/images/games/sm64.jpg" alt=""/>
 				<table>
 					<tr><th colspan="3">16 Star</th></tr>
 					<tr><td><span class="gold">#1</span></td><td>BebopBandit</td><td>1134</td></tr>
@@ -66,7 +66,7 @@
 			
 			<div class="seasongame">
 				<span class="season_gametitle">Pok&eacute;mon Red/Blue</span>
-				<img src="http://c15111072.r72.cf2.rackcdn.com/pkmnredblue.jpg" alt=""/>
+				<img src="http://cdn.speedrunslive.com/images/games/pkmnredblue.jpg" alt=""/>
 				<table>
 					<tr><th colspan="3">Glitchless</th></tr>
 					<tr><td><span class="gold">#1</span></td><td>werster</td><td>1134</td></tr>
@@ -80,7 +80,7 @@
 			
 			<div class="seasongame">
 				<span class="season_gametitle">The Legend of Zelda: Ocarina of Time</span>
-				<img src="http://c15111072.r72.cf2.rackcdn.com/oot.jpg" alt=""/>
+				<img src="http://cdn.speedrunslive.com/images/games/oot.jpg" alt=""/>
 				<table>
 					<tr><th colspan="3">Any%</th></tr>
 					<tr><td><span class="gold">#1</span></td><td>BebopBandit</td><td>1134</td></tr>
@@ -94,7 +94,7 @@
 			
 			<div class="seasongame">
 				<span class="season_gametitle">Super Castlevania 4</span>
-				<img src="http://c15111072.r72.cf2.rackcdn.com/scv4.jpg" alt=""/>
+				<img src="http://cdn.speedrunslive.com/images/games/scv4.jpg" alt=""/>
 				<table>
 					<tr><th colspan="3">Beat the Game</th></tr>
 					<tr><td><span class="gold">#1</span></td><td>BebopBandit</td><td>1134</td></tr>
@@ -108,7 +108,7 @@
 			
 			<div class="seasongame">
 				<span class="season_gametitle">Super Mario Bros.</span>
-				<img src="http://c15111072.r72.cf2.rackcdn.com/smb1.jpg" alt=""/>
+				<img src="http://cdn.speedrunslive.com/images/games/smb1.jpg" alt=""/>
 				<table>
 					<tr><th colspan="3">Warpless</th></tr>
 					<tr><td><span class="gold">#1</span></td><td>BebopBandit</td><td>1134</td></tr>

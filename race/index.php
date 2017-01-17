@@ -24,7 +24,7 @@
 	<script id="streamTemplate" type="text/x-jquery-tmpl">
 		<div class="ls_namebar">
 			<table><tr><td>
-					<div class="ls_name"><div class="ls_padder"><strong><a href="/profiles/#!/${srlname}">${srlname}</a></strong></div></div>
+					<div class="ls_name"><div class="ls_padder"><strong><a href="/profiles/#!/${srlname}/1">${srlname}</a></strong></div></div>
 				</td><td class="ls_icons">
 					<a class="chatIcon" title="Popout Chat" onClick="window.open('http://www.twitch.tv/chat/embed?channel=${twitch}&popout_chat=true','_blank','width=400,height=550,scrollbars=no,toolbar=no')"><span>[chat]</span></a>
 				</td><td class="ls_icons">
@@ -34,9 +34,9 @@
 			</td></tr></table>
 		</div>
 		<div class="ls_objectContainer">
-			<img src="http://c15111086.r86.cf2.rackcdn.com/aspect-ratio-16-9.png" />
+			<img src="http://cdn.speedrunslive.com/images/aspect-ratio-16-9.png" />
 			<div>
-				<object type="application/x-shockwave-flash" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=${twitch}" bgcolor="#000000"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=${twitch}&auto_play=false&start_volume=25" /></object>
+				<iframe class="twitchracespageembed" frameborder="0" src="https://player.twitch.tv/?channel=${twitch}" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
 			</div>
 		</div>
     </script>
@@ -47,7 +47,7 @@
 	</div>
 
 	<!-- left side -->
-	<div id="gameAndGoal"><img src="http://c15111086.r86.cf2.rackcdn.com/ajax-loader.gif" style="margin-top:16px;"/></div>
+	<div id="gameAndGoal"><img src="http://cdn.speedrunslive.com/images/ajax-loader.gif" style="margin-top:16px;"/></div>
 	
 	<?php 
 		$id = $_GET[ 'id' ];

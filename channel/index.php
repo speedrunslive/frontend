@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 	<!-- Title -->
@@ -22,16 +22,16 @@
 
 		<p>If you need help with the race commands, please <a href="/faq/commandlist">click here</a>.</p>
 		
-		<p style="color:red"><b>We now require you to register your nickname to race. Please read the following <a href="/faq/registration">FAQ</a> 
-		and <a href="http://i.imgur.com/CNQXVAm.jpg">guide</a> for more information. </b></p>
+		<p style="color:red"><b>You are required to register your nickname before you race. Please read the following <a href="/faq/registration">FAQ</a> 
+		and <a href="/faq/#getregged">guide</a> for more information. </b></p>
 	
 	
 		
 		<h1>IRC information</h1>
 
 		<p>
-		Server&mdash; <strong>irc.speedrunslive.com<br/></strong>
-		Server 2&mdash; <strong>irc2.speedrunslive.com</strong><br/>
+		New York&mdash; <strong>irc.speedrunslive.com<br/></strong>
+		Amsterdam&mdash; <strong>irc2.speedrunslive.com</strong><br/>
 		Channel&mdash; <strong>#speedrunslive</strong>
 		</p>
 		
