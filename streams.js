@@ -370,7 +370,7 @@ function getStreams() {
     twitchretry2 = 0;
     $.ajax({
         type : "GET",
-        url : "http://api.speedrunslive.com/frontend/streams",
+        url : apiUrl + "/frontend/streams",
         processData : true,
         data : {},
         dataType : "jsonp",
@@ -1306,7 +1306,7 @@ function switchStreamsView() {
 function getEventStreamsList() {
   $.ajax({
     type: "GET",
-    url: "http://api.speedrunslive.com/frontend/events/1",
+    url: apiUrl + "/frontend/events/1",
     dataType: "json",
   }).done(function(data) {
     streamdata = data._source;

@@ -1,10 +1,7 @@
-//var apiUrl = "http://api.speedrunslive.com:81";  //live
-//var apiUrl = "http://beta.speedrunslive.com:81";  //beta
-
 function renderRace(data, seasonSkill) {
 	if (data.count > 0) {
 		var lastComment = false;
-	
+
 		$.each(data.pastraces, function (index) {
 			var date = getDate( data.pastraces[index].date * 1000 );
 			data.pastraces[index].date = date;
@@ -40,7 +37,7 @@ function siteImage(imagename) {
 
 function getGoal (goal) {
 	var goalArray = goal.split( ' ' );
-	
+
 	for (var i in goalArray) {
 		//if(new RegExp("(https?://)?(([A-Za-z0-9#]+[.])+[A-Za-z]{2,3}($|([/][A-Za-z0-9#]+)+([.][A-Za-z]{2,4})?)").test(goalArray[i])) {
 		if(new RegExp("(https?://)?(([A-Za-z0-9#]+[.])+[A-Za-z]{2,3}([/][A-Za-z0-9#]+)*([.][A-Za-z]{2,4})?)").test(goalArray[i])) {
@@ -48,9 +45,9 @@ function getGoal (goal) {
             // Append a URL protocol if it's missing.
             var prefix = '';
 			if ((goalArray[i].substring(0, 7) != 'http://') && (goalArray[i].substring(0, 8) != 'https://')) {
-                prefix = 'http://';  
+                prefix = 'http://';
             }
-            
+
             if (goalArray[i].length > 40) {
 				goalArray[i] = '<a onmousedown="javascript:linkClick();" href="' + prefix + goalArray[i] + '">' + goalArray[i].substr(0, 40) + '...</a>';
 			} else {
@@ -116,14 +113,14 @@ function getRank( rank ) {
 };
 
 function getTime( secs, place, firstPlaceTime ) {
-	if ( secs > 0 ) { 
+	if ( secs > 0 ) {
 		convert = secondsToTime( secs )
 		secondsDifference = secs - firstPlaceTime
 		difference = secondsToTime( secondsDifference )
 		timeDifference = ''
 		if( secondsDifference > 0 ) {
 			return '<span title="+' + difference.h + ':' + difference.m + ':' + difference.s + '">' + convert.h + ':' + convert.m + ':' + convert.s + '</span>';
-		} else { 
+		} else {
 			return convert.h + ':' + convert.m + ':' + convert.s;
 		}
 	}
@@ -137,17 +134,17 @@ function secondsToTime( secs )
     var hours = Math.floor(secs / (60 * 60));
 	hours += '';
 	while ( hours.length < 2 ) { hours = '0' + hours };
-   
+
     var divisor_for_minutes = secs % (60 * 60);
     var minutes = Math.floor(divisor_for_minutes / 60);
 	minutes += '';
 	while ( minutes.length < 2 ) { minutes = '0' + minutes };
- 
+
     var divisor_for_seconds = divisor_for_minutes % 60;
     var seconds = Math.ceil(divisor_for_seconds);
 	seconds += '';
 	while ( seconds.length < 2 ) { seconds = '0' + seconds };
-   
+
     var obj = {
         "h": hours,
         "m": minutes,
@@ -197,7 +194,7 @@ function timePlayed( time )
 		"mins": mins,
 		"secs": secs
     };
-	
+
 	var string = ''
 	i = 1
 	for ( x in obj ) {
@@ -234,22 +231,22 @@ function getRating (oldrating, newrating, ratingchange) {
 	if ( newrating <= 0 ) {
 		return '<td colspan="3" class="unranked">unranked</td><td class="raceFeedRatingChange"></td>';
 	}
-	
+
 	if ( oldrating <= 0 ) {
 		return '<td colspan="3" class="unranked">ranked!</td><td class="raceFeedRatingChange"><span class="green">+' + ratingchange + '</span></td>';
 	}
-	
+
 	var fluff = '<td class="raceFeedRating">' + oldrating + ' </td><td class="raceFeedRating raceFeedArrow">&rarr;</td><td class="raceFeedRating">' + newrating + '</td>';
-	
-	if (oldrating > newrating) { 
+
+	if (oldrating > newrating) {
 		ratingchange = Math.abs(ratingchange);
 		return (fluff + '<td class="raceFeedRatingChange"><span class="red">&minus;' + ratingchange + '</td>');
 	}
-	
+
 	if (newrating > oldrating) {
 		return (fluff + '<td class="raceFeedRatingChange"><span class="green">+' + ratingchange + '</td>');
 	}
-	
+
 	return (fluff + '<td class="raceFeedRatingChange">&plusmn;0</td>');
 
 }

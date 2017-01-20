@@ -12,7 +12,7 @@ function getStreams() {
 function getRealName(twitchname) {
 	$.ajax({
 		type : "GET",
-		url : "http://api.speedrunslive.com/streams/" + twitchname + "?channel=twitch",
+		url : apiUrl + "/streams/" + twitchname + "?channel=twitch",
 		processData : true,
 		data : {},
 		dataType : "jsonp",
@@ -23,7 +23,7 @@ function getRealName(twitchname) {
 function getRealNames(twitchnames) {
 	return $.ajax({
 		type : "GET",
-		url : "http://api.speedrunslive.com/streams/?channels=" + twitchnames,
+		url : apiUrl + "/streams/?channels=" + twitchnames,
 		processData : true,
 		data : {},
 		dataType : "jsonp",
@@ -33,7 +33,7 @@ function getRealNames(twitchnames) {
 
 function giveRealNames(data) {
 	//console.log(data);
-	
+
 	for ( x in data ) {
 		$("#" + x + " .streamerinfo .name").text( data[x] );
 	}
@@ -49,7 +49,7 @@ function renderList( data ) {
 		fullname = data[ 'channels' ][ 0 ][ 'channel' ][ 'display_name' ];
 		getRealName(name);
 		featuredStream( name, fullname );
-	}	
+	}
 	var twitchNames = '';
 	for ( x in data[ 'channels' ] ) {
 		twitchname = data[ 'channels' ][ x ][ 'channel' ][ 'name' ];
@@ -69,7 +69,7 @@ function renderList( data ) {
 		}
 		$( '#streamList' ).html( addList );
 		$( '#'+ $( '.featuredstream' ).attr( 'data-name' ) ).addClass( 'watching' )
-		$( ".twitchstreamer" ).click( function(){ 
+		$( ".twitchstreamer" ).click( function(){
 			$( '#'+ $( '.featuredstream' ).attr( 'data-name' ) ).removeClass( 'watching' )
 			name = $( this ).attr('id');
 			fullname = $( this ).attr('data-fullname');
@@ -110,12 +110,12 @@ function formatList( name, viewers, descrip, twitchname, img, srlname ) {
 }
 
 $( document ).ready( function(){
-	var updatestreams = function(){ 
-		getStreams(); 
-		setTimeout( updatestreams, 30000 ); 
+	var updatestreams = function(){
+		getStreams();
+		setTimeout( updatestreams, 30000 );
 	}
 	updatestreams();
-	
+
 	$(".closechat").click(function () {
 		$(".featuredchat iframe").remove();
 		$(".featuredchat").toggle();

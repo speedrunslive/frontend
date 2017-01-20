@@ -1,17 +1,20 @@
-<?php session_start(); ?>
+<?php
+  session_start();
+  if( ! ini_get('date.timezone') ) date_default_timezone_set('GMT');
+?>
 	<!-- Encoding -->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	
+
 	<!-- Icon -->
 	<link rel="icon" type="image/png" href="http://cdn.speedrunslive.com/images/favico.png">
-	
+
 	<!-- Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-	
+
 	<!-- Style -->
 	<link rel="stylesheet/less" type="text/css" href="/style/styles.less?2">
 	<script src="/scripts/less.js" type="text/javascript"></script> <!-- less 2 css -->
-	
+
 	<!-- Scripts -->
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script> <!-- google libraries API -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> <!-- jquery -->
@@ -24,7 +27,7 @@
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 	<?php include($_SERVER['DOCUMENT_ROOT'] . '/racetabletemplate.html'); ?>
 	<script type="text/javascript" src="/search.js"></script>
-	
+
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--> <!-- make HTML5 tags work in IE7/8 -->
 	<script type="text/javascript"> <!-- Google Analytics -->
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -36,10 +39,10 @@
   ga('send', 'pageview');
 
 	var srl = {}; // javascript holder
-	
+
 	function setcolor() {
 		var pathArray = window.location.href.split('/');
-		if (pathArray[3].toLowerCase() == 'races') { 
+		if (pathArray[3].toLowerCase() == 'races') {
 			$("#racesButtonHeader").addClass("current");
 			return 'racesborder';
 		}
@@ -99,7 +102,7 @@
 					jsonpCallback: "grabAvatar",
 					cache: true
 				});
-				<?php } else { 
+				<?php } else {
 				?>
 				$(".loginava").html('<div id="headerav" style="background-image:url(\'<?php echo $_SESSION['avatar']; ?>\');">&nbsp;</div>')
 				<?php } ?>
@@ -117,7 +120,7 @@
 			}
 		}
 	</script>
-	
+
 </head>
 
 <body>
@@ -182,7 +185,7 @@
                 dataType: 'json',
                 async: false,
                 type : "GET",
-                url : "http://api.speedrunslive.com/frontend/donate",
+                url : apiUrl + "/frontend/donate",
                 success : function(data) { renderDonate(data); }
                 });
                 $("*:not(title)").tooltip({
