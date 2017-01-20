@@ -3,7 +3,7 @@ var autocompleteTimeout;
 function getgames( query ) {
     $.ajax({
         type : "GET",
-        url : "http://api.speedrunslive.com/search/games/" + query + "?size=1",
+        url : apiUrl + "/search/games/" + query + "?size=1",
         dataType : "json",
         success: function(data) {
             if (data.hits.total > 0) {
@@ -19,7 +19,7 @@ function getgames( query ) {
 function getplayers(query) {
     $.ajax({
         type : "GET",
-        url : "http://api.speedrunslive.com/search/players/" + query + "?size=1",
+        url : apiUrl + "/search/players/" + query + "?size=1",
         dataType : "json",
         success: function(data) {
             if (data.hits.total > 0) {
@@ -74,7 +74,7 @@ function showAutocompletes() {
         if ( $("#headersearchtype").val() == "game" ) {
             $.ajax({
                 type : "GET",
-                url : "http://api.speedrunslive.com/search/games/" + $("#headersearch").val().toLowerCase() + "?size=3",
+                url : apiUrl + "/search/games/" + $("#headersearch").val().toLowerCase() + "?size=3",
                 dataType : "json",
                 success: function(data) {
                     switch (data.hits.hits.length) {
@@ -100,7 +100,7 @@ function showAutocompletes() {
         else {
             $.ajax({
                 type : "GET",
-                url : "http://api.speedrunslive.com/search/players/" + $("#headersearch").val().toLowerCase() + "?size=3",
+                url : apiUrl + "/search/players/" + $("#headersearch").val().toLowerCase() + "?size=3",
                 dataType : "json",
                 success: function(data) {
                     switch (data.hits.hits.length) {

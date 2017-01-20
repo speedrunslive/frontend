@@ -4,7 +4,7 @@ function getSeasonData() {
 	  return $.ajax({
 		  type : "GET",
 	      url : apiUrl + "/seasons",
-		  //url : "http://api.speedrunslive.com:81/seasons",
+		  //url : apiUrl + "/seasons",
 		  processData : true,
 		  data : {},
 		  dataType : "jsonp",
@@ -12,7 +12,7 @@ function getSeasonData() {
 	  });
 }
 
-function getRacesData( pg ) {	
+function getRacesData( pg ) {
 	return $.ajax({
 		type : "GET",
 		url : apiUrl + "/pastraces" + pg + "&pageSize=16", //16 is the page size for this page.
@@ -78,7 +78,7 @@ function getRules(game) {
 	});
 };
 
-function getRaces( pg ) {	
+function getRaces( pg ) {
 	$.ajax({
 		type : "GET",
 		url : apiUrl + "/pastraces" + pg + "&pageSize=16", //16 is the page size for this page.
@@ -100,7 +100,7 @@ function getRaces( pg ) {
 			}
 		}
 	});
-	
+
 
 };
 
@@ -145,7 +145,7 @@ function renderLeaderboard( data ) {
 		else if ( perc <= 28 ) club = 5;
 		else if ( perc <= 55 ) club = 6;
 		else club = 7;
-		
+
 		if ( content[ club ] ) content[ club ] += formatPlayer( i, data.leaders[ x ].name, data.leaders[ x ].trueskill );
 		else content[ club ] = formatPlayer( i, data.leaders[ x ].name, data.leaders[ x ].trueskill )
 		i += 1;
@@ -154,7 +154,7 @@ function renderLeaderboard( data ) {
 		$( '#playerslist' ).append( formatTable( x, content[ x ] ) );
 	}
 	$( '#playerslist' ).append( '<table id="unrankedtable" class="r8 club"><tr id="unranked"><td colspan="2">Show Unranked [' + data.unrankedCount +'] </td></tr></table>' );
-	
+
 	$( "#unranked" ).toggle(
 		function() {
 			$("#unranked").html('<td colspan="2">Hide Unranked [' + data.unrankedCount +'] </td>');
@@ -167,10 +167,10 @@ function renderLeaderboard( data ) {
 			$("#unrankedtable").find("tr:gt(0)").remove();
 		}
 	);
-	
-	
+
+
 	/*
-	$( "#unranked" ).click( function(){ 
+	$( "#unranked" ).click( function(){
 		$("#unranked").html('<td colspan="2">Hide Unranked [' + data.unrankedCount +'] </td>');
 		for ( x in data.unranked ) {
 			$( '#unrankedtable' ).append( '<tr><td>#&thinsp;&ndash;</td><td><a href="/profiles/#!/' + data.unranked[ x ].name + '">' + data.unranked[ x ].name + '</td></tr>');
@@ -202,7 +202,7 @@ function renderStats( data ) {
 		$('#side_gamepic').append('<h1>Pic</h1>');
 		$('#side_gamepic').append('<object data="' + gameImage(data['game']['abbrev']) + '"><img src="' + gameImage('noimage') + '" alt="' + data['game']['abbrev'] + '" /></object>');
 	}
-	
+
 	if($('#side_gamestats').is(":empty")) {
 		$('#side_gamestats').append('<h1>Stats</h1>');
 		$('#side_gamestats').append("Abbreviation: <strong id=\"gameAbbrev\" data-abbrev=\"" + data['game']['abbrev'] + "\">" + data['game']['abbrev'] + "</strong><br/>");
@@ -218,13 +218,13 @@ function renderSeasonList( data ) {
 		$('.racesHighlighted').removeClass('racesHighlighted')
 		$( '#buttonSeasons' ).addClass( 'racesHighlighted' );
 		$( '#seasonList' ).html( '<div id="seasonselectcontainer"></div><div id="seasongamecontainer"></div>' );
-		
+
 		var text = '';
 		for (var season in data.seasons) {
 			text += selectSeason(data.seasons[season], data.current_season_id);
 		}
 		$('#seasonselectcontainer').html( '<p class="seasonSelect">Select a season: ' + text + '</p>' );
-		
+
 		var pathArray = window.location.hash.split( '/' );
 		var gamestring = getGameString( pathArray );
 		hideUnracedSeasons(gamestring);
@@ -234,7 +234,7 @@ function renderSeasonList( data ) {
 
 function getGoalShort (goal) {
 	var goalArray = goal.split( ' ' );
-	
+
 	for (var i in goalArray) {
 		if(new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(goalArray[i])) {
 			if (goalArray[i].length > 20) {
@@ -255,20 +255,20 @@ function renderTrackedGoals( data ) {
 	var maxShownPlayers = 5;
 	var timeTable = "";
 	$('#side_popgoals').append('<h1>Best race times</h1>');
-	
+
 	for(var goal = 0; goal < data.goals.length; goal++) {
 		timeTable += "<table class=\"raceResults\"><col class=\"raceFeedPlacing\"><col class=\"raceFeedName\"><col class=\"raceFeedStatus\">";
 		data.goals[goal].name = getGoalShort( data.goals[goal].name ); // fixes long URLs and long goals
 		timeTable += "<tr><th colspan=\"3\">" + data.goals[goal].name + "</th></tr>";
 		for(var time = 0; time < data.goals[goal].toptimes.length; time++) {
-		
+
 			var timeObj = secondsToTime( data.goals[goal].toptimes[time].time );
-		
+
 			// limit results shown to 5
 			if(time >= maxShownPlayers) {
 				break;
 			}
-			
+
 			if(time == 0) {
 				timeTable += "<tr><td><span class=\"gold\">1st</span></td>";
 			} else if(time == 1) {
@@ -292,7 +292,7 @@ function hideUnracedSeasons( gamestring ) {
 //alert($("#seasonselectcontainer").html());
 	$(".seasonFilterContainer").each(function(index, seasonLink) {
 		var racesData = getRacesData(gamestring + "&season=" + index);
-		
+
 		racesData.success(function (data) {
 			if(data.count == 0) {
 				// hide season links for seasons with no races in them
@@ -314,14 +314,14 @@ function selectSeason( season, currentSeasonID ) {
 $(document).on("click", ".seasonFilter", function() {
 	// disable the link from calling ajax again
 	//$(this).toggleClass("seasonFilter filterClicked");
-	
+
 	var pathArray = window.location.hash.split( '/' );
 	var newgame = pathArray[1];
-	
+
 	if($(".seasonSelected")) {
 		//seasonID = $(".seasonSelected").attr("id");
 	}
-	
+
 	var seasonID = $(this).attr("id");
 	var gamestring = getGameString( pathArray );
 	renderGameSeason(newgame, gamestring, seasonID);
@@ -329,7 +329,7 @@ $(document).on("click", ".seasonFilter", function() {
 	$(".seasonSelected").attr("class", "seasonFilter");
 	//$(this).toggleClass("seasonFilter filterClicked");
 	//$(this).addClass("seasonSelected");
-	
+
 	$(this).attr("class", "seasonFilter seasonSelected");
 	return false;
 });
@@ -337,7 +337,7 @@ $(document).on("click", ".seasonFilter", function() {
 function renderGameSeason (abbrev, gamestring, seasonID) {
 	emptyDivs();
 	getSeasons();
-	
+
 	$("#gamelist").hide();
 	$("#gamepageloader").show();
 	$("#gamepageloader").append('<div id="ajaxstage"><div id="ajaxspin">&nbsp;</div><div id="ajaxloading">LOADING...</div></div>');
@@ -372,7 +372,7 @@ function emptyDivs() {
 
 function redirectPage(pathArray, index, value) {
 	var url = window.location.href.substring(0, window.location.href.indexOf(window.location.hash)) + "#!";
-	
+
 	for(var x = 1; x < pathArray.length; x++) {
 		if(x == index) {
 			url += "/" + value;
@@ -391,19 +391,19 @@ function hashChange () {
 	var location = window.location + "";
 
 	abbrev = $( '#gameAbbrev' ).attr( 'data-abbrev' );
-	
+
 	if (pathArray[0] == '#!') {
 		if ((page == false) || (page < 1)) { // don't allow any weird values
 			updatePage(1);
-			
+
 		} else if ((!abbrev) || (abbrev != newgame)) {
 			emptyDivs();
 			gamestring = getGameString( pathArray );
-			
+
 			seasonData.success(function (data) {
 				renderGameSeason(newgame, gamestring, data.current_season_id);
 			});
-				
+
 		} else {
 			var seasonID = $(".seasonSelected").attr("id");
 			//console.log("SeasonID: " + seasonID);
@@ -429,6 +429,6 @@ function getGameString( path ) {
 $( document ).ready( function(){
 	$("#gamepage").html('<div id="ajaxstage"><div id="ajaxspin">&nbsp;</div><div id="ajaxloading">LOADING...</div></div>');
 	hashChange();
-	
+
 	window.addEventListener("hashchange", hashChange, false);
 });
