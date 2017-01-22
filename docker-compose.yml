@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  nginx_frontend:
+    image: nginx
+    container_name: nginx_frontend
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+    volumes_from:
+      - php_frontend
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+  php_frontend:
+    image: php:5.6-fpm
+    container_name: php_frontend
+    volumes:
+      - .:/var/www/html
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
