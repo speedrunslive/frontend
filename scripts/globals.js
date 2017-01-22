@@ -1,1 +1,1 @@
-var apiUrl = "http://dev.speedrunslive.com:8081";  //live
+var apiUrl = "http://api.speedrunslive.com";  //live
